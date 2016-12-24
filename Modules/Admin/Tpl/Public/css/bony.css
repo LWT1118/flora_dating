@@ -1,0 +1,81 @@
+.my-icon{
+	margin: 0 4px;
+}
+.my-icon:link,.my-icon:active,.my-icon:visited{
+	text-decoration: none !important;
+	color: #444 !important;
+	font-size: 1.6em;
+}
+
+.my-icon:hover{
+	color: #f64 !important;
+}
+
+.my-ul{
+	margin: 0 10px;
+	padding: 0;
+	list-style: none;
+	height: 300px;
+	overflow: auto;
+}
+
+.my-ul li input[type=checkbox]{
+	float: right;
+}
+
+.my-ul li{
+	clear: both;
+	border-bottom: 1px dashed #444;
+	padding: 6px 0;
+}
+
+.solid-info{
+	display:block; 
+	width:20%; 
+	margin:auto; 
+	float:left;
+}
+
+.info-face{
+	margin: 10%;
+	width: 80%;
+}
+
+.info-ul{
+	width: 80%;
+	float: right;
+}
+
+.info-ul li{
+	width: 50%;
+	float: left;
+	margin-bottom: 15px !important;
+}
+
+.info-ul li label{
+	display: inline-block;
+	width: 80px;
+}
+
+.info-ul li input[type=text],.info-ul li textarea{
+	width: 240px;
+}
+
+
+.page{text-align:center; clear:both; margin:10px auto 20px auto; font-size: 1.2em}
+.page a,.page span{padding:6px 12px; border:1px solid #333; border-radius: 2px; text-decoration:none; margin:0 4px; color:#333}
+.page a.current,.page span.current{background:#333; color:#FFF}
+.page a:hover{background: #ddd}
+
+.txt_input,
+.pwd_span,
+.pwd_input{
+	margin: 0 15px !important;
+	font-size: 16px !important;
+	border: 1px solid #888 !important;
+	box-shadow: 2px 2px 2px #aaa inset !important;
+	padding: 2px 8px !important;
+	border-radius: 4px !important;
+	display: inline-block !important;
+	width: 80% !important;
+}

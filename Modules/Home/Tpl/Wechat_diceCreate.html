@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{$page_title} {$site.name}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<meta name="keywords" content="{$site.keyword}" />
+<meta name="description" content="{$site.descreption}" />
+
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/buttons.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/holder.min.js"></script>
+
+
+<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/css/buttons.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/css/font-awesome-ie7.min.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/css/bony.css" rel="stylesheet" type="text/css" />
+
+
+</head>
+<body>
+
+  <div class='container bony-login'>
+    <div class="row">
+
+      <form class="form-signin" method='post' action='{:U('diceCreateHandle')}'>
+        <h2 class="form-signin-heading text-center">{$page_title}</h2>
+        <input type='hidden' name='openid' value='{$openid}'>
+
+        <div class="form-group">
+        <label for="qty">游戏人数</label>
+        <select id='qty' name='qty' class="form-control text-center">
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">创建游戏</button>
+
+      </form>   
+
+    </div>
+  </div>
+
+</body>
+</html>

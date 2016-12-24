@@ -1,0 +1,37 @@
+<include file="Modules/Mobile/Tpl/header.html" />
+<!--include file="Modules/Mobile/Tpl/Member_nav.html" /-->
+
+    <div class='container'>
+        <div class='row'>
+            <div class='col-sm-12 col-xs-12'>
+                <h3>{$page_title}</h3>
+                <form method='post' action='{:U('Mobile/Member/pwdUpdate')}'>
+
+                  
+                <!--div class='form-group'>
+                    <label>邮箱：</label>
+                    <input class='form-control' type='email' name='email' readonly value='{$data.email}'>
+                </div-->
+                <div class='form-group'>
+                    <label>当前密码：</label>
+                    <input class='form-control' name='p' type='password'>
+                </div>
+                <div class='form-group'>
+                    <label>新密码：</label>
+                    <input class='form-control' name='p1' type='password'>
+                </div>
+                <div class='form-group'>
+                    <label>确认新密码：</label>
+                    <input class='form-control' name='p2' type='password'>
+                </div>
+
+                <div class='form-group text-center'>
+                    <button class='btn btn-block btn-lg btn-primary'>提交修改</button>
+                </div>
+
+                </form>  
+            </div>
+        </div>        
+    </div>
+
+<include file="Modules/Mobile/Tpl/footer.html" />

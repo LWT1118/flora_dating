@@ -1,0 +1,194 @@
+
+.slider-thumb{
+	width: 720px;
+	height: 480px;
+	float: left;	
+}
+
+
+.banner{
+	width: 720px;
+	height: 360px;
+}
+
+.slider-thumb ul.three-pic{
+	width: 720px;
+	height: 120x;
+}
+
+.slider-thumb ul.three-pic li{
+	width: 240px;
+	float: left;
+	height: 120px;
+	overflow: hidden;
+}
+
+.news-login{
+	width: 280px;
+	float: right;
+	height: 480px;
+
+	box-shadow: 2px 2px 2px #969698;
+}
+
+.news-login hr{
+	width: 94%;
+	margin: 0 auto;
+	border-top: 1px solid #969698;
+	padding: 0;
+}
+
+.bony-tags .nav li{
+	width: 50px;
+	height: 28px;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+.bony-tags .nav li a{
+	display: block;
+	border-radius: 0;
+	width: 50px;
+	height: 28px;
+	text-align: center;
+	margin: 0 !important;
+	padding: 0 !important;
+	background: none;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	color: #969698;
+}
+
+.bony-tags .nav li.active a{
+	border-bottom: 2px solid #CD3B3B;
+	color: #969698;
+}
+
+.bony-tags .tab-pane ul li a{
+	color: #969698;
+	font-size: 12px;
+}
+
+
+.bony-avatar .pic{
+	width: 80px;
+	height: 80px;
+	float: left;
+}
+
+.bony-avatar .txt{
+	width:170px;
+	height: 80px;
+	float: left; 
+}
+
+.bony-avatar .txt p{
+	margin-top: 20px;
+	padding-left: 20px;
+}
+
+.bony-avatar .btns{
+	margin-top: 20px;
+	text-align: center;
+}
+
+
+.bony-wechat{
+	height: 100px;
+	position: relative;
+}
+
+.bony-wechat .pic{
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	left: 0;
+	top: 0;
+}
+
+.bony-wechat .txt{
+	position: absolute;
+	width:150px;
+	height: 100px;
+	left: 100px;
+	top: 0; 
+}
+
+.bony-wechat .txt .wechat-icon{
+	position: absolute;
+	left: 10px;
+	top: 7px;
+	color:green;
+	font-size:28px;
+}
+
+.bony-wechat .txt .wechat-txt{
+	text-align: center;	
+	width: 100px;
+	height: 25px;
+	position: absolute;
+	left: 40px;
+	top: 0px;
+	color: #777;
+}
+
+.bony-wechat .txt .wechat-line{
+	position: absolute;
+	left: 5px;
+	top: 45px;
+	width: 140px;
+	height: 1px;
+	background: #777;
+}
+
+.bony-wechat .txt .wechat-link{
+	position: absolute;
+	left: 5px;
+	top: 50px;
+	width: 140px;
+	height: 60px;
+}
+
+.bony-wechat .txt .wechat-link a{
+	display: inline-block;
+	width: 50%;
+	float: left;
+	text-align: center;
+	font-size: 12px;
+	color: #777;
+	padding: 2px 0 0 0;
+}
+
+
+.guess ul{
+	width: 1205px;
+	height: 150px;
+}
+
+.guess ul li{
+	width: 236px;
+	height: 132px;
+	float: left;
+	margin-right: 5px;
+}
+
+
+.gray-bg{
+	height: 206px;
+	background: #ececec;
+}
+
+.rec-list{
+	margin-bottom: 33px;
+}
+
+.rec-list ul li{
+	border-top: 1px solid #ececec;
+	border-bottom: 1px solid #ececec;
+	border-left: 1px solid #ececec;
+}
+
+.rec-list ul li:nth-child(6){
+	border-right: 1px solid #ececec;
+}

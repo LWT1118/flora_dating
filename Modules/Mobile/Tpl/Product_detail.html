@@ -1,0 +1,227 @@
+<include file="Modules/Home/Tpl/header.html" /> 
+<div class='w1200'>
+
+
+
+<div class='w200 pull-left'>
+    <div class='menu'>
+        <ul>
+            <volist name='cat_nav' id='cat_nav'>
+            <li>
+                <a href='{:U('Mobile/Product/index',array('cat'=>$cat_nav['id']))}'>{$cat_nav.title}</a>
+                <ul>
+                    <volist name="cat_nav['child']" id='cat_nav_sub'>
+                    <h5><a href='{:U('Mobile/Product/index',array('cat'=>$cat_nav_sub['id']))}'>{$cat_nav_sub.title}</a></h5>
+                        <volist name="cat_nav_sub['child']" id='cat_nav_sub_sub'>
+                        <li><a href='{:U('Mobile/Product/index',array('cat'=>$cat_nav_sub_sub['id']))}'>{$cat_nav_sub_sub.title}</a></li>
+                        </volist>
+                    </volist>
+                </ul>
+            </li>
+            </volist>
+            <div class='clearfix'></div>
+        </ul>
+
+    </div>
+</div>
+
+
+
+
+
+
+<div class='w1000 pull-right'>
+
+    <div class='bony-detail'>
+        <div class='basic-info'>
+            <!-- 产品主图开始 -->
+            <div class='pic-show'>
+                <div id='pic-main'>
+                    <img src='__UPLOAD__/product/thumb400_{$data.img}'>
+                </div>
+<!-- <div class="sec bnspic">
+    <div class="big_pic">
+        <ul>
+            <li class="on"><a href="#"><img class='img-responsive' src="product/big_1.jpg" /></a></li>
+            <li><a href="#"><img class='img-responsive' src="product/big_2.jpg" /></a></li>
+            <li><a href="#"><img class='img-responsive' src="product/big_3.jpg" /></a></li>
+            <li><a href="#"><img class='img-responsive' src="product/big_4.jpg" /></a></li>
+        </ul>
+    </div>
+    <div class="small_pic clearfix">
+        <ul>
+            <li class="on"><a href="#"><img src="product/big_1.jpg" /></a></li>
+            <li><a href="#"><img src="product/big_2.jpg" /></a></li>
+            <li><a href="#"><img src="product/big_3.jpg" /></a></li>
+            <li><a href="#"><img src="product/big_4.jpg" /></a></li>
+        </ul>
+    </div>
+    <div class='clearfix'></div>
+</div> -->
+<script>
+/*    $(".small_pic li").mouseover(function(){
+        $(this).siblings().removeClass("on");
+        $(this).addClass("on");
+        var preNumber=$(this).prevAll().size()+1;
+        $(".big_pic li").removeClass("on");
+        $(".big_pic li:nth-child("+preNumber+")").addClass("on");
+    });*/
+</script>
+            
+            </div>
+            <!-- 产品主图结束 -->
+
+            <!-- 产品文本开始 -->
+            <div class='txt-show'>
+
+    <div id="buy_block">
+
+        <div class="name">{$data.title}</div>
+
+        <div class="price_block">
+            <div>市场价格：<span class="price text-delete">￥{$data.price1}</span></div>
+            <div>本站价格：<span class="price text-primary">￥{$data.price2}</span></div>
+            <div>VIP&nbsp;价格：<span class="price text-danger">￥{$data.price3}</span></div>
+        </div>
+
+  
+          <div class="clearfix data_table">
+            <div class="pull-left ifo">
+              <div class="num">{$data.hits}</div>
+              <div class="txt">月销量</div>
+            </div>
+            <div class="pull-left ifo center">
+              <div class="num">0</div>
+              <div class="txt">用户评价</div>
+            </div>
+            <div class="pull-left ifo">
+              <div class="num">{$data.score}</div>
+              <div class="txt">赠送积分</div>
+            </div>
+          </div>
+        <div>
+            <div class="quantity_block large">
+              <button type="button" class="btn increase"><i class='icon icon-plus-sign'></i></button>
+              <button type="button" class="btn decrease"><i class='icon icon-minus-sign'></i></button>
+              <input id="item-num" type="text" value="1" class="form-control">
+              <input id="item-id" type="hidden" value="{$data.id}">
+              <input id="post-url" type="hidden" value="{:U('Cart/add')}">
+              
+            </div>
+            <div align='center'>
+                <button id='add-to-cart-with-num' type="button" class="button button-rounded button-large button-primary"><i class='icon icon-shopping-cart'></i> 加入购物车</button>
+            </div>
+        </div>
+
+    </div>
+
+
+            </div>
+            <!-- 产品文本结束 -->
+
+            <div class='clearfix'></div>
+
+        </div>
+
+        <!-- 评价开始 -->
+        <div class='detail-info'>
+
+<div role="tabpanel">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active">
+        <a href="#home" aria-controls="home" role="tab" data-toggle="tab">商品详情</a>
+    </li>
+    <li role="presentation">
+        <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">用户评价</a>
+    </li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="home">
+        <h3 class='text-center'>产品详情</h3>
+
+        {$data.content}
+
+    </div>
+    <div role="tabpanel" class="tab-pane" id="profile">
+        <ul>
+          <li>暂无用户评价</li>
+        </ul>
+    </div>
+  </div>
+
+</div>
+
+
+
+        </div>
+    </div>
+
+</div>
+<div class='clearfix'></div>
+
+    <div class='bony-row'>
+        <h3>推荐单品</h3>
+        <ul>
+            <volist name='rec' id='rec'>
+            <li>
+                <div class='pic'><a href='{:U('detail','id='.$rec['id'])}'><img src='__UPLOAD__/product/thumb200_{$rec.img}'></a></div>
+                <div class='txt'>
+                    <p>{$rec.title|left_title=10}</p>
+                    <p class='pull-right'>￥{$rec.price3}</p>
+                </div>
+            </li>
+            </volist>
+            <div class='clearfix'></div>            
+        </ul>
+    </div>
+
+
+</div>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+    $(".increase").click(function(){
+        $nums = $("#item-num").val();
+        $num = parseInt($nums);
+        $num += 1;
+        $("#item-num").val($num);
+    });
+
+    $(".decrease").click(function(){
+        $nums = $("#item-num").val();
+        $num = parseInt($nums);
+        if($num>1){
+            $num -= 1;
+            $("#item-num").val($num);
+        }else{
+            $("#item-num").val(1);
+        }
+    });
+
+    $(function () { 
+        $(window).scroll(function(){
+            if ($(window).scrollTop()>200){
+                $(".menu").css({'position':'fixed','z-index':'99999','top':'0','opacity':'0.9'});
+            }else{
+                $(".menu").css('position','static');
+            }
+
+            if ($(window).scrollTop()>200){
+                $("#buy_block").css({'position':'fixed','z-index':'99999','top':'0','opacity':'0.9'});
+            }else{
+                $("#buy_block").css('position','static');
+            }
+        });
+    });
+});
+</script>
+
+<include file="Modules/Home/Tpl/promis.html" />
+
+<include file="Modules/Home/Tpl/footer.html" />    

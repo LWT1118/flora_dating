@@ -1,0 +1,85 @@
+<include file="Modules/Admin/Tpl/header.html" />
+
+<include file="Modules/Admin/Tpl/left.html" />
+<section id="main" class="column">
+	<form method='post' action='{:U('posUpdate')}'>
+    <input type='hidden' name='p' value='{$nowpage}'>
+		<article class="module width_full">
+		<header>
+			<h3 class="tabs_involved">{$location}</h3>
+			<ul class="tabs">
+	   			<li><a href="{:U('add')}"><i class='icon-plus'></i> 添加新条目</a></li>
+			</ul>
+		</header>
+
+		<div class="tab_container">
+			<div id="tab1" class="tab_content">
+			<table class="tablesorter" cellspacing="0"> 
+			<thead> 
+				<tr> 
+   					<th width='10'><input type="checkbox"></th> 
+    				<th width='60'>主图</th>
+    				<th>名称</th> 
+		            <!-- <th width='100'>多图</th> -->
+		            <th width='20'>价格</th>
+		            <th>排序</th>
+    				<th width='30'>状态</th> 
+    				<th width='100'>操作</th> 
+				</tr> 
+			</thead> 
+			<tbody>
+			<volist name="data" id="vo"> 
+				<input name='id[]' type='hidden' value='{$vo.id}'>
+				<tr> 
+   					<td><input type="checkbox"></td>
+   					<td class='pro-img'>
+   					<a title='查看商品详情' href='{:U('Home/Product/detail',array('id'=>$vo['id']))}' target='_blank'>
+   					<if condition="strlen($vo['img']) gt 0">
+   						<img src='__UPLOAD__/product/thumb_{$vo.img}' class='img-responsive img-rounded img-thumbnail'>
+   					<else />
+   						<img src="__HOMEPUBLIC__/images/no_pic.jpg" class='img-responsive img-rounded img-thumbnail'>
+   					</if>
+   					</td> 
+    				<td>
+    					<p>ID：<b>{$vo.code}</b></p>
+    					<p>名称：{$vo.title|left_title=30}</p>
+    				</td> 				
+            <td>
+              <input style='width:60px !important' name='price3[]' type='text' value='{$vo.price3}'>
+            </td>
+            <td>
+              <input style='width:60px !important' name='pos[]' type='number' min="1" max="999999" value='{$vo.pos}'>
+            </td>
+            <php>
+            	$txt = array('已下架','销售中');
+            </php>
+    				<td>{$vo['status']|is_active=$txt[$vo['status']],U('Product/statusUpdate','id='.$vo['id'].'&status='.$vo['status'].'&p='.$nowpage)}
+            </td> 
+    				<td>
+						<a class='my-icon' href='{:U('edit','id='.$vo['id'].'&p='.$nowpage)}' title="编辑"><i class='icon-pencil'></i></a>
+						<a class='my-icon' href='javascript:sure("{:U('del','id='.$vo['id'].'&p='.$nowpage)}")' title="删除"><i class='icon-trash'></i></a>
+    				</td> 
+				</tr>
+			</volist>	 
+			</tbody> 
+			</table>
+			</div><!-- end of #tab1 -->
+
+		</div><!-- end of .tab_container -->
+
+		<footer>
+			<div class="submit_link">
+				<input type="submit" value="提交" class="alt_btn">
+				<input onclick='history.go(-1)' type="button" value="返 回">
+			</div>
+		</footer>
+		
+		</article><!-- end of content manager article -->
+
+		<div class='page'>{$page}</div>
+		
+
+	</form>
+</section>
+
+<include file="Modules/Admin/Tpl/footer.html" />

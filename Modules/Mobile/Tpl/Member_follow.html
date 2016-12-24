@@ -1,0 +1,43 @@
+<include file="Modules/Mobile/Tpl/header.html" />
+	
+	<div class='container-fluid'>
+
+
+
+
+		<div class="list-group bony-mt2 bony-font-2 bony-search">
+
+			<volist name='follow' id='notify' empty='暂无数据'>
+
+	          <a class="list-group-item" href='{:U('User/detail','id='.$notify['id'])}'>
+	          	
+				<div class="pic pull-left">
+				<if condition="strlen($notify['img']) gt 0 AND file_exists('./Upload/user/thumb200_'.$notify['img'])">
+					<img width='100%' src='__UPLOAD__/user/thumb200_{$notify.img}' class='img-circle img-responsive'>
+				<else />
+					<img width='100%' src="__UPLOAD__/user/no_face.gif" class='img-circle img-responsive'>
+				</if>
+				</div>
+				<div class="txt">
+					<span class="icon-angle-right pull-right" style='position:absolute;right:5%;top:50%'></span>
+					<h3>{$notify.realname}</h3>
+					<p>{$notify.age}岁 
+						{$notify.height}cm，{$notify.edu|edu}
+						月收入：{$notify.income|income}</p>
+					<p>{$notify.interest}</p>
+					
+				</div>
+				
+				<div class="clearfix"></div>
+	          </a>
+
+			</volist>
+
+		</div>
+
+	</div>
+
+
+
+
+<include file="Modules/Mobile/Tpl/footer.html" />

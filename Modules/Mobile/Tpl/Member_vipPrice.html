@@ -1,0 +1,46 @@
+<include file="Modules/Mobile/Tpl/header.html" />
+
+<div class="list-group bony-font-2 bony-m5 price-list">
+  
+
+
+  <a class="list-group-item" href='javascript:sure("{:U('Mobile/Member/vipPay','type=month')}")'>
+    <b>购买红线 {$cfg['vip_price_month']}根</b> 
+    <br>
+	<em>（月度会员）</em>
+    <span class='pull-right button button-small button-primary button-rounded'>购买</span>
+  </a>
+
+  <a class="list-group-item" href='javascript:sure("{:U('Mobile/Member/vipPay','type=quarter')}")'>
+   <b>购买红线{$cfg['vip_price_quarter']} 根</b> 
+   <br>
+   <em>(季度会员)</em>
+    <span class='pull-right button button-small button-primary button-rounded'>购买</span>
+  </a>
+
+  <a class="list-group-item" href='javascript:sure("{:U('Mobile/Member/vipPay','type=halfyear')}")'>
+    <b>购买红线{$cfg['vip_price_half_year']} 根</b> 
+    <br>
+    <em>(半年度会员)</em>
+    <span class='pull-right button button-small button-primary button-rounded'>购买</span>
+  </a>
+
+  <a class="list-group-item" href='javascript:sure("{:U('Mobile/Member/vipPay','type=year')}")'>
+    <b>购买红线{$cfg['vip_price_year']} 根</b> 
+    <br>
+    <em>(年度会员)</em>
+    <span class='pull-right button button-small button-primary button-rounded'>购买</span>
+  </a>
+
+  
+</div>
+
+  <h3 class='text-center bony-m5'>
+  	<p>您红线账户余额</p>
+  	<p class='text-danger'>{$m.redline}</p>
+  	<!--<a href="{:U('Mobile/Member/yyb')}" class='button button-block button-primary button-rounded'>马上充值</a>-->
+  </h3>
+
+
+
+<include file="Modules/Mobile/Tpl/footer.html" />

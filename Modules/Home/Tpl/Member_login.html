@@ -1,0 +1,19 @@
+<include file="Modules/Home/Tpl/header.html" />
+
+
+  <div class='container bony-login'>
+    <div class="row">
+
+      <form class="form-signin" method='post' action='{:U('checklogin')}'>
+        <h2 class="form-signin-heading">登录 Login</h2>
+        <label for="inputEmail" class="sr-only">邮箱地址</label>
+        <input name='user' type="email" id="inputEmail" class="form-control" placeholder="邮箱地址" required autofocus>
+        <label for="inputPassword" class="sr-only">登录密码</label>
+        <input name='pwd' type="password" id="inputPassword" class="form-control" placeholder="登录密码" required>
+        <button style='width:100%' class="button button-rounded button-large button-primary button-block" type="submit">登 录</button> 
+      </form>   
+
+    </div>
+  </div>
+
+<include file="Modules/Home/Tpl/footer.html" />

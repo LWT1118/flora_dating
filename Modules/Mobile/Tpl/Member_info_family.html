@@ -1,0 +1,71 @@
+<include file="Modules/Mobile/Tpl/header.html" />
+<div class="container bony-mt2">
+    <div class="row">
+        <form class='bony-info form-inline' method='post' action='{:U('infoUpdate ')}'>
+            <input type='hidden' name='id' value='{$data.id}'>
+
+
+                <div class='form-group'>
+                <label>户口：</label>
+                <input class='form-control' name='hukou' type='text' value='{$data.hukou}'>
+                </div>
+                <div class='form-group'>
+                <label>籍贯：</label>
+                <input class='form-control' name='jiguan' type='text' value='{$data.jiguan}'>
+                </div>
+            <div class='form-group'>
+                <label>家中排行：</label>
+                <select class='form-control' name='ranking'>
+					<option <eq name="data['ranking']" value="不详">selected='selected'</eq> value='不详'>不详</option>
+                    <option <eq name="data['ranking']" value="独生子女">selected='selected'</eq> value='独生子女'>独生子女</option>
+                    <option <eq name="data['ranking']" value="老大">selected='selected'</eq> value='老大'>老大</option>
+                    <option <eq name="data['ranking']" value="老二">selected='selected'</eq> value='老二'>老二</option>
+                    <option <eq name="data['ranking']" value="老三">selected='selected'</eq> value='老三'>老三</option>
+                    <option <eq name="data['ranking']" value="老四">selected='selected'</eq> value='老四'>老四</option>
+                    <option <eq name="data['ranking']" value="老五及更小">selected='selected'</eq> value='老五及更小'>老五及更小</option>
+                    <option <eq name="data['love2']" value="老幺">selected='selected'</eq> value='老幺'>老幺</option>
+                </select>
+            </div>
+            <div class='form-group'>
+                <label>父母状态：</label>
+                <select class='form-control' name='parent_sta'>
+                    <option <eq name="data['parent_sta']" value="退休">selected='selected'</eq> value='退休'>退休</option>
+                    <option <eq name="data['parent_sta']" value="上班">selected='selected'</eq> value='上班'>上班</option>
+                    <option <eq name="data['parent_sta']" value="有企业">selected='selected'</eq> value='有企业'>有企业</option>
+                    <option <eq name="data['parent_sta']" value="健康">selected='selected'</eq> value='健康'>健康</option>
+                    <option <eq name="data['parent_sta']" value="单亲">selected='selected'</eq> value='单亲'>单亲</option>
+                    <option <eq name="data['parent_sta']" value="和谐幸福">selected='selected'</eq> value='和谐幸福'>和谐幸福</option>
+                    <option <eq name="data['parent_sta']" value="务农">selected='selected'</eq> value='务农'>务农</option>
+                    <option <eq name="data['parent_sta']" value="保密">selected='selected'</eq> value='保密'>保密</option>
+                </select>
+            </div>
+            <div class='form-group text-center'>
+                <button class='btn btn-block btn-sm btn-danger'>提交修改</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<style type="text/css">
+    .form-group label{
+        font-size: 1rem;
+    }
+    .form-control{
+        font-size: 1rem;
+        border: 1px solid pink;
+        padding: 0px 4px !important;
+        height: 30px;
+        line-height: 30px;
+    }
+    .bony-tab li{
+        padding: 2px !important;
+    }
+    .bony-tab li a{
+        padding: 4px 6px !important;
+        font-size: 1.2rem;
+        color: #222;
+    }
+</style>
+
+<include file="Modules/Mobile/Tpl/footer.html" />

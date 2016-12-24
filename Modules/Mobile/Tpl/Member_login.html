@@ -1,0 +1,23 @@
+<include file="Modules/Mobile/Tpl/header.html" />
+
+
+  <div class='container bony-login'>
+    <div class="row">
+
+      <form class="form-signin" method='post' action='{:U('Mobile/Member/checklogin')}'>
+        <h2 class="form-signin-heading">会员登录</h2>
+        <label for="inputEmail" class="sr-only">邮箱地址</label>
+        <input name='user' type="email" id="inputEmail" class="form-control" placeholder="邮箱地址"  value="{$username}" required autofocus>
+        <label for="inputPassword" class="sr-only">登录密码</label>
+        <input name='pwd' type="password" id="inputPassword" class="form-control" placeholder="登录密码" required>
+		<label>记住用户名<input name="remember" type="checkbox" checked="checked" value="1"></label>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登 录</button>
+<!-- http://mp.weixin.qq.com/s?__biz=MzA3MTQzOTA3OA==&mid=207440771&idx=1&sn=ed6055714d51d5fc690c5767982ccce5#rd -->
+        <a href="{:U('Mobile/Member/register')}" class="btn btn-lg btn-success btn-block" type="button">注册会员</a>
+        <a href="{:U('Mobile/Member/getBackPWD')}" >找回密码</a>
+      </form>   
+
+    </div>
+  </div>
+
+<include file="Modules/Mobile/Tpl/footer.html" />

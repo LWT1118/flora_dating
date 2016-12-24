@@ -1,0 +1,65 @@
+<div id='member-menu' class="container">
+  <div class="row member-face">
+    <div class='face'>
+      <if condition="strlen($m['img']) gt 0">
+        <img id='bony-face-img' class='img-resonsive img-circle img-thumbnail' src='__UPLOAD__/user/thumb200_{$m.img}'>
+      <else/>
+        <img id='bony-face-img' class='img-resonsive img-circle img-thumbnail' src='__PUBLIC__/images/no_face.gif'>
+      </if>
+      <p><a href="{:U('Mobile/face')}">修改头像</a></p>
+    </div>
+  </div>
+  <div class="row member-nav mt10">
+
+      <div class='col-sm-2 col-xs-4'>
+        <a class='button button-primary button-rounded' href="{:U('Mobile/newsAdd')}"><i class='icon-plus'></i> 发起活动</a></div>
+      <div class='col-sm-2 col-xs-4'>
+        <a class='button button-primary button-rounded dropdown-toggle' id='myNewsSub' data-toggle="dropdown"><i class='icon-tasks'></i> 我的活动<span class="caret"></span></a>
+
+        <ul class="dropdown-menu" role="menu" aria-labelledby="myNewsSub">
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="{:U('Mobile/myNews','status=1')}">已审核活动</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="{:U('Mobile/myNews','status=0')}">待审核活动</a></li>
+        </ul>
+
+      </div>
+      <div class='col-sm-2 col-xs-4'>
+        <a class='button button-primary button-rounded' href="{:U('Mobile/myReg')}"><i class='icon-bullhorn'></i> 报名记录</a></div>
+      <div class='col-sm-2 col-xs-4'>
+        <a class='button button-primary button-rounded' href="{:U('Mobile/myArrival')}"><i class='icon-check'></i> 签到记录</a></div>
+      <div class='col-sm-2 col-xs-4'>
+        <a class='button button-primary button-rounded' href="{:U('Mobile/info')}"><i class='icon-info-sign'></i> 我的资料</a></div>
+      <div class='col-sm-2 col-xs-4'>
+        <a class='button button-primary button-rounded' href="{:U('Mobile/pwd')}"><i class='icon-lock'></i> 修改密码</a></div>
+    
+  </div>
+
+<!--   <div class='row'>
+  <div class="col-sm-12">
+    <button id='pulldown' class='btn btn-block btn-xs btn-success'><i class="icon-angle-down icon-2x"></i></button>
+  </div>
+</div> -->
+</div>
+
+<script type="text/javascript">
+/*  $(document).ready(function(){
+
+    $h = $("#member-menu").height()-5;
+    $("#member-menu").animate({marginTop:'-'+$h+'px'},250);
+    //alert($h);
+
+    $("#pulldown").click(function(){
+      $html = $(this).html();
+      //alert($html);
+
+      if($html=='<i class="icon-angle-down icon-2x"></i>'){
+        $("#member-menu").animate({marginTop:'0px'},250);
+        $(this).html('<i class="icon-angle-up icon-2x"></i>');
+        $(this).removeClass('btn-success');
+      }else{
+        $("#member-menu").animate({marginTop:'-'+$h+'px'},250);
+        $(this).html('<i class="icon-angle-down icon-2x"></i>');
+        $(this).addClass('btn-success');
+      }
+    });
+  });*/
+</script>

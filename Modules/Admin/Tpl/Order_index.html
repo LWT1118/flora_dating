@@ -1,0 +1,82 @@
+<include file="Modules/Admin/Tpl/header.html" />
+
+<include file="Modules/Admin/Tpl/left.html" />
+<section id="main" class="column">
+	<form method='post' action='{:U('posUpdate')}'>
+		<article class="module width_full">
+		<header>
+			<h3>{$location}</h3>
+		</header>
+
+		<div class="tab_container">
+			<div id="tab1" class="tab_content">
+			<table class="tablesorter" cellspacing="0"> 
+			<thead> 
+				<tr> 
+   					<th><input type="checkbox"></th> 
+    				<th>单号</th>
+    				<th>价格</th> 
+    				<th>配送信息</th> 
+    				<th>时间信息</th>
+    				<th>下单会员</th>
+    				<th>状态</th> 
+    				<th>操作</th> 
+				</tr> 
+			</thead> 
+			<tbody>
+			<volist name="data" id="vo"> 
+				<input name='id[]' type='hidden' value='{$vo.id}'>
+				<tr> 
+   					<td><input type="checkbox"></td>
+   					<td>{$vo.id}</td>
+   					<td>
+    					<p>价格：{$vo.goods_price}</p>
+    					<p>运费：{$vo.ship_fee}</p>
+    					<p>应付：{$vo.pay_price}</p>
+    				</td>
+    				<td>
+    					<p>名称：{$vo.realname}</p>
+    					<p>地址：{$vo.address}</p>
+    					<p>电话：{$vo.tel}</p>
+    				</td> 
+    				
+    					
+    				<td>
+    					<p>下单：{$vo.add_time|date='Y/m/d H:i',###}</p>
+    					<p>付款：<gt name="$vo['pay_time']" value="0">{$vo.pay_time|date='Y/m/d H:i',###}<else />-</gt></p>
+    					<p>发货：<gt name="$vo['send_time']" value="0">{$vo.send_time|date='Y/m/d H:i',###}<else />-</gt></p>
+    				</td>
+    				</td>
+    				<td>
+    					<p>账号：<a href='{:U('Admin/User/edit','id='.$vo['uid'])}'>{$vo.user_name}</a></p>
+						<p>电话：{$vo.user_tel}</p>
+						<p>姓名：{$vo.user_realname}</p>
+    				</td>
+    				<td></td> 
+    				<td>
+						<a class='my-icon' href='{:U('edit','id='.$vo['id'])}' title="订单详情"><i class='icon-question-sign'></i></a>
+						<a class='my-icon' href='javascript:sure("{:U('del','id='.$vo['id'])}")' title="删除"><i class='icon-trash'></i></a>
+    				</td> 
+				</tr>
+			</volist>	 
+			</tbody> 
+			</table>
+			</div><!-- end of #tab1 -->
+
+		</div><!-- end of .tab_container -->
+
+		<footer>
+			<div class="submit_link">
+				<input type="submit" value="提交" class="alt_btn">
+				<input onclick='history.go(-1)' type="button" value="返 回">
+			</div>
+		</footer>
+		
+		</article><!-- end of content manager article -->
+
+		<div class='page'>{$page}</div>
+		
+
+	</form>
+</section>
+<include file="Modules/Admin/Tpl/footer.html" />

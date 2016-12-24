@@ -1,0 +1,48 @@
+<include file="Modules/Admin/Tpl/header.html" />
+
+<include file="Modules/Admin/Tpl/left.html" />
+
+	<section id="main" class="column">
+	<form method='post' action='{:U('pwdUpdate')}'>
+		<input value='{$data.id}' name='id' type="hidden">
+		<article class="module width_full">
+			<header>
+				<h3>{$location}</h3>
+			</header>
+				<div class="module_content">
+						
+
+
+						<fieldset>
+							<label>当前账户</label>
+							<span class='pwd_span'>{$m['username']}<span>
+						</fieldset>
+
+						<fieldset>
+							<label>当前密码</label>
+							<input class='pwd_input' name='p' type="password" placeholder='当前密码'>
+						</fieldset>
+
+						<fieldset>
+							<label>新密码</label>
+							<input class='pwd_input' name='p1' type="password" placeholder='新密码'>
+						</fieldset>
+
+						<fieldset>
+							<label>确认密码</label>
+							<input class='pwd_input' name='p2' type="password" placeholder='确认密码'>
+						</fieldset>
+
+
+				</div>
+			<footer>
+				<div class="submit_link">
+					<input type="submit" value="提交" class="alt_btn">
+					<input onclick='history.go(-1)' type="button" value="返回">
+				</div>
+			</footer>
+		</article><!-- end of post new article -->
+	</form
+	</section>
+
+<include file="Modules/Admin/Tpl/footer.html" />

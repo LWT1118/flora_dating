@@ -1,0 +1,82 @@
+<include file="Modules/Admin/Tpl/header.html" />
+
+<include file="Modules/Admin/Tpl/left.html" />
+<section id="main" class="column">
+	<form method='post' action='{:U('posUpdate')}'>
+		<article class="module width_full">
+    <header>
+      <h3 class="tabs_involved">{$location}</h3>
+      <ul class="tabs">
+          <li><a href="{:U('add')}"><i class='icon-plus'></i> 添加新条目</a></li>
+      </ul>
+    </header>
+		<div class="tab_container">
+			<div class="tab_content">
+			<table class="tablesorter" cellspacing="0"> 
+			<thead> 
+				<tr> 
+    				<th>图片</th>
+    				<th>名称</th> 
+    				<th width='100'>类型</th>
+            <th width='100'>排序</th>
+            <th width='80'>状态</th> 
+    				<th width='120' class='text-center'>操作</th> 
+				</tr> 
+			</thead> 
+			<tbody>
+			<volist name="data" id="vo"> 
+				<input name='id[]' type='hidden' value='{$vo.id}'>
+				<tr>
+   					<td width='120'>
+   					<div style='width:120px; height:42px; overflow:hidden'>
+   					<if condition="strlen($vo['img']) gt 0">
+   						<img src='__UPLOAD__/nav/thumb200_{$vo.img}' class='img-responsive img-rounded img-thumbnail'>
+   					<else />
+   						<img src="holder.js/120x42/random/text:暂无" class='img-responsive img-rounded img-thumbnail'>
+   					</if>
+   					</div>
+            </td> 
+    				
+            <td>
+              {$vo.title}<br>
+              {$vo.url}
+    				</td>
+
+            <td>{$vo.cat|nav_type}</td>
+
+    				<td>
+              <input style='width:70px !important' name='pos[]' type='number' min="1" max="999999" value='{$vo.pos}'></td>
+
+    				<td>
+              <a href='{:U('statusUpdate','id='.$vo['id'].'&status='.$vo['status'])}' title="状态开关">
+    					<eq name="vo['status']" value="0"><span class='text-success'>开启</span><else/><span class='text-danger'>关闭</span></eq>
+    				  </a>
+            </td>
+
+    				<td class='text-center'>
+    					<a class='my-icon' href='{:U('edit','id='.$vo['id'])}' title="编辑"><i class='icon-pencil'></i></a>&nbsp;&nbsp;
+    					<a class='my-icon' href='javascript:sure("{:U('del','id='.$vo['id'])}")' title="删除"><i class='icon-trash'></i></a>
+    				</td> 
+				</tr>
+			</volist>	 
+			</tbody> 
+			</table>
+			</div><!-- end of #tab1 -->
+
+		</div><!-- end of .tab_container -->
+
+		<footer>
+			<div class="submit_link">
+				<input type="submit" value="提交" class="alt_btn">
+				<input onclick='history.go(-1)' type="button" value="返 回">
+			</div>
+		</footer>
+		
+		</article><!-- end of content manager article -->
+
+		<div class='page'>{$page}</div>
+		
+
+	</form>
+</section>
+<include file="Modules/Admin/Tpl/footer.html" />

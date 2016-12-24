@@ -1,0 +1,32 @@
+<link href="__PUBLIC__/css/swiper3.08.min.css" rel="stylesheet">
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+      <volist name='slide' id='slide'>
+        <div class="swiper-slide">
+          <a title="{$slide.title}" href="{$slide.url}">
+            <img width='100%' class="img-responsive" alt="{$slide.title}" src='__UPLOAD__/slide/{$slide.img}'>
+          </a>
+        </div>
+      </volist>
+    </div>
+    <!-- 如果需要分页器 -->
+    <div class="swiper-pagination"></div>
+  
+    <!-- 如果需要导航按钮 -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+</div>
+<script src="__PUBLIC__/js/swiper3.08.jquery.min.js"></script>
+<script>
+$(document).ready(function () {      
+  var mySwiper = new Swiper ('.swiper-container', {
+    direction: 'horizontal',
+    loop: true,
+    // 如果需要分页器
+    pagination: '.swiper-pagination',
+    // 如果需要前进后退按钮
+    nextButton: '.swiper-button-next',
+    prevButton: '.swiper-button-prev',
+  }) 
+})       
+</script>

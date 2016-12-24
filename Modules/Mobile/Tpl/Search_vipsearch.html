@@ -1,0 +1,45 @@
+<include file="Modules/Mobile/Tpl/header.html" />
+
+	
+
+
+
+	<div class='container-fluid bony-search'>
+
+		<h3 class='text-center'>{$h3}</h3>
+
+		<div class="list-group bony-font-2 bony-search">
+
+			<volist name='user' id='notify'>
+
+	          <a class="list-group-item" href='{:U('User/detail','id='.$notify['id'])}'>
+	          	
+				<div class="pic pull-left">
+					<img width='100%' src='{$notify.img}' class='img-circle img-responsive'>
+				</div>
+				<div class="txt">
+					<span class="icon-angle-right pull-right" style='position:absolute;right:5%;top:48%'></span>
+					<h3>{$notify.nickname|default='暂未填写昵称'}<if condition="($m.audit gt 0)">(已认证)</if></h3>
+					<!--<p>{$notify.age}岁 {$notify.height}cm，{$notify.edu} 月收入：{$notify.income}</p>
+					<p>地区：{$notify.area|default='-'} 城市：{$notify.city|default='-'}</p>-->
+					<p>个性签名：{$notify.sign|default='未填写个性签名'}</p>
+					<p>兴趣爱好：{$notify.interest|default='暂未填写兴趣爱好'}</p>
+					
+				</div>
+				
+				<div class="clearfix"></div>
+	          </a>
+
+			</volist>
+			<div class="pages">{$page}</div>
+		</div>
+
+
+		<a class='bony-mt2 button button-rounded button-block button-caution' href="{:U('advance')}">重新搜索</a>
+
+	</div>
+
+
+
+
+<include file="Modules/Mobile/Tpl/footer.html" />

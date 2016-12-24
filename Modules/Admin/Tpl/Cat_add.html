@@ -1,0 +1,40 @@
+
+<include file="Modules/Admin/Tpl/header.html" />
+
+<include file="Modules/Admin/Tpl/left.html" />
+
+	<section id="main" class="column">
+	<form method='post' action='{:U('update','action=add')}'>
+		<input type='hidden' name='pid' value='{$pid}'>
+		<article class="module width_full">
+			<header>
+				<h3 class="tabs_involved">{$location}</h3>
+				<ul class="tabs">
+		   			<li><a href="{:U('index')}">返回列表</a></li>
+				</ul>
+			</header>
+				<div class="module_content">
+						
+
+						<fieldset>
+							<label>分类名称</label>
+							<input name='title' type="text" placeholder='输入分类名称'>
+						</fieldset>
+
+						<fieldset>
+							<label>位置排序</label>
+							<input name='pos' type="text" value='999999' placeholder='输入排序数字升序排列'>
+						</fieldset>
+
+				</div>
+			<footer>
+				<div class="submit_link">
+					<input type="submit" value="提交" class="alt_btn">
+					<input onclick='history.go(-1)' type="button" value="返回">
+				</div>
+			</footer>
+		</article><!-- end of post new article -->
+	</form
+	</section>
+
+<include file="Modules/Admin/Tpl/footer.html" />

@@ -1,0 +1,35 @@
+<include file="Modules/Home/Tpl/header.html" />
+
+
+<include file="Modules/Home/Tpl/Member_nav.html" />
+
+
+<div class="container">
+
+	<div class="row mt10">
+		
+		<div class='col-sm-12 col-xs-12'>
+
+
+<ul class="list-group">
+  <li class="list-group-item">姓名称呼：{$m.realname|default='未填写'}</li>
+  <li class="list-group-item">电子邮箱：{$m.email|default='未填写'}</li>
+  <li class="list-group-item hidden">微信绑定：
+  	<eq name="$m['openid']" value="">
+  		未绑定
+  	<else/>
+  		已绑定
+  	</eq></li>
+  <li class="list-group-item">我的活动：<a href='{:U('myNews')}'>生效活动 {$ok} 个</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='{:U('myNews')}'>待审核或过期活动 {$bad} 个</a></li>
+  <li class="list-group-item">活动报名：<a href='{:U('myReg')}'>{$m.reg}</a></li>
+  <li class="list-group-item">活动签到：<a href='{:U('myArrival')}'>{$m.arrival}</a></li>
+</ul>
+
+		
+		</div>
+
+	</div>
+
+</div>
+
+<include file="Modules/Home/Tpl/footer.html" />

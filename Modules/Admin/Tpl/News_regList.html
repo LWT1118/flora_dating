@@ -1,0 +1,49 @@
+<include file="Modules/Admin/Tpl/header.html" />
+<include file="Modules/Admin/Tpl/left.html" />
+<section id="main" class="column">
+	<article class="module width_full" style="border:none">
+		<form method="post" action="{:U('Admin/News/excel','id='.$news['id'])}">
+		<p><button type="submit">导出用户</button></p>
+		</form>
+	</article>
+	<article class="module width_full" style="border:none">
+		<form method="post" action="{:U('Admin/News/msg','id='.$news['id'])}">
+		<textarea style="width:800px;height:60px;" name="content"></textarea><p><button type="submit">发送消息</button></p>
+		</form>
+	</article>
+
+	<article class="module width_full">
+		<h3>活动 <a href='{:U('Home/News/detail/','id='.$news['id'])}'><b>{$news.title}</b></a> 的报名清单</h3>
+		<table class="tablesorter" cellspacing="0"> 
+		<thead> 
+			<tr><th>头像</th><th>姓名/手机</th><th>性别</th><th>邮箱/地址</th><th width='120'>参与</th></tr> 
+		</thead> 
+		<tbody>
+		<volist name="data" id="vo"> 
+			<tr> 
+				<td width='80'>
+					<img src='{$vo.img}' width='100%' class='img-responsive img-circle img-thumbnail'>
+				</td> 
+				<td>
+				  <p>昵姓：{$vo.nickname|default='暂未填写'}</p>
+				  <p>姓名：{$vo.realname|default='暂未填写'}</p>
+				  <p>手机：{$vo.tel|default='暂未填写'}</p>
+				</td> 
+				<td><if condition="$vo.gender == 0">男<else/>女</if></td>
+				<td>
+				  <p>邮箱：{$vo.email|default='暂未填写'}</p>
+				  <p>微信：{$vo.wechat|default='暂未填写'}</p>
+				</td>  
+				<td>
+				  <p>发布：{$vo.post}</p>
+				  <p>报名：{$vo.reg}</p>
+				  <p>签到：{$vo.arrival}</p>
+				</td>
+			</tr>
+		</volist>	 
+		</tbody> 
+		</table>
+	</article>
+</section>
+
+<include file="Modules/Admin/Tpl/footer.html" />

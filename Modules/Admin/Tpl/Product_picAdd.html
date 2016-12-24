@@ -1,0 +1,114 @@
+<include file="Modules/Admin/Tpl/header.html" />
+
+<include file="Modules/Admin/Tpl/left.html" />
+
+	<section id="main" class="column">
+		<form method='post' action='{:U('Product/picUpdate','action=add')}'>
+		<input type='hidden' name='pid' value='{$pid}'>
+    <input type='hidden' name='type' value='{$type}'>
+		<article class="module width_full">
+			<header><h3>{$location}</h3></header>
+				<div class="module_content">
+						
+<fieldset style="width:24%; float:left; margin-right:1%; margin-top:0">
+	<label>图片预览</label>
+	<input type='hidden' id='img_input' name='img' value=''>
+	<div class="clear"></div>
+	<div data-toggle="modal" data-target="#myModal" title='修改图片' style='display:block; width:200px; margin:0 auto; overflow:hidden'>
+			<img src="__PUBLIC__/images/add.gif" class='shop_pic img-responsive img-rounded img-thumbnail'>
+	</div>
+	<label>&nbsp;</label>
+	<div class="clear"></div>
+</fieldset>
+
+<fieldset>
+  <label>图片描述</label>
+  <input name='alt'  value='{$data.alt}' type="text" style="width:92%;">
+</fieldset>
+
+<fieldset>
+  <label>优酷视频</label>
+  <input name='url'  value='{$data.url}' type="text" style="width:92%;">
+</fieldset>
+
+<div class="clear"></div>
+
+				</div>
+			<footer>
+				<div class="submit_link">
+					<input type="submit" value="提 交" class="alt_btn">
+					<input onclick='history.go(-1)' type="button" value="返 回">
+				</div>
+			</footer>
+		</article><!-- end of post new article -->
+
+		</form>
+
+	</section>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    <form method='post' enctype='multipart/form-data' id='myForm' action='{:U('upload')}'>
+      <input type='hidden' name='w' value='{$w}'>
+      <input type='hidden' name='h' value='{$h}'>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">案例主图上传</h4>
+      </div>
+      <div class="modal-body">
+        	<fieldset>
+        		<label>当前图片</label>
+        		<div class="clear"></div>
+        		<p align='center'>	
+				<if condition="strlen($data['img']) gt 0">
+					<img style='width:300px' src='__UPLOAD__/product/{$data.img}' class='shop_pic img-responsive img-rounded img-thumbnail'>
+				<else />
+					<img style='width:300px' src="__HOMEPUBLIC__/images/no_pic.gif" class='shop_pic img-responsive img-rounded img-thumbnail'>
+				</if>
+				</p>
+			</fieldset>
+        	<fieldset>
+        		<label>上传新图</label>
+        		<div class="clear"></div>
+        		<p align='center'><input name='pic' type='file'></p>
+        	</fieldset>
+      </div>
+      <div class="modal-footer">
+        <button id='my-submit' type="submit" class="btn btn-primary">上传图片</button>
+        <button id='my-close' type="button" class="btn btn-default" data-dismiss="modal">关闭取消</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<js file="__PUBLIC__/js/jquery.form.js" />
+<script type="text/javascript">
+
+    $(document).ready(function() {
+    	var path = '__UPLOAD__/product/';
+		var options = {
+            success	: function (data) {
+            	$src_1 = path+'thumb_'+data;
+            	$src_2 = data;
+            	
+                $(".shop_pic").attr('src',path+'thumb_'+data);
+                $("#img_input").val($src_2);
+                $("#my-submit").remove();
+                $("#my-close").text('确定使用');
+                alert('上传成功');
+            }
+        };
+        $('#myForm').on('submit', function(e) {
+            e.preventDefault(); // <-- important
+            $(this).ajaxSubmit(options);
+        });
+    });
+
+
+</script>
+
+<include file="Modules/Admin/Tpl/footer.html" />

@@ -1,0 +1,339 @@
+body {
+    font-size: 10px !important;
+}
+
+
+/**************会员购买和红线赠送*****************/
+
+.price-list a b{
+    color: #00f;
+}
+
+.price-list a em{
+    color: #444;
+    font-style: normal;
+    font-size: .8em;
+}
+
+
+.w100{
+    width: 100%;
+}
+
+.font-small{
+    font-size: 1.2rem !important;
+}
+
+.bony-m5{
+    margin: 5px;
+}
+
+.bony-mt2 {
+    margin-top: 2rem;
+}
+
+.bony-pink {
+    background: #f69;
+}
+
+.bony-h1 {
+    font-size: 1.5rem;
+    padding: .5rem 0;
+}
+
+.bony-h1 a {
+    color: #333;
+}
+
+.bony-text-pink {
+    color: #cb3b4c;
+}
+
+.bony-font-2 {
+    font-size: 1.5rem !important;
+}
+
+.bony-topbar {
+    color: #fff;
+    position: relative;
+    text-align: center;
+    font-size: 2rem;
+    line-height: 3rem;
+}
+
+.bony-topbar a {
+    padding: 0;
+    color: #fff;
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 0 8px;
+}
+
+.bony-info-header .face {
+    margin: 3rem auto 1rem;
+}
+
+.bony-info-header .face img{
+    margin: auto;
+}
+
+.bony-info-header {
+    overflow: hidden;
+}
+
+.bony-info-header h3 {
+    color: #fff;
+    text-align: center;
+    font-weight: normal;
+    font-size: 1.8rem;
+    margin: .5rem 0;
+}
+
+.bony-info-header p {
+    font-size: 1.2rem;
+    color: #fff;
+    text-align: center;
+    margin: auto auto 1rem auto;
+}
+
+.bony-info-header p span{
+    font-size: 2rem;
+    color: #ff0;
+    margin: 0 10px;
+}
+
+.bony-info-header p a{
+    padding: 0 8px;
+    font-size: 1.2rem;
+    margin-left: 10px;
+}
+
+.bony-gray-border {
+    border-top: .5rem solid #eee;
+    border-bottom: .5rem solid #eee;
+}
+
+.bony-line {
+    border-bottom: 1px solid #eee;
+    padding: 2px;
+    margin: auto;
+    font-size: 1.2rem;
+}
+
+.bony-no-line {
+    border-bottom: none;
+}
+
+.bony-line div {
+    padding: .5rem 0;
+}
+
+.bony-more-list h3 {
+    font-size: 1.25rem;
+    color: #333;
+    margin: 3px 0;
+    padding: 0;
+}
+
+.bony-more-list p {
+    font-size: 1rem;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* 登陆 */
+
+
+/* 搜索结果列表 */
+
+.bony-search h3 {
+    font-size: 1.2rem;
+    margin: 1.2rem 0 .5rem;
+    padding: 0;
+}
+
+.bony-search a .pic {
+    float: left;
+    width: 20%;
+    padding-top: 2rem;
+}
+
+.bony-search a .txt {
+    float: left;
+    width: 75%;
+    margin-left: 5%;
+    text-align: left;
+    position: relative;
+}
+
+.bony-search a .txt p {
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+}
+
+.bony-search a span {}
+
+.bony-search a {
+    display: block;
+    clear: both;
+}
+
+.bony-nav .container-fluid {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.bony-nav .col-xs-4 {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.bony-nav .col-xs-4 a {
+    display: block;
+    padding: 5px 0;
+    color: #fff;
+    font-size: 2rem;
+    text-decoration: none;
+    position: relative;
+}
+
+.bony-nav .col-xs-4 a.cur {
+    background: #ff5200;
+}
+
+.bony-nav .col-xs-4 a .badge {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 4px 10px;
+    border: 1px solid #fff;
+    font-weight: lighter;
+    background: #f25d00;
+}
+
+.bony-nav .col-xs-4 a p {
+    padding: 0;
+    margin: 0;
+    font-size: 1rem;
+    letter-spacing: 0.2rem;
+}
+
+.bony-nav .col-xs-4 a i {
+    text-shadow: 1px 1px 2px #777;
+}
+
+.bony-search {
+    position: relative;
+    text-align: center;
+}
+
+.bony-sub {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    padding: 0;
+    background: #FFFFFF;
+    color: #999999;
+}
+
+.bony-form {
+    margin: 1.5rem auto;
+}
+
+.bony-form .col-xs-4 {
+    padding: 0;
+}
+
+.bony-border {
+    border: 1px solid #CCCCCC;
+    padding: 0.5rem;
+    margin-top: 1rem;
+    font-size: 1.6rem;
+    position: relative;
+}
+
+.bony-img {
+    margin: 1rem auto;
+}
+
+.bony-h {
+    font-size: 1.6rem;
+}
+
+.bony-p {
+    font-size: 1.2rem;
+}
+
+.bony-padd {
+    padding: 0;
+}
+
+
+
+.bony-info{
+    margin:0 2rem;
+}
+
+.bony-info .form-group{
+    margin-bottom: 10px !important;
+}
+
+.bony-info .form-group label{
+    line-height: 1.6 !important;
+}
+
+/* 分页 */
+
+.pages {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.pages a,
+.pages span.current {
+    display: inline-block;
+    padding: 0 8px;
+    margin: 0 4px;
+    height: 26px;
+    color: #333;
+    text-decoration: none;
+    text-align: center;
+    line-height: 26px;
+}
+
+.pages a {
+    background: #f69;
+}
+
+.pages a:hover {
+    background: #F690EA;
+}
+
+.pages span.current {
+    background: #E08887;
+}
+
+.pages input,
+.pages button {
+    width: 70px;
+    height: 26px;
+    line-height: 26px;
+    border: 1px solid #a3a3a3;
+    margin: 0 10px;
+}
+
+.pages input {
+    background: #f9f9f9;
+}
+
+.pages button {
+    background: #eceaeb;
+}
+
+
+/* 分页样式 */

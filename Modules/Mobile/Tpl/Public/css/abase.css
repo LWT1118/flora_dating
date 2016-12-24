@@ -1,0 +1,11 @@
+﻿.cm-slide div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, hr, button, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { margin: 0;padding: 0;}
+.cm-slide ul, ol {list-style: none;}
+fieldset, img, button, input {border: 0;}
+.cm-slide .cm-slide-list:before, .cm-slide .cm-slide-list:after {  content: "";display: table}
+.cm-slide .cm-slide-list:after {clear: both}
+.cm-slide { overflow: hidden; position: relative;  height: 210px}
+.cm-slide .cm-slide-list {   width: 4000px;  position: absolute}
+.cm-slide .cm-slide-list .cm-slide-item { position: relative;float: left}
+.cm-slide--full-img img {  display: block;width: 100%}
+.cui-slide-nav-item { overflow: hidden; width: 8px; height: 8px; background: rgba(255, 255, 255, .6); float: left;margin: 0 5px;border-radius: 50%}
+.cui-slide-nav-item-current{background: rgba(9,159,222,1)}

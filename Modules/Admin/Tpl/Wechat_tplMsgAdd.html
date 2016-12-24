@@ -1,0 +1,45 @@
+<include file="Modules/Admin/Tpl/header.html" />
+
+<include file="Modules/Admin/Tpl/left.html" />
+
+	<section id="main" class="column">
+		<form method='post' action='{:U('tplMsgAddHandle')}'>
+		<article class="module width_full">
+			<header><h3>{$location}</h3></header>
+				<div class="module_content">
+
+
+<fieldset>
+  <label>模板消息ID</label>
+  <input name='id' type="text" value='{$data.id}'>
+</fieldset>
+
+<fieldset>
+  <label>模板消息标题</label>
+  <input name='title' type="text" value='{$data.title}'>
+</fieldset>
+
+<fieldset>
+  <label>模板消息行业分类</label>
+  <input name='cat' type="text" value='{$data.cat}'>
+</fieldset>
+				
+
+<div class="clear"></div>
+				</div>
+			<footer>
+				<div class="submit_link">
+					<input type="submit" value="提 交" class="alt_btn">
+					<input onclick='history.go(-1)' type="button" value="返 回">
+				</div>
+			</footer>
+		</article><!-- end of post new article -->
+
+		</form>
+
+	</section>
+
+
+
+
+<include file="Modules/Admin/Tpl/footer.html" />

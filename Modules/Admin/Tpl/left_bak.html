@@ -1,0 +1,72 @@
+	<header id="header">
+		<hgroup>
+			<h1 class="site_title"><a href="{:U('/Admin/Index')}">管理菜单</a></h1>
+			<h2 class="section_title"></h2>
+			<div class="btn_view_site">
+				<a target='_blank' href="{:U('/Home/Index/index')}">前台首页</a>
+			</div>
+		</hgroup>
+	</header> <!-- end of header bar -->
+	
+	<section id="secondary_bar">
+		<div class="user">
+			<p><a href='{:U('/Home/Member/')}'>{$m.username}</a> (<a href="{:U('/Admin/Index/')}">3 条信息</a>)</p>
+			<!--<a class="logout_user" href="#" title="Logout">注销</a>  -->
+		</div>
+		<div class="breadcrumbs_container">
+			<article class="breadcrumbs"><a href="{:U('/Admin/Index/index')}">后台首页</a> <div class="breadcrumb_divider"></div> <a class="current">{$location}</a></article>
+		</div>
+	</section><!-- end of secondary bar -->
+	
+	<aside id="sidebar" class="column">
+		<form class="quick_search">
+			<input type="text" value="Quick Search" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
+		</form>
+		<hr/>
+		<h3>订单管理</h3>
+		<ul class="toggle">
+			<li class="icn_new_article"><a href="{:U('/Admin/Order/new')}">未处理订单</a></li>
+			<li class="icn_edit_article"><a href="{:U('/Admin/Order/process')}">处理中订单</a></li>
+			<li class="icn_categories"><a href="{:U('/Admin/Order/finish')}">已完成订单</a></li>
+			<li class="icn_tags"><a href="{:U('/Admin/Order/fail')}">失败订单</a></li>
+		</ul>
+		<h3>商户/商品</h3>
+		<ul class="toggle">
+			<li class="icn_new_article"><a href="{:U('/Admin/Goods/')}">商品管理</a></li>
+			<li class="icn_edit_article"><a href="{:U('/Admin/Shop/')}">商家管理</a></li>
+			<li class="icn_categories"><a href="{:U('/Admin/Index/')}">商家属性</a></li>
+			<li class="icn_tags"><a href="{:U('/Admin/Index/')}">商家标签</a></li>
+		</ul>
+		<h3>活动</h3>
+		<ul class="toggle">
+			<li class="icn_new_article"><a href="{:U('/Admin/Group/')}">团购活动</a></li>
+			<li class="icn_edit_article"><a href="{:U('/Admin/Sec/')}">秒杀活动</a></li>
+			<li class="icn_categories"><a href="{:U('/Admin/Pro/')}">Categories</a></li>
+			<li class="icn_tags"><a href="{:U('/Admin/Index/')}">Tags</a></li>
+		</ul>
+		<h3>用户</h3>
+		<ul class="toggle">
+			<li class="icn_add_user"><a href="{:U('/Admin/Index/')}">添加用户</a></li>
+			<li class="icn_view_users"><a href="{:U('/Admin/Index/')}">用户列表</a></li>
+			<li class="icn_profile"><a href="{:U('/Admin/Index/')}">用户权限</a></li>
+		</ul>
+		<h3>基础配置</h3>
+		<ul class="toggle">
+			<li class="icn_folder"><a href="{:U('/Admin/Index/zone')}">区域/街道</a></li>
+			<li class="icn_photo"><a href="{:U('/Admin/Index/cat')}">分类管理</a></li>
+			<li class="icn_audio"><a href="{:U('/Admin/Index/site')}">站点配置</a></li>
+			<li class="icn_video"><a href="{:U('/Admin/Index/seo')}">SEO选项</a></li>
+		</ul>
+		<h3>个人设置</h3>
+		<ul class="toggle">
+			<li class="icn_settings"><a href="{:U('/Admin/Index/')}">个人配置</a></li>
+			<li class="icn_security"><a href="{:U('/Admin/Index/')}">安全中心</a></li>
+			<li class="icn_jump_back"><a href="{:U('/Home/Member/logout')}">注销退出</a></li>
+		</ul>
+		
+		<footer>
+			<hr />
+			<p><strong>Copyright &copy; BonyStudio</strong></p>
+			<p>Theme by <a href="http://BonyStudio.com">bony</a></p>
+		</footer>
+	</aside><!-- end of sidebar -->

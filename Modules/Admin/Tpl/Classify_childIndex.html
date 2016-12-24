@@ -1,0 +1,80 @@
+<include file="Modules/Admin/Tpl/header.html" />
+<include file="Modules/Admin/Tpl/left.html" />
+<section id="main" class="column">
+    
+        <article class="module width_full">
+		<form method='post' action="__URL__/addChildClass">
+			<input type="hidden" name="id" value="{$current_class['id']}">
+            <header><h3>添加分类</h3></header>
+            <div class="module_content">
+                <fieldset>
+                    <label>父分类</label>
+                    <select name='pid'>
+						<option value='0'>无</option>
+                        <volist name='mainclass' id='main'>
+                            <option value='{$main.id}' <if condition="(!empty($current_class) and ($main.id eq $current_class['pid']))"> selected</if>>{$main.classname}</option>
+                        </volist>
+                    </select>
+                </fieldset>
+                <div class="clear"></div>
+                <fieldset>
+                    <label>分类名称</label>
+                    <input name='childname' type="text" value="{$current_class.classname}">
+                </fieldset>
+                <div class="clear"></div>
+                <fieldset>
+                    <label>URL</label>
+                    <input name='childurl' type="text" value='{$current_class.url}'>
+                </fieldset>
+                <fieldset>
+                    <label>序号</label>
+                    <input name='no' type="text" value='{$current_class.no}'>
+                </fieldset>				
+            </div>
+			
+            <footer>
+                <div class="submit_link">
+                    <input type="submit" value="提 交" class="alt_btn">
+                    <input onclick='history.go(-1)' type="button" value="返 回">
+                </div>
+            </footer>
+		</form>
+        </article><!-- end of post new article -->
+		
+		<article class="module width_full">
+			<div class="tab_container">
+			<header><h3>分类列表</h3></header>
+            <div id="tab1" class="tab_content">
+                <table class="tablesorter" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th width='5%'>ID</th>
+                        <th width='10%'>父分类</th>
+                        <th>分类名称</th>                       
+						<th>URL</th>
+						<th>序号</th>
+                        <th width='15%'>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <volist name="list" id="ls">
+                        <tr>
+                            <td>{$ls.id}</td>
+                            <td>{$ls.parent}</td>
+                            <td>{$ls.classname}</td>
+                            <td>{$ls.url}</td>
+							<td>{$ls.no}</td>
+                            <td>
+                                <a class='my-icon' href='{:U('childIndex','id='.$ls['id'])}' title="编辑"><i class='icon-pencil'></i></a>
+                                <a class='my-icon' href='javascript:sure("{:U('classdelete','id='.$ls['id'])}")' title="删除"><i class='icon-trash'></i></a>                                
+                            </td>
+                        </tr>
+                    </volist>
+                    </tbody>
+                </table>
+            </div><!-- end of #tab1 -->
+
+			</div><!-- end of .tab_container -->
+		</article>
+</section>
+<include file="Modules/Admin/Tpl/footer.html" />

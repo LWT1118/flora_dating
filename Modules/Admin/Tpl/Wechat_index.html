@@ -1,0 +1,72 @@
+<include file="Modules/Admin/Tpl/header.html" />
+
+<include file="Modules/Admin/Tpl/left.html" />
+<section id="main" class="column">
+	<form method='post' action='{:U('posUpdate')}'>
+		<article class="module width_full">
+		<header><h3 class="tabs_involved">{$location}</h3>
+		<ul class="tabs">
+   			<li><a href="{:U('add','cat='.$pid)}"><i class='icon-plus'></i> 添加新条目</a></li>
+		</ul>
+		</header>
+		<div class="tab_container">
+			<div class="tab_content">
+			<table class="tablesorter" cellspacing="0"> 
+			<thead> 
+				<tr> 
+   					<th width='10'><input type="checkbox"></th> 
+    				<th>图片</th>
+    				<th>标题</th> 
+    				<th>链接</th>  
+    				<th width='100'>操作</th> 
+				</tr> 
+			</thead> 
+			<tbody>
+			<volist name="data" id="vo"> 
+				<input name='id[]' type='hidden' value='{$vo.id}'>
+				<tr> 
+   					<td><input type="checkbox"></td>
+   					<td width='60'>
+   						<div style='width:60px; height:60px; over-flow:hidden'>
+   					<if condition="strlen($vo['img']) gt 0">
+   						<img src='__UPLOAD__/wechat/thumb200_{$vo.img}' class='img-responsive img-rounded img-thumbnail'>
+   					<else />
+   						<img src="__HOMEPUBLIC__/images/no_pic.gif" class='img-responsive img-rounded img-thumbnail'>
+   					</if>
+   						</div>
+					</td> 
+    				<td>
+    					<p>关键词：{$vo.keyword}</p>
+    					<p>标&nbsp;&nbsp;&nbsp;&nbsp;题：{$vo.title}</p>
+    				</td> 
+    				<td>
+    					<p>多图文ID：{$vo.itemlist}</p>
+    					<p>链接：{$vo.url}</p>
+    				</td>
+    				<td>
+    					<a class='my-icon' href='{:U('edit','id='.$vo['id'])}' title="编辑"><i class='icon-pencil'></i></a>&nbsp;&nbsp;
+    					<a class='my-icon' href='javascript:sure("{:U('del','id='.$vo['id'])}")' title="删除"><i class='icon-trash'></i></a>
+    				</td> 
+				</tr>
+			</volist>	 
+			</tbody> 
+			</table>
+			</div><!-- end of #tab1 -->
+
+		</div><!-- end of .tab_container -->
+
+		<footer>
+			<div class="submit_link">
+				<input type="submit" value="提交" class="alt_btn">
+				<input onclick='history.go(-1)' type="button" value="返 回">
+			</div>
+		</footer>
+		
+		</article><!-- end of content manager article -->
+
+		<div class='page'>{$page}</div>
+		
+
+	</form>
+</section>
+<include file="Modules/Admin/Tpl/footer.html" />

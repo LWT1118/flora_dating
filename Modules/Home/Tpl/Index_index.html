@@ -1,0 +1,86 @@
+<include file="Modules/Home/Tpl/header.html" />
+
+
+
+<!-- 	<div class='container bony-ads'>
+
+		<div class="row">
+			<div class="col-sm-6 col-xs-12">
+				{$ads.content}
+			</div>
+			<div class="col-sm-6 col-xs-12">
+				{$ads2.content}
+			</div>
+		</div>
+	</div> -->
+	
+
+
+	<div class='container bony-nav'>
+		<div class='myh2 mt20 bg3'><a href='{:U('News/index')}' class='pull-right'>more&raquo;</a>最新活动</div>
+		<div class="row mt20">
+			<volist name='notify' id='notify'>
+			<div class="col-sm-4 col-xs-12" style="float:right">
+				<a href='{:U('News/detail','id='.$notify['id'])}'>
+				<if condition="strlen($notify['img']) gt 0 AND file_exists('./Upload/news/thumb300_'.$notify['img'])">
+					<img src='__UPLOAD__/news/thumb300_{$notify.img}' class='img-responsive'>
+				<else />
+					<img src="holder.js/360x200/random/text:{$notify.title}" class='img-responsive'>
+				</if>
+				</a>
+				<a href='{:U('News/detail','id='.$notify['id'])}'>
+				<p>
+					<span class='bg3'>
+						报名：{$notify.reg}<br>
+						签到：{$notify.arrival}
+					</span>
+					<h3>{$notify.title|left_title=12}</h3>
+					<b><i class='icon-time'></i> {$notify.start_time|date='Y-m-d H:i',###}——{$notify.end_time|date='Y-m-d H:i',###}<a href="/Home/Index/yinyuan">报名</a></b>
+					<b><i class='icon-map-marker'></i> {$notify.summary}</b>
+
+				</p>
+				</a>
+			</div>
+			</volist>
+		</div>
+	</div>
+
+<div class='container bony-member'>
+	<div class='myh2 mt20 bg1'>优秀会员</div>
+	<div class="row">
+		<volist name='user' id='user'>
+		<div class="col-sm-3 col-xs-6">
+			<a href='{:U('Home/Index/yinyuan')}'>
+			<img src="{$user.img}" class='img-circle img-thumbnail img-responsive'>
+			<b>{$user.nickname}</b>
+			<!--b>活跃度：{$user.arrival}</b-->
+			</a>
+		</div>
+		</volist>
+	</div>
+	<div class="row">
+		<div class="form-group">
+			<a class="from-control btn btn-primary" href="/Home/Index/yinyuan">会员搜索</a>
+		</div>
+	</div>
+</div>
+
+
+<!-- <div class='container bony-link'>
+	<div class='myh2 mt20 bg3'>合作伙伴</div>
+	<div class="row mt20">
+		
+		<volist name='link' id="link">
+	    <div class="col-sm-2 col-xs-4 text-center"><a target='_blank' href="{$link.url}">
+			<if condition="strlen($link['img']) gt 0">
+			<img src='__UPLOAD__/nav/thumb200_{$link.img}' class='img-thumbnail img-responsive'>
+			<else />
+			<img src="holder.js/120x42/random/{$link.title}" class='img-thumbnail img-responsive'>
+			</if>	    	
+	    </a></div>
+	    </volist>
+	</div> 
+</div> -->
+
+
+<include file="Modules/Home/Tpl/footer.html" />

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{$page_title} {$site.name}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<meta name="keywords" content="{$site.keyword}" />
+<meta name="description" content="{$site.descreption}" />
+
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/buttons.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/holder.min.js"></script>
+
+
+<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/css/buttons.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/css/font-awesome-ie7.min.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/css/bony.css" rel="stylesheet" type="text/css" />
+
+
+</head>
+<body>
+
+  <div class='container bony-login'>
+    <div class="row">
+
+      <form class="form-signin" method='post' action='{:U('roleSelectHandle')}'>
+        <h2 class="form-signin-heading text-center">{$page_title}</h2>
+        <input type='hidden' name='openid' value='{$openid}'>
+        <input type='hidden' name='roomid' value='{$roomid}'>
+
+        <div class="form-group">
+        <label for="num">选择号码</label>
+        <select id='num' name='num' class="form-control text-center">
+          <volist name='num' id='num'>
+          <option value="{$num}">{$num}</option>
+          </volist>
+        </select>
+        </div>
+
+        <div class="form-group">
+        <label for="role">选择角色</label>
+        <select id='role' name='role' class="form-control text-center">
+          <volist name='role' id='role'>
+          <option value="{$role}">{$role}</option>
+          </volist>
+        </select>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">进入游戏</button>
+
+      </form>   
+
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<include file="Modules/Admin/Tpl/header.html" />
+
+<include file="Modules/Admin/Tpl/left.html" />
+<section id="main" class="column">
+	<form method='post' action='{:U('pos')}'>
+		<article class="module width_full">
+		<header>
+			<h3 class="tabs_involved">{$location}</h3>
+			<ul class="tabs">
+	   			<li><a href="{:U('add')}"><i class='icon-plus'></i> 添加新条目</a></li>
+			</ul>			
+		</header>
+
+		<div class="tab_container">
+			<div id="tab1" class="tab_content">
+			<table class="tablesorter" cellspacing="0"> 
+			<thead> 
+				<tr> 
+   					<th><input type="checkbox"></th> 
+    				<th>图片</th>
+    				<th>标题/链接</th>
+    				<th>排序</th>
+    				<th>分类</th> 
+    				<th width='80'>编辑</th> 
+				</tr> 
+			</thead> 
+			<tbody>
+			<volist name="data" id="vo"> 
+				<input name='id[]' type='hidden' value='{$vo.id}'>
+				<tr> 
+   					<td><input type="checkbox"></td>
+   					<td>
+   					<div style='width:200px; over-flow:hidden'>
+	   					<if condition="strlen($vo['img']) gt 0">
+	   						<img src='__UPLOAD__/slide/{$vo.img}' class='img-responsive img-rounded img-thumbnail'>
+	   					<else />
+	   						<img src="__HOMEPUBLIC__/images/no_pic.gif" class='img-responsive img-rounded img-thumbnail'>
+	   					</if>
+   					</div>
+					</td> 
+    				<td>
+    					<p>标题：{$vo.title}</p>
+    					<p>链接：{$vo.url}</p>
+    				</td> 
+    				<td><input style='width:80px' name='pos[]' type='number' min="1" max="999999" value='{$vo.pos}'></td>
+    				<td>
+    					<eq name="vo['type']" value="0">
+    						<span class='btn btn-primary'>顶部</span>
+    					<else/>
+    						<span class='btn btn-warning'>底部</span>
+    					</eq>
+    				</td> 
+    				<td>
+    					<a class='my-icon' href='{:U('edit','id='.$vo['id'])}' title="编辑"><i class='icon-pencil'></i></a>
+    					<a class='my-icon' href="javascript:sure('{:U('del','id='.$vo['id'])}')" title="删除"><i class='icon-trash'></i></a>
+    				</td> 
+				</tr>
+			</volist>	 
+			</tbody> 
+			</table>
+			</div><!-- end of #tab1 -->
+
+		</div><!-- end of .tab_container -->
+
+		<footer>
+			<div class="submit_link">
+				<input type="submit" value="提交" class="alt_btn">
+				<input onclick='history.go(-1)' type="button" value="返 回">
+			</div>
+		</footer>
+		
+		</article><!-- end of content manager article -->
+
+		<div class='page'>{$page}</div>
+		
+
+	</form>
+</section>
+<include file="Modules/Admin/Tpl/footer.html" />

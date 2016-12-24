@@ -1,0 +1,55 @@
+<include file="Modules/Admin/Tpl/header.html" />
+
+<include file="Modules/Admin/Tpl/left.html" />
+
+	<section id="main" class="column">
+	<form method='post' action='{:U('catUpdate','action=save')}'>
+		<input value='{$data.id}' name='id' type="hidden">
+		<article class="module width_full">
+			<header>
+				<h3 class="tabs_involved">{$location}</h3>
+				<ul class="tabs">
+		   			<li><a href="{:U('catList')}">返回列表</a></li>
+				</ul>
+			</header>
+				<div class="module_content">
+					
+
+<fieldset>
+	<label>关键词名称</label>
+	<input value='{$data.cat}' name='cat' type="text" placeholder='输入城区名称'>
+</fieldset>
+
+<fieldset>
+	<label>回复类型</label>
+	<select name="pid">
+		<option value="0">纯文本消息</option>
+		<option value="1">单图文消息</option>
+		<option value="2">多图文消息</option>
+	</select>
+</fieldset>
+
+<fieldset>
+	<label>关键词描述</label>
+	<input value='{$data.remarks}' name='remarks' type="text" placeholder='关键词长描述'>
+</fieldset>
+
+<fieldset>
+	<label>位置排序</label>
+	<input value='{$data.pos}' name='pos' type="text" placeholder='输入排序数字升序排列'>
+</fieldset>
+
+<div class="clear"></div>
+
+				</div>
+			<footer>
+				<div class="submit_link">
+					<input type="submit" value="提交" class="alt_btn">
+					<input onclick='history.go(-1)' type="button" value="返回">
+				</div>
+			</footer>
+		</article>
+	</form>
+	</section>
+
+<include file="Modules/Admin/Tpl/footer.html" />

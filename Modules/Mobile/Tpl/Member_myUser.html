@@ -1,0 +1,20 @@
+<include file="Modules/Mobile/Tpl/header.html" />
+
+<include file="Modules/Mobile/Tpl/mheader.html" />
+
+
+<div class="list-group bony-font-2">
+  
+  <a class="list-group-item" href='{:U('Mobile/Member/follow')}'>
+    我关注了 {$follow} 人
+    <span class='pull-right icon-chevron-right'></span>
+  </a>
+
+  <a class="list-group-item" href='{:U('Mobile/Member/fans')}'>
+    有 {$fans} 人关注我
+    <span class='pull-right icon-chevron-right'></span>
+  </a>
+</div>
+
+
+<include file="Modules/Mobile/Tpl/footer.html" />

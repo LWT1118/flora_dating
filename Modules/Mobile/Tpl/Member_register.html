@@ -1,0 +1,55 @@
+<include file="Modules/Mobile/Tpl/header.html" />
+<div class="container">
+  <div class="row">
+    <div class='myh2 mt20'>会员注册</div>
+    <div class="col-sm-12">
+
+<form role="form" method='post' action='{:U('Mobile/Member/checkregister')}'>
+
+  <input name='img' type='hidden' value='{$img}'>
+  <div class="form-group">
+    <label>邮箱</label>
+    <input name='email' type="email" class="form-control" id="email" placeholder="邮箱" required="required">
+  </div>
+
+  <div class="form-group">
+    <label>微信号</label>
+    <input name='wechat' type="text" class="form-control" placeholder="微信号" required="required">
+  </div>
+
+  <div class="form-group">
+    <label>手机号</label>
+    <input name='tel' type="text" class="form-control" placeholder="手机号" required="required">
+  </div>
+
+  <div class="form-group">
+    <label>昵称</label>
+    <input name='nickname' type="text" class="form-control" placeholder="昵称" required="required">
+  </div>
+
+  <div class="form-group">
+    <label>性别</label>
+	<select class='form-control' name='gender'>
+	<option value='0'>男生</option>
+	<option value='1'>女生</option>
+	</select>
+  </div>
+
+  <div class="form-group">
+    <label>初始密码</label>
+    <input name='p1' type="password" class="form-control" id="p1" placeholder="初始密码" required="required">
+  </div>
+  <div class="form-group">
+    <label>确认密码</label>
+    <input name='p2' type="password" class="form-control" id="p2" placeholder="确认密码" required="required">
+  </div>
+  <div class="form-group">
+    <input name='p' type="checkbox" checked  id="p" value="1"><a href="{:U('/Mobile/Member/protocol')}">我已阅读并同意协议</a>
+  </div>
+
+  <button type="submit" class="btn btn-lg btn-block btn-primary">注 册</button>
+</form>
+  </div>
+  </div>
+</div>
+<include file="Modules/Mobile/Tpl/footer.html" />

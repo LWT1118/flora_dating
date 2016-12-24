@@ -1,0 +1,38 @@
+<include file="Modules/Home/Tpl/header.html" /> 
+<div class='w1200'>
+    <div class='view-style'>
+        {$page_title}
+    </div>
+
+<footer><div class='page'>{$page}</div></footer>
+<ul class="list-group search-result">
+
+            <volist name="data" id="vo" empty="暂无数据">
+
+
+<li class="list-group-item">
+    <a href='{:U('Mobile/Product/detail','id='.$vo['id'])}' class='pic'>
+      <if condition="file_exists('./Upload/product/thumb200_'.$vo['img'])">
+          <img src='__UPLOAD__/product/thumb200_{$vo.img}' width="100%" class='img-responsive img-rounded'>
+      <else />
+          <img src="__PUBLIC__/images/no_pic.gif" width="100%" class='img-responsive img-rounded'>
+      </if>
+    </a>
+    <div class='txt'>
+        
+      <h1 class='myh1'>{$vo.title}</h1>
+      <p>市场价格：<span class='del'>{$vo.price2}</span> 本站价格：{$vo.price3}</p>
+      <p style='line-height:5;'>
+        <a href='{:U('Mobile/Product/detail',array('id'=>$vo['id']))}' class='button button-small button-primary button-rounded'>查看详情</a>
+      </p>
+    </div>
+    <div class='clearfix'></div>
+</li>
+            </volist> 
+</ul>
+
+    <footer><div class='page'>{$page}</div></footer>
+
+</div>
+
+ <include file="Modules/Home/Tpl/footer.html" />    

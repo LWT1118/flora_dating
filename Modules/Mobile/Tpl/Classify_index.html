@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+<meta name="apple-mobile-web-app-title" content="携程旅行">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta content="telephone=no" name="format-detection">
+<link href="__PUBLIC__/css/classify.css" rel="stylesheet">
+<link href="__PUBLIC__/css/abase.css" rel="stylesheet">
+<link href="__PUBLIC__/css/swiper3.08.min.css" rel="stylesheet">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/swiper3.08.jquery.min.js"></script>
+<meta name="full-screen" content="yes">
+<meta name="x5-fullscreen" content="true">
+<meta name="browsermode" content="application">
+<meta name="x5-page-mode" content="app">
+</head>
+<body id="ctripPage">
+<div id="js-index-page">
+	<if condition="!empty($image_list)">
+	<header class="jsmodule" id="js_module">
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+			<volist name='image_list' id='image'>
+				<div class="swiper-slide"><a <if condition="!empty($image['url'])">href="{$image['url']}"</if>><img style="width:100%;height:auto" src="{$image.image}"></a></div>
+			</volist>
+			</div>
+			<!-- 如果需要分页器 -->
+			<div class="swiper-pagination"></div>						
+		</div>		
+	</header>
+	</if>
+	<nav id="nav" class="nav-entry">
+	<volist name='relation_catalog' id='parent'>
+		<div class="row">
+		<div class="col col-33"><a style="line-height:90px" title="{$parent['classname']}" <if condition="!empty($parent['url'])">href="{$parent['url']}"</if>>{$parent['classname']}</a></div>
+		<volist name="parent['children']" id='chunk'>
+		<div class="col col-33">
+			<volist name="chunk" id='catalog'>
+			<a title="{$catalog['classname']}" <if condition="!empty($catalog['url'])">href="{$catalog['url']}"</if>><em>{$catalog['classname']}</em></a> 
+			</volist>		
+		</div>
+		</volist>			
+		</div>	
+	</volist>
+	
+	<div class="row">
+	<volist name='single_catalog' id='chunk'>
+		<div class="col col-33">
+		<volist name="chunk" id='catalog'>
+		<a title="{$catalog['classname']}" <if condition="!empty($catalog['url'])">href="{$catalog['url']}"</if>><em>{$catalog['classname']}</em></a>
+		</volist>	
+		</div>	
+	</volist>
+	</div>		
+	</nav>		
+</div>			
+<script type="text/javascript">        
+  var mySwiper = new Swiper ('.swiper-container', {
+    loop: true,    
+    autoplay: 1500,
+    pagination: '.swiper-pagination',    
+	paginationClickable:true,
+	slideToClickedSlide:true,
+	autoplayDisableOnInteraction:false
+  });        
+</script>	

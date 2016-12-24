@@ -1,0 +1,64 @@
+<include file="Modules/Mobile/Tpl/header.html" />
+
+
+    <div class="bony-pink bony-info-header">
+        <div class='face'>
+          <a href="#">
+          <if condition="(strlen($user['img']) gt 0) AND (file_exists('./Upload/user/thumb_'.$user['img']))">
+          <img src="__UPLOAD__/user/thumb_{$user.img}" class='img-responsive img-circle' alt="头像照片">
+          <else/>
+          <img src="holder.js/100x100/#044:#fff/text:暂无照片/" class='img-responsive img-circle' alt="">
+          </if>
+          </a>
+        </div>
+        <h3>{$user.realname|default='未填写昵称'}</h3>
+        <p>{$user.sign|default='未填写个性签名'}</p>
+    </div>
+    <div class="container bony-gray-border">
+        <div class="row bony-line">        
+          <div class="col-xs-4">称呼</div>
+          <div class="col-xs-8">{$user.realname}</div>
+        </div>
+
+        <div class="row bony-line">        
+          <div class="col-xs-4">年龄</div>
+          <div class="col-xs-8">{$user.age}</div>
+        </div>
+
+        <div class="row bony-line">        
+          <div class="col-xs-4">身高</div>
+          <div class="col-xs-8">{$user.height}cm</div>
+        </div>
+
+        <div class="row bony-line">        
+          <div class="col-xs-4">教育程度</div>
+          <div class="col-xs-8">{$user.edu|edu}</div>
+        </div>
+
+        <div class="row bony-line">        
+          <div class="col-xs-4">收入</div>
+          <div class="col-xs-8">{$user.income|income}</div>
+        </div>
+
+        <div class="row bony-line">        
+          <div class="col-xs-4">情感状况</div>
+          <div class="col-xs-8">{$user.love|love}</div>
+        </div>
+
+        <div class="row bony-line">        
+          <div class="col-xs-4">兴趣爱好</div>
+          <div class="col-xs-8">{$user.interest}</div>
+        </div>
+
+        <div class="row bony-line">        
+          <div class="col-xs-4">微信号</div>
+          <div class="col-xs-8">
+            <a class='button button-caution button-small' href='#'>查看微信号</a>
+          </div>
+        </div>
+
+       
+    </div>
+
+
+<include file="Modules/Mobile/Tpl/footer.html" />

@@ -1,0 +1,51 @@
+<include file="Modules/Admin/Tpl/header.html" />
+
+<include file="Modules/Admin/Tpl/left.html" />
+
+	<section id="main" class="column">
+	<form method='post' action='{:U('cfgUpdate')}'>
+		<input value='{$data.id}' name='id' type="hidden">
+		<article class="module width_full">
+			<header>
+				<h3>{$location}</h3>
+			</header>
+				<div class="module_content">
+						
+<fieldset>
+	<label>URL(服务器地址)</label>
+	<span class='pwd_span'>http://{$Think.server.HTTP_HOST}/Wechat/</span>
+</fieldset>
+
+<fieldset>
+	<label>Token(令牌)</label>
+	<input value='{$data.token}' class='txt_input' name='token' placeholder='Token(令牌)'>
+</fieldset>
+
+<fieldset>
+	<label>EncodingAESKey(消息加解密密钥)</label>
+	<input value='{$data.encodingaeskey}' class='txt_input' name='encodingaeskey' placeholder='EncodingAESKey(消息加解密密钥)'>
+</fieldset>
+
+<fieldset>
+	<label>AppID(应用ID)</label>
+	<input value='{$data.appid}' class='txt_input' name='appid' placeholder='AppID(应用ID)'>
+</fieldset>
+
+<fieldset>
+	<label>AppSecret(应用密钥)</label>
+	<input value='{$data.appsecret}' class='txt_input' name='appsecret' placeholder='AppSecret(应用密钥)'>
+</fieldset>
+
+
+				</div>
+			<footer>
+				<div class="submit_link">
+					<input type="submit" value="提交" class="alt_btn">
+					<input onclick='history.go(-1)' type="button" value="返回">
+				</div>
+			</footer>
+		</article><!-- end of post new article -->
+	</form
+	</section>
+
+<include file="Modules/Admin/Tpl/footer.html" />

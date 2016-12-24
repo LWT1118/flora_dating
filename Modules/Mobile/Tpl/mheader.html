@@ -1,0 +1,16 @@
+    <div class="bony-pink bony-info-header">
+        <div class='face'>
+          <a href="{:U('Mobile/Member/face')}">
+          <img src="{$m.img}" class='img-responsive img-circle' alt="头像照片">
+          </if>
+          </a>
+        </div>
+        <h3>{$m.nickname|default='未填写昵称'}(<if condition="($m.audit gt 1)">已认证<else />{$audit_url}</if>)</h3>
+		<if condition="$m.vip eq 0">
+		 <p>您还不是VIP会员</p>
+		 <else/>
+		 <p>您的VIP会员将于{$m.vipendtime|date="Y-m-d",###}到期</p>
+		</if>
+        <p>红线：<span>{$m.redline}</span>根 <a class='button button-tiny button-rounded button-primary' href="{:U('yyb')}">购买</a></p>
+        <p style='padding:0 8px'>{$m.sign|default='未填写个性签名'}</p>
+    </div>

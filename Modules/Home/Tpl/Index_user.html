@@ -1,0 +1,40 @@
+<include file="Modules/Home/Tpl/header.html" />
+
+
+<div id='member-menu' class="container">
+  <div class="row member-face">
+    <div class='face'>
+      <if condition="strlen($m['img']) gt 0">
+        <img id='bony-face-img' class='img-resonsive img-circle img-thumbnail' src='/Upload/user/{$m.img}'>
+      <else/>
+        <img id='bony-face-img' class='img-resonsive img-circle img-thumbnail' src='holder.js/100%x100%/random/text:暂无头像/'>
+      </if>
+    </div>
+    <p class='text-center'>{$m.realname|default='未填写'}</p>
+  </div>
+</div>
+
+
+<div class="container">
+
+	<div class="row mt10">
+		
+		<div class='col-sm-12 col-xs-12'>
+
+
+<ul class="list-group">
+  <li class="list-group-item">年龄：{$m.realname|default='未填写'} - 身高：{$m.realname|default='未填写'}</li>
+  <li class="list-group-item">学历：{$m.edu} - 收入：{$m.income}</li>
+  <li class="list-group-item">兴趣爱好：{$m.interest}</li>
+  <li class="list-group-item">请扫描二维码查看关于ta的更多信息</li>
+  <li class="list-group-item"><img src="/Upload/qrcode/qr_{$m.id}.png"></li>
+</ul>
+
+		
+		</div>
+
+	</div>
+
+</div>
+
+<include file="Modules/Home/Tpl/footer.html" />

@@ -1,0 +1,68 @@
+<include file="Modules/Admin/Tpl/header.html" />
+
+<include file="Modules/Admin/Tpl/left.html" />
+<section id="main" class="column">
+
+	<form method='post' action='{:U('posUpdate')}'>
+		<article class="module width_full">
+		<header>
+      <h3 class="tabs_involved">{$location}</h3>
+     
+		</header>
+
+			<table class="tablesorter" cellspacing="0"> 
+			<thead> 
+				<tr> 
+   					<!--th width='40' id='checkall'>全选</th--> 
+    				<th width='120'>投诉人</th>
+    				<th width='150'>被投诉人邮箱</th>
+					<th width='150'>被投诉人微信号</th>
+					<th width='120'>投诉时间</th>
+                    <th width='80'>道具类型</th>
+    				<th width='80'>数量</th> 
+					<th width='80'>操作</th>
+				</tr> 
+			</thead> 
+			<tbody>
+			<volist name="data" id="vo">
+			<tr>
+				<!--td>{$vo.user.name}</td-->
+				<td>{$vo.complainter.email}</td>
+				<td><a href="{:U('User/edit', array('id'=>$vo['user']['id']))}">{$vo.user.email}</a></td>
+				<td>{$vo.user.wechat}</td>
+				<td>{$vo.addtime|date='Y-m-d H:i:s',###}</td>
+				<if condition="$vo.types eq showWechatPayFree">
+				<td>免费机会</td>
+				<else /><td>付费红线</td>
+				</if>
+				<td>{$vo.num}</td>
+				<td><input type="button" r_id="{$vo.id}" value="同意" status="1" class="alt_btn">&nbsp;<input type="button" r_id="{$vo.id}" value="拒绝" status="2" class="alt_btn"></td>
+			</tr>
+			</volist>
+			</tbody>			
+			</table>
+		
+		</article><!-- end of content manager article -->
+
+		<div class='page'>{$page}</div>
+		
+
+	</form>
+</section>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('input[status]').click(function(){
+		if(!confirm('确定要执行该操作？'))return;
+		var button = $(this);
+		$.getJSON('{:U("/Admin/User/audit")}', {status:button.attr('status'), rid:button.attr('r_id')}, function(data){
+			if(data.err_code == 0){
+				alert('操作成功');
+				document.location.reload();
+			}
+		});
+	});
+});
+</script>
+
+<include file="Modules/Admin/Tpl/footer.html" />

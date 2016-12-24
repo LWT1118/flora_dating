@@ -1,0 +1,125 @@
+<include file="Modules/Admin/Tpl/header.html" />
+
+<include file="Modules/Admin/Tpl/left.html" />
+
+	<section id="main" class="column">
+		<form method='post' action='{:U('Nav/update','action=add')}'>
+		<input type='hidden' name='id' value='{$data.id}'>
+		<article class="module width_full">
+			<header><h3>{$location}</h3></header>
+				<div class="module_content">
+
+
+<fieldset style="width:24%; float:left; margin-right:1%; margin-top:0">
+	<label>链接主图</label>
+	<input type='hidden' id='img_input' name='img' value=''>
+	<div class="clear"></div>
+	<div data-toggle="modal" data-target="#myModal" title='修改图片' style='display:block; width:200px; margin:0 auto; overflow:hidden'>
+		<img src="__PUBLIC__/images/add.gif" class='shop_pic img-responsive img-rounded img-thumbnail'>
+	</div>
+	<label>&nbsp;</label>
+	<div class="clear"></div>
+</fieldset>
+
+
+<fieldset>
+	<label>链接标题</label>
+	<input name='title' type="text" value='{$data.title}'>
+</fieldset>
+
+
+<fieldset>
+	<label>链接分类</label>
+	<select name='cat'>
+		<option value='0'>顶部导航</option>
+		<option value='1'>页脚文字</option>
+		<option value='2'>首页图文</option>
+	</select>
+</fieldset>						
+
+<fieldset>
+	<label>链接地址</label>
+	<input name='url' type='text'>{$data.url}
+</fieldset>
+
+<div class="clear"></div>
+				</div>
+			<footer>
+				<div class="submit_link">
+					<input type="submit" value="提 交" class="alt_btn">
+					<input onclick='history.go(-1)' type="button" value="返 回">
+				</div>
+			</footer>
+		</article><!-- end of post new article -->
+
+		</form>
+
+	</section>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    <form method='post' enctype='multipart/form-data' id='myForm' action='{:U('upload')}'>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">链接主图上传</h4>
+      </div>
+      <div class="modal-body">
+        	<fieldset>
+        		<label>当前图片</label>
+        		<div class="clear"></div>
+        		<p align='center'>	
+				<if condition="strlen($data['img']) gt 0">
+					<img class='shop_pic' src='__UPLOAD__/nav/thumb400_{$data.img}' class='img-responsive img-rounded img-thumbnail'>
+				<else />
+					<img class='shop_pic' src="__PUBLIC__/images/add.gif" class='img-responsive img-rounded img-thumbnail'>
+				</if>
+				</p>
+			</fieldset>
+        	<fieldset>
+        		<label>上传新图</label>
+        		<div class="clear"></div>
+        		<div style='padding:10px'>
+	        		<p><input name='pic' type='file'>最佳宽高：200像素x70像素</p>
+        		</div>
+        	</fieldset>
+      </div>
+      <div class="modal-footer">
+        <button id='my-submit' type="submit" class="btn btn-primary">上传图片</button>
+        <button id='my-close' type="button" class="btn btn-default" data-dismiss="modal">关闭取消</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<js file="__PUBLIC__/js/jquery.form.js" />
+<script type="text/javascript">
+    $(document).ready(function() {
+
+
+    	var path = '__UPLOAD__/nav/';
+		var options = {
+            success	: function (data) {
+            	$src_1 = path+'thumb400_'+data;
+            	$src_2 = data;
+            	
+                $(".shop_pic").attr('src',path+'thumb400_'+data);
+                $("#img_input").val($src_2);
+                $("#my-submit").remove();
+                $("#my-close").text('确定使用');
+                alert('上传成功');
+            }
+        };
+        $('#myForm').on('submit', function(e) {
+            e.preventDefault(); // <-- important
+            $(this).ajaxSubmit(options);
+        });
+    });
+
+
+</script>
+
+<include file="Modules/Admin/Tpl/footer.html" />

@@ -1,0 +1,78 @@
+<include file="Modules/Admin/Tpl/header.html" />
+
+<include file="Modules/Admin/Tpl/left.html" />
+<section id="main" class="column">
+	<form method='post' action='{:U('picPosUpdate')}'>
+		<input type='hidden' name='p' value='{$nowpage}'>
+		<article class="module width_full">
+		<header>
+			<h3 class="tabs_involved">{$location}</h3>
+			<if condition="!isset($pid) OR !isset($type) OR $pid lt 1 OR $type lt 0">
+
+			<else/>
+				<ul class="tabs">
+		   			<li><a href="{:U('picAdd','pid='.$pid.'&type='.$type)}"><i class='icon-plus'></i> 添加新条目</a></li>
+				</ul>
+			</if>
+		</header>
+
+		<div class="tab_container">
+			<div id="tab1" class="tab_content">
+			<table class="tablesorter" cellspacing="0"> 
+			<thead> 
+				<tr> 
+   					<th width='10'><input type="checkbox"></th> 
+    				<th width='150'>主图</th>
+    				<th>图片信息</th>
+    				<th>图片类型</th>
+    				<th>排序</th>
+    				<th width='100'>操作</th> 
+				</tr> 
+			</thead> 
+			<tbody>
+			<volist name="data" id="vo">
+				<tr> 
+   					<td><input type="checkbox"></td>
+   					<td>
+   					<a title='查看图片' href='__UPLOAD__/product/{$vo.img}' target='_blank'>
+   					<if condition="strlen($vo['img']) gt 0">
+   						<img width='100' src='__UPLOAD__/product/thumb_{$vo.img}' class='img-responsive img-rounded img-thumbnail'>
+   					<else />
+   						<img src="__HOMEPUBLIC__/images/no_pic.gif" class='img-responsive img-rounded img-thumbnail'>
+   					</if>
+   					</td> 
+    				<td>
+    					<p>图片ID：{$vo.id}</p>
+    					<p>所属产品：<a href='{:U('Product/edit','id='.$vo['pid'])}'>{$vo.title}</a></p>
+    					<p>图片注释：{$vo.alt}</p>
+    					<p>视频地址：{$vo.url}</p>
+    				</td>
+    				<td>{$tt[$vo['type']]}</td>
+    				<td><input style='width:60px !important' name='{$vo.id}' type='number' min="1" max="999999" value='{$vo.pos}'></td>				
+    				<td>
+						<a class='my-icon' href='{:U('picEdit','id='.$vo['id'].'&type='.$vo['type'])}' title="编辑"><i class='icon-pencil'></i></a>
+						<a class='my-icon' href='javascript:sure("{:U('picDel','id='.$vo['id'].'&type='.$vo['type'])}")' title="删除"><i class='icon-trash'></i></a>
+    				</td> 
+				</tr>
+			</volist>	 
+			</tbody> 
+			</table>
+			</div><!-- end of #tab1 -->
+
+		</div><!-- end of .tab_container -->
+
+		<footer>
+			<div class="submit_link">
+				<input type="submit" value="提交" class="alt_btn">
+				<input onclick='history.go(-1)' type="button" value="返 回">
+			</div>
+		</footer>
+		
+		</article><!-- end of content manager article -->
+
+		<div class='page'>{$page}</div>
+		
+
+	</form>
+</section>
+<include file="Modules/Admin/Tpl/footer.html" />

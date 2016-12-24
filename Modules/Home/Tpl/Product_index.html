@@ -1,0 +1,50 @@
+<include file="Modules/Home/Tpl/header.html" />
+<div class='w1200'>
+
+    <header class='view-style'>
+        <div class='pull-left'>
+            <a href='{:U('Index/index')}'>{$site.name}</a> -&gt; 
+            <a href='{:U('Product/index')}'>商品中心</a> -&gt; 
+            <a href='#'>{$catinfo}</a>
+        </div>
+        <div class='pull-right'>
+            查看方式：
+            <i class='icon-table'></i>
+            <i class='icon-list'></i>
+        </div>
+        <div class='clearfix'></div>
+    </header>
+
+    <div class='pro-list'>
+        <ul>
+            <volist name='data' id='rec'>
+            <li>
+                <div class='pic'><a href='{:U('Product/detail','id='.$rec['id'])}'>
+                    <if condition="file_exists('./Upload/product/thumb200_'.$rec['img'])">
+                    <img class='img-responsive' src='__UPLOAD__/product/thumb200_{$rec.img}'>
+                    <else/>
+                    <img class='img-responsive' src='__UPLOAD__/product/thumb_{$rec.img}'>
+                    </if>
+                </a></div>
+                <div>
+                    <p class='pull-right sold'>已售{$rec.hits}份</p>
+                    <p class='pull-left price'>￥{$rec.price3}</p>
+                </div>
+                <div class='text-left desc'>{$rec.title}</div>
+                <div>
+<button item='{$rec.id}' url="{:U('Cart/add')}" class='add-btn button button-caution button-small pull-left'><i class='icon icon-shopping-cart'></i> 立即购买</button>
+<button item="{$rec.id}" url="{:U('Member/bookmarkAdd')}" class='bookmark-btn button button-royal button-small pull-right'><i class='icon icon-plus'></i> 加入收藏</button>
+                </div>
+            </li>
+            </volist>
+
+            <div class='clearfix'></div>          
+        </ul>
+    </div>
+    <footer><div class="page">{$page}</div></footer>
+</div>
+
+
+<include file="Modules/Home/Tpl/promis.html" />
+
+<include file="Modules/Home/Tpl/footer.html" />

@@ -1,0 +1,73 @@
+<include file="Modules/Admin/Tpl/header.html" />
+
+<include file="Modules/Admin/Tpl/left.html" />
+<section id="main" class="column">
+	<form method='post' action='{:U('catPosUpdate')}'>
+		<article class="module width_full">
+		<header><h3 class="tabs_involved">{$location}</h3>
+		<ul class="tabs">
+   			<li><a href="{:U('catAdd')}"><i class='icon-plus'></i> 添加新条目</a></li>
+		</ul>
+		</header>
+
+		<div class="tab_container">
+			<div id="tab1" class="tab_content">
+			<table class="tablesorter" cellspacing="0"> 
+			<thead> 
+				<tr> 
+   					<th width='10'><input type="checkbox"></th> 
+    				<th>名称</th>
+    				<th>排序</th>
+    				<th>显示</th>
+    				<th>图</th> 
+    				<th>长描述</th>
+    				<th width='110'>操作</th> 
+				</tr> 
+			</thead> 
+			<tbody>
+			<volist name="data" id="vo">
+				<tr> 
+   					<td><input type="checkbox"></td> 
+    				<td>{$vo.html}{$vo.cat}</td> 
+    				<td><input style='width:60px !important' name='{$vo.id}' type='number' min="1" max="999999" value='{$vo.pos}'></td>
+    				<td>
+<div class='btn-group'>
+{$vo.header|is_active='眉',U('catStatusUpdate','id='.$vo['id'].'&pos=header&v='.$vo['header'])}
+{$vo.footer|is_active='脚',U('catStatusUpdate','id='.$vo['id'].'&pos=footer&v='.$vo['footer'])}
+{$vo.home|is_active='首',U('catStatusUpdate','id='.$vo['id'].'&pos=home&v='.$vo['home'])}
+</div>
+    				</td>
+    				<td>
+<if condition="strlen($vo['img']) gt 0">
+<a target='_blank' class='my-icon' href='__UPLOAD__/cat/{$vo.img}'><i class='icon-picture'></i></a>
+</if>
+    				</td>
+    				<td>{$vo.remarks}</td> 
+    				<td>
+						<a class='my-icon' href='{:U('index','cat='.$vo['id'])}' title="查看"><i class='icon-list'></i></a>
+						<a class='my-icon' href='{:U('catEdit','id='.$vo['id'])}' title="编辑"><i class='icon-pencil'></i></a>
+						<a class='my-icon' href='javascript:sure("{:U('catDel','id='.$vo['id'])}")' title="删除"><i class='icon-trash'></i></a>
+    				</td> 
+				</tr>
+			</volist>	 
+			</tbody> 
+			</table>
+			</div><!-- end of #tab1 -->
+			
+
+		</div><!-- end of .tab_container -->
+
+		<footer>
+			<div class="submit_link">
+				<input type="submit" value="提交" class="alt_btn">
+				<input onclick='history.go(-1)' type="button" value="返回">
+			</div>
+		</footer>
+		
+		</article><!-- end of content manager article -->
+
+		<div class='page'>{$page}</div>
+		
+	</form>
+</section>
+<include file="Modules/Admin/Tpl/footer.html" />

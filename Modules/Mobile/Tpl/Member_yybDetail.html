@@ -1,0 +1,26 @@
+<include file="Modules/Mobile/Tpl/header.html" />
+
+<div class="list-group bony-font-2">
+  
+<table class='table'>
+	<tr>
+		<th>数量</th>
+		<th>原因</th>
+		<th>时间</th>
+		<th>投诉</th>
+	</tr>
+	<volist name='data' id='vo'>
+	<tr>
+		<td>{$vo.redline}</td>
+		<td>{$vo.remarks}</td>
+		<td>{$vo.addtime|date='Y/m/d H:i:s',###}</td>
+		<td><a href="#">投诉</a></td>
+	</tr>
+	</volist>
+</table>
+<div class="pages">{$page}</div>
+
+</div>
+
+
+<include file="Modules/Mobile/Tpl/footer.html" />

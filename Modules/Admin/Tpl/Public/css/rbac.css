@@ -1,0 +1,65 @@
+      ul{
+        padding: 10px 20px;
+        list-style: none;
+      }
+      .module_list{
+        background: #ddd;
+        overflow: hidden;
+        margin: 10px
+      }
+      .module_list li{
+        font:bold 14px '微软雅黑';
+        border: none;
+      }
+      .module_list li a{
+        text-decoration: none;
+        color: #222;
+        float: right;
+        margin-left:4px;
+      }
+
+      .action_list{
+        background: #898fef;
+        overflow: hidden;
+        margin: 10px 0;
+      }
+      .action_list li{
+        font-size: 14px;
+        border: none;
+      }
+
+
+      .method_list{
+        background: #efe898;
+        overflow: hidden;
+        margin: 10px 0;
+      }
+      .method_list li{
+        float: left;
+        width: 24%;
+        overflow: hidden;
+        background: #fff;
+        margin: 4px;
+        padding: 4px; 
+        border: none;
+      }
+
+      ol.role{
+        margin: 0;
+        padding: 5px;
+        list-style: none;
+        border: 1px solid #999;
+        background: #eee;
+        overflow: hidden;
+      }
+      
+      ol.role li{
+        margin: 0;
+        padding: 0;
+        width: 20%;
+        float: left;
+      }
+
+      ol.role li input{
+        float: left;
+      }

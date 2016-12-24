@@ -1,0 +1,59 @@
+<include file="Modules/Mobile/Tpl/header.html" />
+
+	
+
+
+	{$gender}
+	<div class='container-fluid'>
+
+		<form action='{:U('search')}' method='get' class='form-group bony-mt2'>
+			<input value='{$kw}' name='kw' class='form-control' placeholder='请输入兴趣爱好进行查找'>
+			<button type="submit" style='position:absolute;right:0;top:1rem;background:none;border:none'><i class='icon icon-2x icon-search'></i></button>
+			<div class='form-control text-center' style='border:none'>
+				不限<input <eq name="gender" value="">checked='checked'</eq> name='gender' type="radio" value=''>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				女生<input <eq name="gender" value="女生">checked='checked'</eq> name='gender' type="radio" value='女生'>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				男生<input <eq name="gender" value="男生">checked='checked'</eq> name='gender' type="radio" value='男生'>
+			</div>
+		</form>
+
+
+		<div class="list-group bony-font-2 bony-search">
+
+			<volist name='user' id='notify'>
+
+	          <a class="list-group-item" href='{:U('User/detail','id='.$notify['id'])}'>
+	          	
+				<div class="pic pull-left">
+				<if condition="strlen($notify['img']) gt 0 AND file_exists('./Upload/user/thumb200_'.$notify['img'])">
+					<img width='100%' src='__UPLOAD__/user/thumb200_{$notify.img}' class='img-circle img-responsive'>
+				<else />
+					<img width='100%' src="__UPLOAD__/user/no_face.gif" class='img-circle img-responsive'>
+				</if>
+				</div>
+				<div class="txt">
+					<span class="icon-angle-right pull-right" style='position:absolute;right:5%;top:50%'></span>
+					<h3>{$notify.realname}</h3>
+					<p>{$notify.age}岁 {$notify.height}cm，{$notify.edu} 月收入：{$notify.income}</p>
+					<p>地区：{$notify.area|default='-'} 城市：{$notify.city|default='-'}</p>
+					<p>兴趣爱好：{$notify.interest|default='暂未填写'}</p>
+					
+				</div>
+				
+				<div class="clearfix"></div>
+	          </a>
+
+			</volist>
+
+		</div>
+
+
+		<a class='bony-mt2 button button-rounded button-block button-caution' href="{:U('advance')}">结果不给力，使用高级搜索</a>
+
+	</div>
+
+
+
+
+<include file="Modules/Mobile/Tpl/footer.html" />

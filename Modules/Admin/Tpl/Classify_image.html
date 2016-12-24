@@ -1,0 +1,67 @@
+<include file="Modules/Admin/Tpl/header.html" />
+
+<include file="Modules/Admin/Tpl/left.html" />
+<script type="text/javascript">
+function saveUrl(id){
+	if(!confirm('确定要保存吗？')){
+		return;
+	}
+	var saveUrl = $('#url_' + id).val();
+	alert(saveUrl);	
+	$.getJSON('{:U("url")}', {id:id, url:saveUrl}, function(data){
+		alert(data['err_code']);
+	});
+}
+</script>
+<section id="main" class="column">
+
+    <article class="module width_full">
+      <header><h3>用户搜索</h3></header>
+      <div class="module_content">
+        <form action="{:U('image')}" method='post' enctype="multipart/form-data">            			
+			<button type="submit" style="float:left;margin-right:20px;">上传(1242*248)</button>
+			<input type="file" name="image" style='width:30%'>						
+        </form>
+        <div class="clear"></div>
+      </div>
+    </article>
+
+	
+	<article class="module width_full">
+	
+		<header><h3>图片列表</h3></header>
+
+		<table class="tablesorter" cellspacing="0"> 
+		<thead> 
+			<tr> 
+				<th width='40' id='checkall'>id</th> 
+				<th width='250'>图片</th>    			
+				<th width='250'>URL</th>
+				<th width='100'>操作</th> 
+			</tr> 
+		</thead> 			
+
+		<tbody>
+		<volist name="image_list" id="image"> 
+			<tr> 
+				<td>{$image.id}</td>
+				<td>					
+					<img src='{$image.image}' width='100%' class='img-responsive img-thumbnail'>					
+				</td>
+				<td><input id="url_{$image.id}" type="text" value="{$image.url}" style="width:100%" /></td>
+				<td>
+					<button type="button" onclick="javascript:saveUrl({$image.id})">保存URL</button>
+					<a class='my-icon' href='javascript:sure("{:U('del','id='.$image['id'])}")' title="删除">删除</a>
+				</td> 
+			</tr>
+		</volist>	 
+		</tbody> 
+		</table>
+	
+	</article><!-- end of content manager article -->		
+
+</section>
+
+</div>
+
+<include file="Modules/Admin/Tpl/footer.html" />

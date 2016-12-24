@@ -1,0 +1,195 @@
+<include file="Modules/Admin/Tpl/header.html" />
+
+<include file="Modules/Admin/Tpl/left.html" />
+
+	<section id="main" class="column">
+		<form method='post' action='{:U('News/update','action=save')}'>
+		<input type='hidden' name='id' value='{$data.id}'>
+		<article class="module width_full">
+			<header><h3>{$location}</h3></header>
+				<div class="module_content">
+
+
+<fieldset style="width:24%; float:left; margin-right:1%; margin-top:0">
+	<label>活动主图</label>
+	<input type='hidden' id='img_input' name='img' value='{$data.img}'>
+	<div class="clear"></div>
+	<div data-toggle="modal" data-target="#myModal" title='修改图片' style='display:block; width:200px; margin:0 auto; overflow:hidden'>
+		<if condition="strlen($data['img']) gt 0 AND (file_exists('upload/news/thumb200_'.$data['img']))">
+			<img src='__UPLOAD__/news/thumb200_{$data.img}' class='shop_pic_1 img-responsive img-rounded img-thumbnail'>
+		<else />
+			<img src="__PUBLIC__/images/add.gif" class='shop_pic_1 img-responsive img-rounded img-thumbnail'>
+		</if>
+	</div>
+	<label>&nbsp;</label>
+	<div class="clear"></div>
+</fieldset>
+
+
+<fieldset>
+	<label>活动标题</label>
+	<input name='title' type="text" value='{$data.title}'>
+</fieldset>
+
+<fieldset style='width:37%; margin-top:0; float:left'>
+	<label>活动分类</label>
+	<select name='cat'>
+	<volist name='catlist' id='catlist'>
+		<assign name="var" value=" " />
+		<if condition="$data['cat'] eq $catlist['id']">
+			<assign name="var" value="selected=selected" />
+		</if>
+		<option {$var} value='{$catlist.id}'>{$catlist.cat}</option>
+	</volist>
+	</select>
+</fieldset>
+
+<fieldset style='width:37%; margin-top:0; float:left; margin-left:1%'>
+	<label>报名状态</label>
+	<select name='alive'>
+	<option <eq name="data['alive']" value="0">selected='selected'</eq> value="0">允许报名</option>
+	<option <eq name="data['alive']" value="1">selected='selected'</eq> value="1">允许男性报名</option>
+	<option <eq name="data['alive']" value="2">selected='selected'</eq> value="2">允许女性报名</option>
+	<option <eq name="data['alive']" value="3">selected='selected'</eq> value="3">报名结束</option>
+	</select>
+</fieldset>
+
+<fieldset style='width:37%; margin-top:0; float:left'>
+	<label>开始时间</label>
+	<input class='datepicker' type='text' name='start_time' value='{$data.start_time|date='Y-m-d H:i',###}'>
+</fieldset>
+
+<fieldset style='width:37%; margin-top:0; float:left; margin-left:1%'>
+	<label>结束时间</label>
+	<input class='datepicker' type='text' name='end_time' value='{$data.end_time|date='Y-m-d H:i',###}'>
+</fieldset>
+
+<fieldset>
+	<label>活动地址</label>
+	<textarea style='height:43px' name='summary'>{$data.summary}</textarea>
+</fieldset>
+
+<fieldset>
+	<label>活动详细</label>
+	<textarea style='height:200px' name='content'>{$data.content}</textarea>
+</fieldset>
+<div class="clear"></div>
+				</div>
+			<footer>
+				<div class="submit_link">
+					<input type="submit" value="提 交" class="alt_btn">
+					<input onclick='history.go(-1)' type="button" value="返 回">
+				</div>
+			</footer>
+		</article><!-- end of post new article -->
+
+		</form>
+
+	</section>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    <form method='post' enctype='multipart/form-data' id='myForm' action='{:U('upload')}'>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">活动主图上传</h4>
+      </div>
+      <div class="modal-body">
+        	<fieldset>
+        		<label>当前图片</label>
+        		<div class="clear"></div>
+        		<p align='center'>	
+				<if condition="strlen($data['img']) gt 0">
+					<img class='shop_pic_2' src='__UPLOAD__/news/thumb300_{$data.img}' class='img-responsive img-rounded img-thumbnail'>
+				<else />
+					<img class='shop_pic_2' src="holder.js/200x200/#f90/text:选择电脑中的图片" class='img-responsive img-rounded img-thumbnail'>
+				</if>
+				</p>
+			</fieldset>
+        	<fieldset>
+        		<label>上传新图</label>
+        		<div class="clear"></div>
+        		<p align='center'><input name='pic' type='file'></p>
+        	</fieldset>
+      </div>
+      <div class="modal-footer">
+        <button id='my-submit' type="submit" class="btn btn-primary">上传图片</button>
+        <button id='my-close' type="button" class="btn btn-default" data-dismiss="modal">关闭取消</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+<link type="text/css" rel="stylesheet" href="__HOMEPUBLIC__/css/dhtmlgoodies_calendar/dhtmlgoodies_calendar.css?random=20051112" />
+<script type="text/javascript" src="__HOMEPUBLIC__/js/dhtmlgoodies_calendar/dhtmlgoodies_calendar.js?random=20060118"></script>
+    
+    <!-- 时间选择文件 -->
+<script src="__HOMEPUBLIC__/js/mobiscroll.core-2.5.2.js" type="text/javascript"></script>
+<script src="__HOMEPUBLIC__/js/mobiscroll.core-2.5.2-zh.js" type="text/javascript"></script>
+<link href="__HOMEPUBLIC__/css/mobiscroll.core-2.5.2.css" rel="stylesheet" type="text/css" />
+<link href="__HOMEPUBLIC__/css/mobiscroll.animation-2.5.2.css" rel="stylesheet" type="text/css" />
+<script src="__HOMEPUBLIC__/js/mobiscroll.datetime-2.5.1.js" type="text/javascript"></script>
+<script src="__HOMEPUBLIC__/js/mobiscroll.datetime-2.5.1-zh.js" type="text/javascript"></script>
+
+
+
+<js file="__PUBLIC__/js/jquery.form.js" />
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+
+		$(function () {
+		  var currYear = (new Date()).getFullYear();  
+		  var opt={};
+		  opt.date = {preset : 'date'};
+		  //opt.datetime = { preset : 'datetime', minDate: new Date(2012,3,10,9,22), maxDate: new Date(2014,7,30,15,44), stepMinute: 5  };
+		  opt.datetime = {preset : 'datetime'};
+		  opt.time = {preset : 'time'};
+		  opt.default = {
+		  theme: 'android-ics light', //皮肤样式
+		  display: 'modal', //显示方式 
+		  mode: 'scroller', //日期选择模式
+		  lang:'zh',
+		  startYear:currYear - 10, //开始年份
+		  endYear:currYear + 10 //结束年份    
+		};
+		$("#appDate").val('').scroller('destroy').scroller($.extend(opt['date'], opt['default']));     
+		var optDateTime = $.extend(opt['datetime'], opt['default']);
+		var optTime = $.extend(opt['time'], opt['default']);
+		$(".datepicker").mobiscroll(optDateTime).datetime(optDateTime);
+		$("#appTime").mobiscroll(optTime).time(optTime);
+		});
+
+
+
+
+    	var path = '__UPLOAD__/news/';
+		var options = {
+            success	: function (data) {
+            	$src_1 = path+'thumb200_'+data;
+            	$src_2 = path+'thumb300_'+data;
+            	$src = data;
+            	
+                $(".shop_pic_1").attr('src',$src_1);
+                $(".shop_pic_2").attr('src',$src_2);
+                $("#img_input").val($src);
+                $("#my-submit").remove();
+                $("#my-close").text('确定使用');
+            }
+        };
+        $('#myForm').on('submit', function(e) {
+            e.preventDefault(); // <-- important
+            $(this).ajaxSubmit(options);
+        });
+    });
+
+
+</script>
+
+<include file="Modules/Admin/Tpl/footer.html" />

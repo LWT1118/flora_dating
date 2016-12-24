@@ -1,0 +1,52 @@
+<include file="Modules/Admin/Tpl/header.html" />
+<include file="Modules/Admin/Tpl/left.html" />
+
+	<section id="main" class="column">
+	<form method='post' action='{:U('nodeUpdate','action=save')}'>
+		<input name='id' type="hidden" value='{$data.id}'>
+		<article class="module width_full">
+			<header>
+				<h3 class="tabs_involved">{$location}</h3>
+				<ul class="tabs">
+		   			<li><a href="{:U('node')}">返回列表</a></li>
+				</ul>
+			</header>
+				<div class="module_content">						
+
+<fieldset>
+	<label>{$levelname}名称</label>
+	<input value='{$data.name}' name='name' type="text" placeholder='{$levelname}名称'>
+</fieldset>
+<fieldset>
+	<label>{$levelname}描述</label>
+	<input value='{$data.title}' name='title' type="text" placeholder='{$levelname}标题'>
+</fieldset>
+<fieldset>
+	<label>{$levelname}排序</label>
+	<input value='{$data.sort}' name='sort' type="text" value='999'>
+</fieldset>
+<fieldset>
+	<label>{$levelname}状态</label>
+	<if condition="$data['status']">
+	<input name='status' type="radio" value='1' checked='checked'>开启
+	<input name='status' type="radio" value='0'>关闭
+	<else/>
+	<input name='status' type="radio" value='1'>开启
+	<input name='status' type="radio" value='0' checked='checked'>关闭
+	</if>
+
+</fieldset>
+<div class="clear"></div>
+
+				</div>
+			<footer>
+				<div class="submit_link">
+					<input type="submit" value="提交" class="alt_btn">
+					<input onclick='history.go(-1)' type="button" value="返回">
+				</div>
+			</footer>
+		</article><!-- end of post new article -->
+	</form
+	</section>
+
+<include file="Modules/Admin/Tpl/footer.html" />

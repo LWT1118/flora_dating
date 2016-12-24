@@ -1,0 +1,30 @@
+<include file="Modules/Mobile/Tpl/header.html" />
+
+
+    <div class="bony-pink bony-info-header">
+        <div class='face'>
+          <a href="{:U('face')}">
+          <if condition="(strlen($m['img']) gt 0) AND (file_exists('./UPLOAD/user/thumb100_'.$m['img']))">
+          <img src="__UPLOAD__/user/thumb100_{$m.img}">
+          <else/>
+          <img src="holder.js/100x100/#044:#fff/text:上传照片/" class='img-responsive img-circle' alt="">
+          </if>
+          </a>
+        </div>
+    </div>
+
+    <div class='container'>
+
+          <form style='font-size:2rem' class='bony-mt2' method='post' enctype='multipart/form-data' id='myForm' action='{:U('fUpdate')}'>
+          <div>
+            <input id='pic_file' name='pic' type="file">
+            <input name='old_img' value='{$m.img}'>
+          </div>
+          <div>
+            <button class='button button-caution' type='submit'>确定上传</button>
+          </div>
+          </form>
+
+    </div>
+
+<include file="Modules/Mobile/Tpl/footer.html" />

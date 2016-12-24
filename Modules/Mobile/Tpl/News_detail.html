@@ -1,0 +1,92 @@
+<include file="Modules/Mobile/Tpl/header.html" />
+
+
+	<div class='container'>
+		<div class='row bony-mt2'>
+			<div class='col-md-8 col-xs-12'>
+				<if condition="strlen($news['img']) gt 0">
+					<img src='__UPLOAD__/news/thumb400_{$news.img}' class='img-responsive'>
+				<else />
+					<img src="holder.js/720x400/random/text:{$news.title}" class='img-responsive'>
+				</if>				
+			</div>
+			<div class='col-md-4 col-xs-12'>
+				<table class='table table-hover'>
+					<tr>
+						<td width='30%'>活动地点：</td>
+						<td>{$news.summary}</td>
+					</tr>
+					<tr>
+						<td>开始时间：</td>
+						<td>{$news.start_time|date='Y-m-d H:i',###}</td>
+					</tr>
+					<tr>
+						<td>结束时间：</td>
+						<td>{$news.end_time|date='Y-m-d H:i',###}</td>
+					</tr>
+					<tr>
+						<td>报名人数：</td>
+						<td>{$news.reg}</td>
+					</tr>
+					<tr>
+						<td>签到人数：</td>
+						<td>{$news.arrival}</td>
+					</tr>
+					<tr>
+						<td>活动说明：</td>
+						<td>{$news.content|nl2br}</td>
+					</tr>
+				</table>	
+				<if condition="$time_stamp gt $news['end_time']">
+					<span class='button button-default button-block button-rounded'>活动已结束</span>
+				<else/>				
+					<eq name="reg" value="0">
+						<if condition="$news.alive eq 0">
+						<a href='{:U('Mobile/News/reg','id='.$news['id'])}' class='button button-caution button-block button-rounded'>报名参加</a>
+						<elseif condition="$news.alive eq 1"/>
+						<a href='{:U('Mobile/News/reg','id='.$news['id'])}' class='button button-caution button-block button-rounded'>只接受男士报名(女士已满)</a>
+						<elseif condition="$news.alive eq 2"/>
+						<a href='{:U('Mobile/News/reg','id='.$news['id'])}' class='button button-caution button-block button-rounded'>只接受女士报名(男士已满)</a>
+						<elseif condition="$news.alive eq 3"/>
+						<span class='button button-default button-block button-rounded'>报名结束</span>
+						</if>
+					<else/>
+					<a href="#" onclick='javascript:sure("{:U('Mobile/News/cancel','id='.$news['id'])}")' class='button button-caution button-block button-rounded'>取消报名</a>
+					</eq>
+				</if>
+			</div>
+				<div class="clearfix"></div>			
+		</div>
+
+		<div class='bony-h1 bony-mt2'>更多活动</div>
+		<div class="row bony-more-list">
+
+			<volist name='more' id='more'>
+			<div class="col-sm-4 col-xs-6">
+				<a href='{:U('Mobile/News/detail','id='.$more['id'])}'>
+				<if condition ="strlen($more['img']) gt 0">
+					<img src='__UPLOAD__/news/thumb300_{$more.img}' class='img-responsive'>
+				<else />
+					<img src="__PUBLIC__/images/no_pic.gif" class='img-responsive'>
+				</if>
+				</a>
+				<!-- <span class='pull-right bg3'>
+					报名：{$more.reg}<br>
+					签到：{$more.arrival}
+				</span> -->
+				<h3>{$more.title|left_title=16}</h3>
+				<p>开始：{$more.start_time|date='Y-m-d H:i',###}</p>
+				<p>结束：{$more.end_time|date='Y-m-d H:i',###}</p>
+				<p>地点：{$more.summary}</p>
+				
+			</div>
+			</volist>
+			<div class="clearfix"></div>
+			
+
+		</div>
+		<a href='{:U('Mobile/News/index')}' class='bony-mt2 button button-glow button-royal button-rounded button-small button-block'>查看更多</a>
+	</div>
+
+
+<include file="Modules/Mobile/Tpl/footer.html" />

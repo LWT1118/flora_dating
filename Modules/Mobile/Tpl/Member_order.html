@@ -1,0 +1,50 @@
+<include file="Modules/Mobile/Tpl/header.html" />
+
+<ul class="list-group bony-font-2">
+    <volist name="data" id="vo">
+    <li class="list-group-item">
+        
+
+    <div>
+		<if condition="$vo.status eq 0">
+		<a class='pull-right' href="javascript:sure('{:U('Mobile/Member/orderDel','id='.$vo['id'])}')">取消</a>		
+		<elseif condition="$vo.status eq 1" />
+		<a class='pull-right' href="#">已付款</a>		
+		</if>
+        <span class='pull-left'>{$vo.id}</span>
+        <div class="clearfix"></div>
+    </div>
+    
+    <div>
+        <eq name="vo['status']" value='0'>
+        下单时间：{$vo.add_time|date='Y-m-d H:i:s',###}
+        <else/>
+        付款时间：{$vo.pay_time|date='Y-m-d H:i:s',###}
+        </eq>
+        
+        <div class="clearfix"></div>
+    </div>
+
+           
+
+    <div>
+		<form method="post" action="{:U('Mobile/Member/orderPay')}/">
+		<input type="hidden" name="id" value="{$vo.id}">
+        <span class='pull-left'>总价：￥{$vo.pay_price}</span>
+		<span class='pull-right'>
+		<if condition="$vo.status eq 0">
+		<button class="btn btn-xs btn-success" type="submit">马上付款</button>
+		</if>
+		</span>
+        <div class="clearfix"></div>
+		</form>
+    </div>
+                   
+        
+    </li>
+    </volist>
+        <div class="pages">{$page}</div>
+</ul>
+
+
+<include file="Modules/Mobile/Tpl/footer.html" />

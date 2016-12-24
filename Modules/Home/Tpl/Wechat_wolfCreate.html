@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{$page_title} {$site.name}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<meta name="keywords" content="{$site.keyword}" />
+<meta name="description" content="{$site.descreption}" />
+
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/buttons.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/holder.min.js"></script>
+
+
+<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/css/buttons.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/css/font-awesome-ie7.min.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/css/bony.css" rel="stylesheet" type="text/css" />
+
+
+</head>
+<body>
+
+  <div class='container bony-login'>
+    <div class="row">
+
+      <form class="form-signin" method='post' action='{:U('wolfCreateHandle')}'>
+        <h2 class="form-signin-heading text-center">{$page_title}</h2>
+        <input type='hidden' name='openid' value='{$openid}'>
+
+        <div class="form-group">
+          <label for="qty">角色数</label>
+          <input type='text' id='qty' name='qty' value='2'>
+          <button type='button' id='gen'>生成</button>
+        </div>
+        <div class="form-group">
+          <label id='rolenum' for="qty">角色及人数</label>
+          <div id='rolelist'>
+            <p>名称：<input required type='text' size='10' name='role[]'>人数：<input required type='text' size='4' name='num[]'></p>
+            <p>名称：<input required type='text' size='10' name='role[]'>人数：<input required type='text' size='4' name='num[]'></p>
+          </div>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">创建游戏</button>
+
+      </form>   
+
+    </div>
+  </div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+  $("#gen").click(function() {
+
+    $html = '';
+    $num = $("#qty").val();
+    //alert($num);
+    for(i=0;i<$num;i++){
+      $html += "<p>名称：<input required type='text' size='10' name='role[]'>人数：<input required type='text' size='4' name='num[]'></p>";
+    }
+    $("#rolelist").html($html);
+
+
+  });
+
+});
+</script>
+<style type="text/css">
+  input[type=text]{
+    text-align: center;
+  }
+</style>
+
+</body>
+</html>

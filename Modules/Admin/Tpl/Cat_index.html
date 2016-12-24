@@ -1,0 +1,68 @@
+<include file="Modules/Admin/Tpl/header.html" />
+
+<include file="Modules/Admin/Tpl/left.html" />
+<section id="main" class="column">
+	<form method='post' action='{:U('posUpdate')}'>
+		<input type='hidden' name='taxonomy' value='{$taxonomy}'>
+		<article class="module width_full">
+		<header><h3 class="tabs_involved">{$location}</h3>
+		<ul class="tabs">
+   			<li><a href="{:U('add')}"><i class='icon-plus'></i> 添加新条目</a></li>
+		</ul>
+		</header>
+
+		<div class="tab_container">
+			<div id="tab1" class="tab_content">
+			<table class="tablesorter" cellspacing="0"> 
+			<thead> 
+				<tr> 
+   					<th><input type="checkbox"></th> 
+    				<th>分类名称</th>
+    				<th>排序</th>
+    				<th>分类层级</th> 
+    				<th>分类类型</th>
+    				<th>操作</th> 
+				</tr> 
+			</thead> 
+			<tbody>
+			<volist name="data" id="vo">
+				<tr> 
+   					<td><input type="checkbox"></td> 
+    				<td>
+    					<gt></gt>{$vo.html}{$vo.title}
+    				</td> 
+    				<td><input name='{$vo.id}' type='number' min="1" max="999999" value='{$vo.pos}'></td> 
+    				<td>{$vo.level}</td>
+    				<td>{$vo.taxonomy}</td> 
+    				<td>
+    					<lt name="vo['level']" value="3">
+						<a class='my-icon' href='{:U('add','pid='.$vo['id'])}' title="添加子分类"><i class='icon-plus'></i></a>
+						<else />
+						<a class='my-icon' href='#'><i class='icon-circle-blank'></i></a>
+						</lt>
+						<a class='my-icon' href='{:U('edit','id='.$vo['id'])}' title="编辑"><i class='icon-pencil'></i></a>
+						<a class='my-icon' href='javascript:sure("{:U('del','id='.$vo['id'])}")' title="删除"><i class='icon-trash'></i></a>
+    				</td> 
+				</tr>
+			</volist>	 
+			</tbody> 
+			</table>
+			</div><!-- end of #tab1 -->
+			
+
+		</div><!-- end of .tab_container -->
+
+		<footer>
+			<div class="submit_link">
+				<input type="submit" value="提交" class="alt_btn">
+				<input onclick='history.go(-1)' type="button" value="返回">
+			</div>
+		</footer>
+		
+		</article><!-- end of content manager article -->
+
+		<div class='page'>{$page}</div>
+		
+	</form>
+</section>
+<include file="Modules/Admin/Tpl/footer.html" />

@@ -1,0 +1,39 @@
+<include file="Modules/Mobile/Tpl/header.html" />
+
+	<div class='container-fluid'>
+		<div class='bony-h1 bony-text-pink' style="font-size:18px">			
+			【{$data.title}】
+			<input type="hidden" id="hid_select_type" value="{$data.status}">
+		</div>
+
+		<div class="row">
+			
+			<div class="col-xs-12 col-md-6">	         
+			<if condition="!empty($data['image']) AND file_exists('.'.$data['img'])">
+				<div class="bony-p"><img src='{$data.image}' class='img-responsive'></div>
+			</if>	          
+			<div class="bony-h"></div>	          
+			  <div class="bony-p" style="font-size:18px;margin: 16px auto;">投票截止时间：<br>{$data.start_time|date='Y-m-d H:i',###} —— {$data.end_time|date='Y-m-d H:i',###}</div>
+	          <div class="bony-p">
+			  <ul class="list-group">				  
+				  <volist name="options" id="option">
+				  <li class="list-group-item">	
+				  <label style="font-size:18px">{$option.title}</label>
+				  <if condition="!empty($option['image'])">
+				  <div><img src="{$option.image}" class="img-thumbnail"></div>
+				  </if>
+				  				 
+				    <div class="progress" style="margin-top:5px">
+					  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {$statistic[$option['id']]['percent']}%;">
+						{$statistic[$option['id']]['percent']}%({$statistic[$option['id']]['amount']}票)
+					  </div>
+					</div>
+				  </li>				  
+				  </volist>			 				  
+				</ul>
+	          </div>    
+	        </div>			
+		</div>
+	</div>	
+
+<include file="Modules/Mobile/Tpl/footer.html" />

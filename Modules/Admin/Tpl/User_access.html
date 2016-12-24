@@ -1,0 +1,81 @@
+<include file="Modules/Admin/Tpl/header.html" />
+
+<include file="Modules/Admin/Tpl/left.html" />
+<section id="main" class="column">
+	<form method='post' action='{:U('accessUpdate')}'>
+    <input type='hidden' name='rid' value='{$rid}'>
+		<article class="module width_full">
+		<header>
+      <h3 class="tabs_involved">{$location}</h3>
+      <ul class="tabs">
+          <li>
+            <a href="{:U('node')}"><i class='icon-plus'></i> 返回</a>
+          </li>
+      </ul>
+		</header>
+
+		<div class="tab_container">
+			<div id="tab1" class="tab_content">
+
+      <ul class='module_list'>
+			<volist name="data" id="vo"> 
+				<li>
+          {$vo.title}
+          <assign name="var" value="" />
+          <if condition="$vo['access']">
+          <assign name="var" value="checked=checked" />
+          </if>       
+          <input {$var} type='checkbox' value='{$vo.id}/{$vo.level}' name='access[]'>
+        
+
+          <ul class='action_list'>
+          <volist name="vo['child']" id="action">            
+            <li>
+              {$action.title}
+              <assign name="var" value="" />
+              <if condition="$action['access']">
+              <assign name="var" value="checked=checked" />
+              </if>
+              <input {$var} type='checkbox' value='{$action.id}/{$action.level}' name='access[]'>
+            
+            <if condition="is_array($action['child'])">
+              <ul class='method_list'>
+              <volist name="action['child']" id="method">
+              <li>
+              {$method.title}
+              <assign name="var" value="" />
+              <if condition="$method['access']">
+              <assign name="var" value="checked=checked" />
+              </if>
+              <input {$var} type='checkbox' value='{$method.id}/{$method.level}' name='access[]'>
+              </li>
+              </volist>
+              <div class="clear"></div>
+              </ul>
+            </if>
+          </li>
+          </volist>
+          </ul>
+      </li>
+			</volist>
+      </ul>	 
+			</div><!-- end of #tab1 -->
+      <css file="__PUBLIC__/css/rbac.css" />
+		</div><!-- end of .tab_container -->
+
+		<footer>
+			<div class="submit_link">
+				<input type="submit" value="提交" class="alt_btn">
+				<input onclick='history.go(-1)' type="button" value="返 回">
+			</div>
+		</footer>
+		
+		</article><!-- end of content manager article -->
+
+		<div class='page'>{$page}</div>
+		
+
+	</form>
+</section>
+
+<include file="Modules/Admin/Tpl/footer.html" />

@@ -1,0 +1,300 @@
+<include file="Modules/Mobile/Tpl/header.html" />
+
+
+    <div class="bony-pink bony-info-header">
+        <div class='face'>
+          <a href="#">
+          <img src="{$user.img}" class='img-responsive img-circle' alt="头像照片">
+          </a>
+        </div>
+        <h3>{$user.nickname|default='未填写昵称'}</h3>
+        <p>{$user.sign|default='未填写个性签名'}</p>
+    </div>
+
+    <div class="container">        
+    
+        <input type="hidden" name='userid' value='{$user.id}'>
+        <script type="text/javascript">
+        $url = "{:U('Member/followTa')}";
+        $url2 = "{:U('Member/showWechat')}";
+        $(document).ready(function(){
+          $("a.follow").click(function(){
+            $action = 'follow';
+            $uid = $('input[name=userid]').val();
+            $.post($url,{pid:$uid,action:$action},function(result){
+              alert(result.info);
+              if(result.status==1){
+                $("a.follow").addClass('hidden');
+                $('a.unfollow').removeClass('hidden');
+              }
+            });
+          });
+          $("a.unfollow").click(function(){
+            $action = 'unfollow';
+            $uid = $('input[name=userid]').val();
+            $.post($url,{pid:$uid,action:$action},function(result){
+              alert(result.info);
+              if(result.status==1){
+                $("a.follow").removeClass('hidden');
+                $('a.unfollow').addClass('hidden');
+              }
+            });
+          });
+
+          $("a.showwechat").click(function(){
+            $('#showWechat').modal('show');
+          });
+
+          $("#showwechat-btn").click(function(){
+            $uid = $('input[name=userid]').val();
+			$('#showWechat').modal('hide');
+			var wxLink = $('a.showwechat');
+			wxLink.text('正在拉取微信号……');
+			wxLink.unbind('click');
+            $.post($url2, {pid:$uid},function(result){
+              //$("#info-container").html(result.info);
+			  //$('#showWechat').modal('');
+			  //wxLink.text(result.info);			  
+			  if(result.status == 1){
+				  location.reload();
+			  }else{
+				  wxLink.text(result.info);
+				  wxLink.attr('href', '/Mobile/Member/yyb');
+			  }
+            });
+
+          });
+
+
+        });
+        </script>
+
+        <div class="row bony-mt2">
+            <div class="col-xs-12">
+			<eq name="paid" value="0">
+            <a class='showwechat w100 button button-small button-action button-rounded w100'>查看微信号(需花费1根红线或使用一次免费机会)</a>
+			<else/>
+			<a class='w100 button button-small button-action button-rounded w100'>微信号：{$user.wechat}(您已花费红线或免费机会)</a>
+			</eq>
+            </div>
+        </div>
+
+       
+    </div> 
+
+	<div class="modal fade" id="showWechat" tabindex="-1" role="dialog" aria-labelledby="showWechatLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+		<form class="modal-content" method='post'>
+		  <div class="modal-header">
+			<!--button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button-->
+			<h4 class="modal-title" id="showWechatLabel">提示信息</h4>
+		  </div>
+		  <div class="modal-body">
+			  <p id='info-container' class='text-primary text-center'>{$msg}</p>
+		  </div>
+		  <div class="modal-footer">
+			<button id='showwechat-btn' type="button" class="btn btn-primary">确认</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+		  </div>
+
+		</form>
+	  </div>
+	</div>
+        
+       
+
+    <div class=" bony-mt2">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <div class="info_head">
+                    <p class="pull-left">内心独白</p>
+                </div>
+            </tr>
+        </thead>
+        <tbody>
+             <tr>
+                
+                <td colspan="4 ">{$user.sign}</td>
+            </tr>  
+        </tbody>
+    </table>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <div class="info_head">
+                    <p class="pull-left">基本信息</p>                    
+                </div>
+            </tr>
+        </thead>
+        <tbody>
+             <tr>
+                <td>昵称：</td>
+                <td>{$user.nickname}</td>
+                <td>年龄：</td>
+                <td>{$user.age}</td>
+            </tr>
+            <tr>
+                <td>性别：</td>
+				<if condition="$user.gender eq 0">
+		        <td>男</td>
+		      <else/>
+		        <td>女</td>
+		     </if>
+                
+                <td>身高：</td>
+                <td>{$user.height}</td>
+            </tr>
+            <tr>
+                <td>学历：</td>
+                <td>{$user.edu}</td>
+                <td>婚姻状况：</td>
+                <td>{$user.love}</td>
+            </tr>
+            <tr>
+                <td>所在地区：</td>
+                <td>{$user.area}</td>
+                <td>所在城市：</td>
+                <td>{$user.city}</td>
+            </tr>
+            <tr>
+                <td>血型：</td>
+                <td>{$user.blood}</td>
+                <td>收入：</td>
+                <td>{$user.income}</td>
+            </tr>
+            <tr>
+                <td>购房情况：</td>
+                <td>{$user.buyhouse}</td>
+                <td>购车情况：</td>
+                <td>{$user.buycar}</td>
+            </tr>
+            <tr>
+                <td>公司类型：</td>
+                <td>{$user.com_type}</td>
+                <td>收入描述：</td>
+                <td>{$user.income2}</td>
+            </tr> 
+            <tr>
+                <td>专业：</td>
+                <td>{$user.Professional}</td>
+                <td>民族：</td>
+                <td>{$user.nation}</td>
+            </tr>
+            <tr>                
+                <td>信仰：</td>
+                <td colspan="3">{$user.faith}</td>
+            </tr> 
+            <tr>                
+                <td>兴趣及爱好：</td>
+                <td colspan="3">{$user.interest}</td>
+            </tr>   
+        </tbody>
+    </table>
+	<eq name="paid" value="1">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <div class="info_head">
+                    <p class="pull-left">择偶要求</p>
+                </div>
+            </tr>
+        </thead>
+        <tbody>
+             <tr>
+                <td>年龄范围：</td>
+                <td>{$user.age_scope}</td>
+                <td>身高范围：</td>
+                <td>{$user.h_scope}</td>
+            </tr>
+            <tr>
+                <td>学历要求：</td>
+                <td>{$user.edu_scope}</td>
+                <td>婚姻状况：</td>
+                <td>{$user.love2}</td>
+            </tr>
+            <!--tr>
+                <td>有无照片：</td>
+                <td>{$user.i_scope}</td>
+                <td>诚信星级：</td>
+                <td>{$user.star}</td>
+            </tr-->   
+        </tbody>
+    </table>
+
+     <table class="table table-hover">
+        <thead>
+            <tr>
+                <div class="info_head">
+                    <p class="pull-left">家庭资料</p>
+                </div>
+            </tr>
+        </thead>
+        <tbody>
+             <tr>
+                <td>户口：</td>
+                <td colspan="3">{$user.hukou}</td>
+            </tr>
+            <tr>
+                <td>籍贯：</td>
+                <td colspan="3">{$user.jiguan}</td>
+            </tr>
+            <tr>
+                <td>家中排行：</td>
+                <td>{$user.ranking}</td>
+                <td>父母状态：</td>
+                <td>{$user.parent_sta}</td>
+            </tr> 
+
+        </tbody>
+    </table>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <div class="info_head">
+                    <p class="pull-left">爱情规划</p>
+                </div>
+            </tr>
+        </thead>
+        <tbody>
+             <tr>
+                <td>谈过几次恋爱：</td>
+                <td colspan="3">{$user.jici}</td>
+            </tr>
+            <tr>
+                <td>近期是否有结婚打算：</td>
+                <td colspan="3">{$user.plan}</td>
+            </tr>
+            <tr>
+                <td>婚后是否愿意要小孩：</td>
+                <td colspan="3">{$user.kid}</td>
+            </tr> 
+            <tr>
+                <td>是否愿意和父母同住：</td>
+                <td colspan="3">{$user.live}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <div class="info_head">
+                    <p class="pull-left">交友状态</p>
+                </div>
+            </tr>
+        </thead>
+        <tbody>
+             <tr>
+                <td>交友状态：</td>
+                <td colspan="3">{$user.friend_sta}</td>
+            </tr>
+        </tbody>
+    </table>
+	</eq>
+
+    </div>
+
+<include file="Modules/Mobile/Tpl/footer.html" />

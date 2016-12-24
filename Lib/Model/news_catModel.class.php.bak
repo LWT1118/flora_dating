@@ -1,0 +1,10 @@
+<?php
+class news_catModel extends Model {
+	protected $_auto = array ( 
+   		array('header','0',3),
+   		array('footer','0',3),
+   		array('home','0',3),
+   	);
+}
+
+?>

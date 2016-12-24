@@ -1,0 +1,75 @@
+<include file="Modules/Admin/Tpl/header.html" />
+
+<include file="Modules/Admin/Tpl/left.html" />
+<section id="main" class="column">
+	<form method='post' action='{:U('posUpdate')}'>
+		<article class="module width_full">
+		<header>
+      <h3 class="tabs_involved">{$location}</h3>
+      <ul class="tabs">
+          <li>
+            <a href="{:U('nodeAdd')}"><i class='icon-plus'></i> 添加模块</a>
+          </li>
+      </ul>
+		</header>
+
+		<div class="tab_container">
+			<div id="tab1" class="tab_content">
+
+      <ul class='module_list'>
+			<volist name="data" id="vo"> 
+				<li>
+          {$vo.title}
+          <assign name="var" value="$vo['level']+1" />
+          <a href='{:U('nodeAdd','pid='.$vo['id'].'&level='.$var)}' title="添加控制器"><i class='icon-plus'></i></a>
+          <a href='{:U('nodeEdit','id='.$vo['id'])}' title="编辑"><i class='icon-pencil'></i></a>
+					<a href='javascript:sure("{:U('nodeDel','id='.$vo['id'])}")' title="删除"><i class='icon-trash'></i></a>
+        
+
+          <ul class='action_list'>
+          <volist name="vo['child']" id="action">
+            <li>
+              {$action.title}
+              <assign name="var" value="$action['level']+1" />
+              <a href='{:U('nodeAdd','pid='.$action['id'].'&level='.$var)}' title="添加方法"><i class='icon-plus'></i></a>
+              <a href='{:U('nodeEdit','id='.$action['id'])}' title="编辑"><i class='icon-pencil'></i></a>
+              <a href='javascript:sure("{:U('nodeDel','id='.$action['id'])}")' title="删除"><i class='icon-trash'></i></a>
+            
+            <if condition="is_array($action['child'])">
+              <ul class='method_list'>
+              <volist name="action['child']" id="method">
+              <li>
+              {$method.title}
+              <a href='{:U('nodeEdit','id='.$method['id'])}' title="编辑"><i class='icon-pencil'></i></a>
+              <a href='javascript:sure("{:U('nodeDel','id='.$method['id'])}")' title="删除"><i class='icon-trash'></i></a>
+              </li>
+              </volist>
+              <div class="clear"></div>
+              </ul>
+            </if>
+          </li>
+          </volist>
+          </ul>
+      </li>
+			</volist>
+      </ul>	 
+			</div><!-- end of #tab1 -->
+      <css file="__PUBLIC__/css/rbac.css" />
+		</div><!-- end of .tab_container -->
+
+		<footer>
+			<div class="submit_link">
+				<input type="submit" value="提交" class="alt_btn">
+				<input onclick='history.go(-1)' type="button" value="返 回">
+			</div>
+		</footer>
+		
+		</article><!-- end of content manager article -->
+
+		<div class='page'>{$page}</div>
+		
+
+	</form>
+</section>
+
+<include file="Modules/Admin/Tpl/footer.html" />

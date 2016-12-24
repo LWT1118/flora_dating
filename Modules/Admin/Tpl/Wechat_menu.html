@@ -1,0 +1,66 @@
+<include file="Modules/Admin/Tpl/header.html" />
+
+<include file="Modules/Admin/Tpl/left.html" />
+<section id="main" class="column">
+	<form method='post' action='{:U('menuPosUpdate')}'>
+		<article class="module width_full">
+		<header><h3 class="tabs_involved">{$location}</h3>
+		<ul class="tabs">
+   			<li><a href="{:U('menuAdd','pid='.$pid)}"><i class='icon-plus'></i> 添加新条目</a></li>
+		</ul>
+		</header>
+		<div class="tab_container">
+			<div class="tab_content">
+			<table class="tablesorter" cellspacing="0"> 
+			<thead> 
+				<tr> 
+    				
+    				<th width='200'>菜单</th>
+    				<th width='100'>类型</th>
+    				<th>参数</th>
+    				<th width='120'>排序</th>  
+    				<th width='150' class='text-center'>操作</th>
+				</tr> 
+			</thead> 
+			<tbody>
+			<volist name="data" id="vo">
+				<tr> 
+    				<td>{$vo.html}{$vo.title}</td>
+    				<td>{$vo.types}</td>
+    				<td>{$vo.val}<br>{$vo.content}</td>
+    				<td>
+    					<input style='width:60px !important' name='pos[]' type='number' min="1" max="999999" value='{$vo.pos}'>
+    					<input name='id[]' type='hidden' value='{$vo.id}'>
+    				</td>
+    				<td class='text-right'>
+    					<eq name="vo['pid']" value='0'>
+    					<a class='my-icon' href='{:U('menuAdd','pid='.$vo['id'])}' title="添加子菜单"><i class='icon-plus'></i></a>
+    					</eq>
+    					<a class='my-icon' href='{:U('menuEdit','id='.$vo['id'])}' title="编辑"><i class='icon-pencil'></i></a>
+    					<a class='my-icon' href='javascript:sure("{:U('menuDel','id='.$vo['id'])}")' title="删除"><i class='icon-trash'></i></a>
+    				</td> 
+				</tr>
+			</volist>	 
+			</tbody> 
+			</table>
+			</div><!-- end of #tab1 -->
+
+		</div><!-- end of .tab_container -->
+
+		<footer>
+			<div class="submit_link">
+				<input onclick="document.location='{:U('menuCreate')}'" type="button" value="发布自定义菜单" class="alt_btn">
+
+				<input type="submit" value="提交" class="alt_btn">
+				<input onclick='history.go(-1)' type="button" value="返 回">
+			</div>
+		</footer>
+		
+		</article><!-- end of content manager article -->
+
+		<div class='page'>{$page}</div>
+		
+
+	</form>
+</section>
+<include file="Modules/Admin/Tpl/footer.html" />

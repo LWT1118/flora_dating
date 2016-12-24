@@ -1,0 +1,74 @@
+<include file="Modules/Mobile/Tpl/header.html" />
+
+
+<div class="container">
+
+	<div class="row mt10">
+		
+		<div class='col-sm-12 col-xs-12'>
+
+
+
+  	<div class="container-fluid">
+  		
+  		<div class="row">
+  			<volist name='data' id='notify'>
+			<div class="col-xs-12 col-md-6">
+	          <a href='{:U('Mobile/News/detail','id='.$notify['id'])}'>
+				<if condition="strlen($notify['img']) gt 0 AND file_exists('./Upload/news/thumb300_'.$notify['img'])">
+					<img width='100%' src='__UPLOAD__/news/thumb300_{$notify.img}' class='img-responsive'>
+				<else />
+					<img width='100%' src="holder.js/360x200/random/text:{$notify.title}" class='img-responsive'>
+				</if>
+	          </a>
+
+	          <div class="bony-h">{$notify.title|left_title=12}</div>
+	          <div class="bony-p">{$notify.content|left_title=30}</div>
+	          <div class="bony-p">地点：{$notify.summary}</div>
+	          <div class="bony-p">时间：{$notify.start_time|date='Y-m-d H:i',###}——{$notify.end_time|date='Y-m-d H:i',###}</div>
+	          <a href="#" class="button button-rounded button-caution button-block">报名时间：{$notify.reg_time|date='Y-m-d H:i',###}</a>
+	          <hr>    
+	        </div>
+				
+			</volist>
+			<div class="pages">{$page}</div>
+		</div>
+		
+	</div>
+
+		
+		</div>
+
+	</div>
+
+</div>
+
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery-ui-1.10.4.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/datepicker.zh.cn.js"></script>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/jquery-ui.min-1.10.4.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/jquery.ui.datepicker-1.10.4.min.css">
+<style type="text/css">
+#ui-datepicker-div{
+    /*width: 400px !important;*/
+}
+.ui-datepicker-year,.ui-datepicker-month{
+    width: 45% !important;
+}
+</style>
+
+<script>
+
+$(function() {
+    $( ".datepicker" ).datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "yy-mm-dd",
+        defaultDate: $( "#datepicker" ).val(),
+        minDate: "{$Think.NOW}",       
+    });    
+});
+</script>
+
+
+<include file="Modules/Mobile/Tpl/footer.html" />

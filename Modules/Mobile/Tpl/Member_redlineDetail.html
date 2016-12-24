@@ -1,0 +1,43 @@
+<html>
+<include file="Modules/Mobile/Tpl/header.html" />
+<script type="text/javascript">
+function complain(id)
+{
+	if(!confirm("确定要投诉吗？"))	return;
+	document.location.href = "{:U('Mobile/Member/complain')}" + "/?pid=" + id;
+}
+</script>
+
+<div class="list-group bony-font-2">
+  
+<table class='table'>
+	<tr>
+		<th>数量</th>
+		<th>原因</th>
+		<th>时间</th>
+		<th>微信号（点击查看会员信息）</th>
+		<th>虚假微信号</th>
+
+	</tr>
+	<volist name='data' id='vo'>
+	<tr>
+		<td>{$vo.num}</td>
+		<td>{$vo.remarks|rtrim=###,'号'}</td>
+		<td>{$vo.addtime|date='Y/m/d H:i:s',###}</td>
+		<td><a href="{:U('Mobile/User/detail', array('id'=>$vo['user']['id']))}">{$vo.user.wechat}</a></td>
+ 		<if condition="$vo.status eq 0">
+		<td><a href="#" onclick="javascript:complain({$vo['pid']})">举报</a></td>
+		<elseif condition="$vo.status eq -1"/>
+		<td>已举报</td>
+		<elseif condition="$vo.status eq 1"/>
+		<td>已返还</td>
+		<else /><td>已受理</td>
+		</if>
+	</tr>
+	</volist>
+</table>
+<div class="pages">{$page}</div>
+</div
+
+<include file="Modules/Mobile/Tpl/footer.html" />
+</html>

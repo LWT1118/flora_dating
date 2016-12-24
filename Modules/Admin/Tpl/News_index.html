@@ -1,0 +1,96 @@
+<include file="Modules/Admin/Tpl/header.html" />
+
+<include file="Modules/Admin/Tpl/left.html" />
+<section id="main" class="column">
+	<form method='post' action='{:U('posUpdate')}'>
+		<article class="module width_full">
+		<header>
+      <h3 class="tabs_involved">{$location}</h3>
+      <ul class="tabs">
+          <li><a href="{:U('add')}"><i class='icon-plus'></i> 添加新条目</a></li>
+      </ul>
+		</header>
+		<div class="tab_container">
+			<div class="tab_content">
+			<table class="tablesorter" cellspacing="0"> 
+			<thead> 
+				<tr> 
+   					<th width='10'><input type="checkbox"></th> 
+    				<th width='100'>图片</th>
+    				<th>活动</th> 
+            <th width='120'>时间</th> 
+    				<th width='130'>统计</th> 
+    				<th width='100'>排序</th>
+    				<th width='60'>审核</th> 
+    				<th width='100' class='text-center'>操作</th> 
+				</tr> 
+			</thead> 
+			<tbody>
+			<volist name="data" id="vo"> 
+				<input name='id[]' type='hidden' value='{$vo.id}'>
+				<tr> 
+   					<td><input type="checkbox"></td>
+   					<td width='80'>
+   					<div style='width:80px; height:80px;'>
+   					<if condition="strlen($vo['img']) gt 0">
+   						<img src='__UPLOAD__/news/thumb_{$vo.img}' class='img-responsive img-rounded img-thumbnail'>
+   					<else />
+   						<img src="__HOMEPUBLIC__/images/no_pic.gif" class='img-responsive img-rounded img-thumbnail'>
+   					</if>
+   					</div>
+					</td> 
+    				<td>
+    					<p>活动：{$vo.title}</p>
+    					<p>地址：{$vo.summary}</p>
+              <p>分类：<a href='{:U('index','cat='.$vo['cat'])}'>{$vo.cat_name}</a></p>
+              <p>发起：{$vo.realname|default='管理员'}</p>
+			  <p>报名状态：<switch name="vo['alive']"><case value="0">允许报名</case><case value="1">允许男性报名</case><case value="2">允许女性报名</case><case value="3">报名结束</case></switch></p>
+    				</td> 
+            <td>
+              <p>{$vo.start_time|date='Y-m-d H:i',###}</p>
+              <p>{$vo.end_time|date='Y-m-d H:i',###}</p>
+            </td>
+    				<td>
+    					<p>报名：<a href="{:U('regList',array('newsid'=>$vo['id']))}">{$vo.reg} 人</a></p>
+    					<p>签到：<a href="{:U('arrList',array('newsid'=>$vo['id']))}">{$vo.arrival} 人</a></p>
+    				</td>
+    				<td>
+              
+              <p><input style='width:70px !important' name='pos[]' type='number' min="1" max="999999" value='{$vo.pos}'></p>
+            </td>
+    				<td>
+    					<eq name="vo['status']" value="0">
+                <a class='btn btn-xs btn-success' href='{:U('statusUpdate','id='.$vo['id'].'&status='.$vo['status'])}' title="活动审核">批准</a>
+              <else/>
+                <a class='btn btn-xs btn-danger' href='{:U('statusUpdate','id='.$vo['id'].'&status='.$vo['status'])}' title="活动审核">拒绝</a>
+              </eq>
+    				</td>
+    				<td>
+    					
+    					<a target='_blank' class='my-icon' href='{:U('qrcode','id='.$vo['id'])}' title="生成二维码"><i class='icon-qrcode'></i></a>
+    					<a class='my-icon' href='{:U('edit','id='.$vo['id'])}' title="编辑"><i class='icon-pencil'></i></a>
+    					<a class='my-icon' href='javascript:sure("{:U('del','id='.$vo['id'])}")' title="删除"><i class='icon-trash'></i></a>
+    				</td> 
+				</tr>
+			</volist>	 
+			</tbody> 
+			</table>
+			</div><!-- end of #tab1 -->
+
+		</div><!-- end of .tab_container -->
+
+		<footer>
+			<div class="submit_link">
+				<input type="submit" value="提交" class="alt_btn">
+				<input onclick='history.go(-1)' type="button" value="返 回">
+			</div>
+		</footer>
+		
+		</article><!-- end of content manager article -->
+
+		<div class='page'>{$page}</div>
+		
+
+	</form>
+</section>
+<include file="Modules/Admin/Tpl/footer.html" />

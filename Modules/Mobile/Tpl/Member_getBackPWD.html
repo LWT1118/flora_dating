@@ -1,0 +1,20 @@
+<include file="Modules/Mobile/Tpl/header.html" />
+
+
+  <div class='container bony-login'>
+    <div class="row">
+
+      <form class="form-signin" method='post' action='{:U('Mobile/Member/sendMail')}'>
+        <h2 class="form-signin-heading">找回密码</h2>
+        <label for="inputEmail" class="sr-only">邮箱地址</label>
+        <input name='mail' type="email" id="inputEmail" class="form-control" placeholder="邮箱地址" required autofocus>
+<!-- http://mp.weixin.qq.com/s?__biz=MzA3MTQzOTA3OA==&mid=207440771&idx=1&sn=ed6055714d51d5fc690c5767982ccce5#rd -->
+        <!--a href=" " class="btn btn-lg btn-success btn-block" type="button">确定</a-->
+		<!--a href="#" class="btn btn-lg btn-success btn-block" type="button">确定</a-->
+		<input name='button' class="btn btn-lg btn-success btn-block" type="submit" value="确定">
+      </form>   
+
+    </div>
+  </div>
+
+<include file="Modules/Mobile/Tpl/footer.html" />

@@ -1,0 +1,61 @@
+
+
+header{
+	background: #b2b2b2;
+	padding: 10px 0;
+}
+
+.bony-logo{
+	text-align: center;
+	padding: 55px 0 0 0;
+}
+
+.bony-text-big{
+	font-size: 30px;
+	text-align: center;
+	font-weight: normal;
+	color: #292929;
+	padding-top: 60px;
+}
+
+.bony-text-small{
+	font-size: 14px;
+	text-align: center;
+	font-weight: normal;
+	color: #a2a2a2;
+}
+
+.pt25{
+	padding-top: 25px;
+}
+
+.pb40{
+	padding-bottom: 40px;
+}
+
+.bony-short{
+	width: 45%;
+}
+
+.bony-short2{
+	width: 50%;
+}
+
+form{
+	width: 320px;
+	margin: auto;
+}
+
+form input{
+	height: 44px !important;
+	line-height: 44px;
+}
+
+form button[type=submit]{
+	width: 320px;
+}
+
+form p{
+	text-align: right;
+	padding: 20px 0;
+}

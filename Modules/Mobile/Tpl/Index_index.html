@@ -1,0 +1,73 @@
+<include file="Modules/Mobile/Tpl/header.html" />
+
+	<div class='container-fluid'>
+		<div class='bony-h1 bony-text-pink'>
+			<a href='{:U('News/index')}' class='pull-right'>更多&gt;</a>
+			<i class="icon icon-tags"></i>
+			最新活动
+		</div>
+
+		<div class="row">
+			<volist name='notify' id='notify'>
+
+			<div class="col-xs-12 col-md-6">
+	          <a href='{:U('News/detail','id='.$notify['id'])}'>
+				<if condition="strlen($notify['img']) gt 0 AND file_exists('./Upload/news/thumb300_'.$notify['img'])">
+					<img width='100%' src='__UPLOAD__/news/thumb300_{$notify.img}' class='img-responsive'>
+				<else />
+					<img width='100%' src="holder.js/360x200/random/text:{$notify.title}" class='img-responsive'>
+				</if>
+	          </a>
+
+	          <div class="bony-h">{$notify.title|left_title=12}</div>
+	          <div class="bony-p">{$notify.content|left_title=30}</div>
+	          <div class="bony-p">地点：{$notify.summary}</div>
+	          <div class="bony-p">时间：{$notify.start_time|date='Y-m-d H:i',###}——{$notify.end_time|date='Y-m-d H:i',###}</div>
+	          <a href="{:U('News/detail','id='.$notify['id'])}" class="button button-rounded button-caution button-block">已报{$notify.reg}人次 查看详情</a>
+	          <hr>    
+	        </div>
+
+			</volist>
+
+		</div>
+	</div>
+
+
+<!-- <div class='container bony-member'>
+	<div class='myh2 mt20 bg1'>活跃会员</div>
+	<div class="row">
+		<volist name='user' id='user'>
+		<div class="col-sm-3 col-xs-6">
+			<a href='{:U('Mobile/Index/user','id='.$user['id'])}'>
+			<if condition="strlen($user['img']) gt 0">
+			<img src='__UPLOAD__/user/thumb_{$user.img}' class='img-circle img-thumbnail img-responsive'>
+			<else />
+			<img src="__PUBLIC__/images/no_face.gif" class='img-circle img-thumbnail img-responsive'>
+			</if>
+			<b>{$user.realname}</b>
+			<b>活跃度：{$user.arrival}</b>
+			</a>
+		</div>
+		</volist>
+	</div>
+</div> -->
+
+
+<!-- <div class='container bony-link'>
+	<div class='myh2 mt20 bg3'>合作伙伴</div>
+	<div class="row mt20">
+		
+		<volist name='link' id="link">
+	    <div class="col-sm-2 col-xs-4 text-center"><a target='_blank' href="{$link.url}">
+			<if condition="strlen($link['img']) gt 0">
+			<img src='__UPLOAD__/nav/thumb200_{$link.img}' class='img-thumbnail img-responsive'>
+			<else />
+			<img src="holder.js/120x42/random/{$link.title}" class='img-thumbnail img-responsive'>
+			</if>	    	
+	    </a></div>
+	    </volist>
+	</div> 
+</div> -->
+
+
+<include file="Modules/Mobile/Tpl/footer.html" />

@@ -1,0 +1,108 @@
+<include file="Modules/Mobile/Tpl/header.html" />
+<div class="bony-pink bony-info-header">
+    <div class='face'>
+        <if condition="(strlen($m['img']) gt 0) AND (file_exists('./Upload/user/thumb200_'.$m['img']))">
+            <img id='bony-face-img' src="__UPLOAD__/user/thumb200_{$m.img}" class='img-responsive img-circle' alt="头像照片">
+        <else/>
+            <img id='bony-face-img' src="holder.js/100x100/#044:#fff/text:图片预览/" class='img-responsive img-circle' alt="">
+        </if>
+    </div>
+</div>
+<div class='container'>
+    <div class='row'>
+        <div class='col-sm-12 col-xs-12'>
+            <form style='font-size:2rem' class='bony-mt2' method='post' enctype='multipart/form-data' id='myForm' action='{:U(' upload ')}'>
+                <div>
+                    <input id='pic_file' name='pic' type="file">
+                    <p class='text-center text-danger'>最佳头像为正方形</p>
+                </div>
+            </form>
+        </div>
+        <div class='col-sm-12 col-xs-12'>
+            <form class='mt30' method='post'>
+                <input type='hidden' id='img_input' name='img'>
+                <if condition="strlen($m['img']) gt 0">
+                    <input type='hidden' id='img_old' name='img_old' value='{$m.img}'>
+                    <else/>
+                    <input type='hidden' id='img_old' name='img_old' value=''>
+                </if>
+                <div class="form-group text-center">
+                    <button id='face-confirm' type="button" class='button button-action'>确定使用</button>
+                    <button id='face-cancel' type="button" class='button button-default'>放弃使用</button>
+                </div>
+            </form>
+        </div>
+        <js file="__PUBLIC__/js/jquery.form.js" />
+        <script type="text/javascript">
+        login_url = "{:U('login')}";
+        $path = "__UPLOAD__/user/";
+        $path_none = $path + "no_face.gif";
+        $(document).ready(function() {
+
+            $("#face-confirm").attr('disabled', true);
+            $("#face-cancel").attr('disabled', true);
+
+            $("#face-confirm").click(function() {
+                $src_old = $("#img_old").val();
+                $src = $("#img_input").val();
+                $.post("{:U('faceUpdate')}", {
+                    img: $src,
+                    img_old: $src_old
+                }, function(data) {
+                    $("#face-cancel").attr('disabled', true);
+                    if (data['status']) {
+                        alert(data['info']);
+                    } else {
+                        alert(data['info']);
+                    }
+                });
+            });
+
+            $("#face-cancel").click(function() {
+
+                $src_old = $("#img_old").val();
+                if ($src_old == '') {
+                    $src_2 = $path_none;
+                } else {
+                    $src_2 = $path + 'thumb200_' + $src_old;
+                }
+                $("#bony-face-img").attr('src', $src_2);
+
+                $src = $("#img_input").val();
+                $.post("{:U('uploadRemove')}", {
+                    img: $src
+                }, function(data) {
+                    $("#face-confirm").attr('disabled', true);
+                    if (data['status']) {
+                        alert(data['info']);
+                    } else {
+                        alert(data['info']);
+                        document.location = login_url;
+                    }
+                });
+            });
+
+            var path = '__UPLOAD__/user/';
+
+            var options = {
+                success: function(data) {
+                    $src_1 = path + 'thumb_' + data;
+                    $src_2 = path + 'thumb200_' + data;
+                    $src_3 = path + 'thumb300_' + data;
+                    $src_4 = path + 'thumb400_' + data;
+                    $src = data;
+                    $("#bony-face-img").attr('src', $src_2);
+                    $("#img_input").val($src);
+                    $("#face-confirm").attr('disabled', false);
+                    $("#face-cancel").attr('disabled', false);
+                }
+            };
+            $('#pic_file').on('change', function(e) {
+                e.preventDefault(); // <-- important
+                $("#myForm").ajaxSubmit(options);
+            });
+        });
+        </script>
+    </div>
+</div>
+<include file="Modules/Mobile/Tpl/footer.html" />

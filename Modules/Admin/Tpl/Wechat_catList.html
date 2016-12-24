@@ -1,0 +1,150 @@
+<include file="Modules/Admin/Tpl/header.html" />
+
+<include file="Modules/Admin/Tpl/left.html" />
+<section id="main" class="column">
+	<form method='post' action='{:U('catPosUpdate')}'>
+		<article class="module width_full">
+		<header><h3 class="tabs_involved">{$location}</h3>
+		<ul class="tabs">
+   			<li><a href="{:U('catAdd')}"><i class='icon-plus'></i> 添加新条目</a></li>
+		</ul>
+		</header>
+
+		<div class="tab_container">
+			<div id="tab1" class="tab_content">
+			<table class="tablesorter" cellspacing="0"> 
+			<thead> 
+				<tr> 
+   					<th width='10'><input type="checkbox"></th> 
+    				<th>名称</th>
+    				<th>排序</th>
+    				<th>类型</th>
+    				<th>长描述</th>
+    				<th width='110'>操作</th> 
+				</tr> 
+			</thead> 
+			<tbody>
+			<volist name="data" id="vo">
+				<tr> 
+   					<td><input type="checkbox"></td> 
+    				<td>{$vo.html}{$vo.cat}</td> 
+    				<td><input style='width:60px !important' name='{$vo.id}' type='number' min="1" max="999999" value='{$vo.pos}'></td>
+    				<td>{$vo.pid|wechat_type}</td>
+    				<td>{$vo.remarks}</td> 
+    				<td>
+						<a class='my-icon showbox' href='#' itemid='{$vo.id}' title="查看"><i class='icon-plus'></i></a>
+						<a class='my-icon' href='{:U('catEdit','id='.$vo['id'])}' title="编辑"><i class='icon-pencil'></i></a>
+						<a class='my-icon' href='javascript:sure("{:U('catDel','id='.$vo['id'])}")' title="删除"><i class='icon-trash'></i></a>
+    				</td> 
+				</tr>
+			</volist>	 
+			</tbody> 
+			</table>
+			</div><!-- end of #tab1 -->
+			
+
+		</div><!-- end of .tab_container -->
+
+		<footer>
+			<div class="submit_link">
+				<input type="submit" value="提交" class="alt_btn">
+				<input onclick='history.go(-1)' type="button" value="返回">
+			</div>
+		</footer>
+		
+		</article><!-- end of content manager article -->
+
+		<div class='page'>{$page}</div>
+		
+	</form>
+</section>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+	<form method='post' id='myForm' action='{:U('itemUpdate')}'>
+	<input type='hidden' id='replyid' name='replyid'>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">选择图文条目</h4>
+      </div>
+      <div class="modal-body">
+
+
+
+			<table class="tablesorter" cellspacing="0"> 
+			<thead> 
+				<tr> 
+   					<th width='15'>选</th> 
+    				<th>图片</th>
+    				<th>标题</th> 
+    				<th>链接</th>  
+				</tr> 
+			</thead> 
+			<tbody>
+			<volist name="reply" id="vo"> 
+				<input name='xid[]' type='hidden' value='{$vo.id}'>
+				<tr> 
+   					<td><input type="checkbox"></td>
+   					<td width='60'>
+   						<div style='width:60px; height:60px; over-flow:hidden'>
+   					<if condition="strlen($vo['img']) gt 0">
+   						<img src='__UPLOAD__/wechat/thumb200_{$vo.img}' class='img-responsive img-rounded img-thumbnail'>
+   					<else />
+   						<img src="__HOMEPUBLIC__/images/no_pic.gif" class='img-responsive img-rounded img-thumbnail'>
+   					</if>
+   						</div>
+					</td> 
+    				<td>{$vo.title}</td> 
+    				<td>{$vo.url}</td>
+				</tr>
+			</volist>	 
+			</tbody> 
+			</table>
+
+
+		
+      </div>
+      <div class="modal-footer">
+        <button id='my-submit' type="submit" class="btn btn-primary">确定选择</button>
+        <button id='my-close' type="button" class="btn btn-default" data-dismiss="modal">关闭取消</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<js file="__PUBLIC__/js/jquery.form.js" />
+<script type="text/javascript">
+	
+	$(document).ready(function(){
+		$(".showbox").click(function(){
+			$id = $(this).attr('itemid');
+			$("#replyid").val($id);
+			$("#myModal").modal('show');
+		});
+
+
+		var options = {
+            success	: function (data) {
+                alert('更新成功');
+                $("#myModal").modal('hide');
+                
+            }
+        };
+
+
+		$('#myForm').on('submit', function(e) {
+            e.preventDefault(); // <-- important
+            $(this).ajaxSubmit(options);
+        });
+	});
+
+</script>
+
+
+
+<include file="Modules/Admin/Tpl/footer.html" />

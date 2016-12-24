@@ -1,0 +1,39 @@
+<include file="Modules/Home/Tpl/header.html" />
+
+
+<div id='member-menu' class="container">
+  <div class="row member-face">
+    <div class='face'>
+      <if condition="strlen($m['img']) gt 0">
+        <img id='bony-face-img' class='img-resonsive img-circle img-thumbnail' src='__UPLOAD__/user/thumb200_{$m.img}'>
+      <else/>
+        <img id='bony-face-img' class='img-resonsive img-circle img-thumbnail' src='__PUBLIC__/images/no_face.gif'>
+      </if>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+
+	<div class="row mt10">
+		
+		<div class='col-sm-12 col-xs-12'>
+
+
+<ul class="list-group">
+  <li class="list-group-item">姓名称呼：{$m.realname|default='未填写'}</li>
+  <li class="list-group-item">电子邮箱：{$m.email|default='未填写'}</li>
+  <li class="list-group-item">发起活动：{$m.post}</li>
+  <li class="list-group-item">活动报名：{$m.reg}</li>
+  <li class="list-group-item">活动签到：{$m.arrival}</li>
+</ul>
+
+		
+		</div>
+
+	</div>
+
+</div>
+
+<include file="Modules/Home/Tpl/footer.html" />

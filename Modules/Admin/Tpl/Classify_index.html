@@ -1,0 +1,26 @@
+<include file="Modules/Admin/Tpl/header.html" />
+<include file="Modules/Admin/Tpl/left.html" />
+<section id="main" class="column">
+    <form method='post' action="__URL__/addParentClass">
+        <article class="module width_full">
+            <header><h3>{$location}</h3></header>
+            <div class="module_content">
+                <fieldset>
+                    <label>主分类</label>
+                    <input name='mainclass' type="text" value=''>
+                </fieldset>
+                <fieldset>
+                    <label>URL</label>
+                    <input name='mainurl' type="text" value=''>
+                </fieldset>
+            </div>
+            <footer>
+                <div class="submit_link">
+                    <input type="submit" value="提 交" class="alt_btn">
+                    <input onclick='history.go(-1)' type="button" value="返 回">
+                </div>
+            </footer>
+        </article><!-- end of post new article -->
+    </form>
+</section>
+<include file="Modules/Admin/Tpl/footer.html" />

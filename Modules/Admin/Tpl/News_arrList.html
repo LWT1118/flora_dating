@@ -1,0 +1,51 @@
+<include file="Modules/Admin/Tpl/header.html" />
+<include file="Modules/Admin/Tpl/left.html" />
+<section id="main" class="column">
+
+
+		<article class="module width_full">
+      <h3>活动 <a href='{:U('Home/News/detail/','id='.$news['id'])}'><b>{$news.title}</b></a> 的签到清单</h3>
+			<table class="tablesorter" cellspacing="0"> 
+			<thead> 
+				<tr> 
+    				<th>头像</th>
+    				<th>姓名/手机</th>
+            <th>邮箱/地址</th>
+            <th width='120'>参与</th>
+				</tr> 
+			</thead> 
+			<tbody>
+			<volist name="data" id="vo"> 
+				<tr> 
+   					<td width='80'>
+   					<if condition="strlen($vo['img']) gt 0">
+   						<img src='__UPLOAD__/user/thumb_{$vo.img}' width='100%' class='img-responsive img-circle img-thumbnail'>
+   					<else />
+   						<img src="__HOMEPUBLIC__/images/no_face.gif"  width='100%' class='img-responsive img-circle img-thumbnail'>
+   					</if>
+					</td> 
+            <td>
+              <p>姓名：{$vo.realname|default='暂未填写'}</p>
+              <p>手机：{$vo.tel|default='暂未填写'}</p>
+            </td> 
+            <td>
+              <p>邮箱：{$vo.email|default='暂未填写'}</p>
+              <p>地址：{$vo.address|default='暂未填写'}</p>
+            </td> 
+            <td>
+              <p>发布：{$vo.post}</p>
+              <p>报名：{$vo.reg}</p>
+              <p>签到：{$vo.arrival}</p>
+            </td>             
+
+
+				</tr>
+			</volist>	 
+			</tbody> 
+			</table>
+		
+		</article>
+
+</section>
+
+<include file="Modules/Admin/Tpl/footer.html" />

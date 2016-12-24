@@ -1,0 +1,40 @@
+<include file="Modules/Home/Tpl/header.html" />
+	
+
+	<div class='container bony-nav'>
+		<div class='myh2 bg3'>{$page_title}</div>
+		<div class="row mt20">
+			<volist name='data' id='data' empty='$empty'>
+			<div class="col-sm-4 col-xs-12">
+				<a href='{:U('Mobile/News/detail','id='.$data['id'])}'>
+				<if condition="strlen($data['img']) gt 0">
+					<img src='__UPLOAD__/news/thumb300_{$data.img}' class='img-responsive'>
+				<else />
+					<img src="__HOMEPUBLIC__/images/no_pic.gif" class='img-responsive'>
+				</if>
+				</a>
+				<a href='{:U('Mobile/News/detail','id='.$data['id'])}'>
+				<p>
+					<span class='bg3'>
+						报名：{$data.reg}<br>
+						签到：{$data.arrival}
+					</span>
+					<h3>{$data.title|left_title=12}</h3>
+					<b><i class='icon-time'></i> {$data.date_start|strtotime|date='m月d日',###}——{$data.date_end|strtotime|date='m月d日',###}</b>
+					<b><i class='icon-map-marker'></i> {$data.summary}</b>
+
+				</p>
+				</a>
+			</div>
+			</volist>
+
+		</div>
+	
+		<div class="pages mt20">{$page}</div>
+
+	</div>
+
+
+
+
+<include file="Modules/Home/Tpl/footer.html" />

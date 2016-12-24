@@ -1,0 +1,73 @@
+<include file="Modules/Admin/Tpl/header.html" />
+
+<include file="Modules/Admin/Tpl/left.html" />
+<section id="main" class="column">
+	<form method='post' action='{:U('menuAddHandle')}'>
+		<input type='hidden' name='pid' value='{$pid}'>
+		<article class="module width_full">
+		<header>
+			<h3 class="tabs_involved">{$location}</h3>
+		</header>
+		<div class="tab_container">
+			<div class="tab_content">
+			<p class='text-danger text-center'>{$alert}</p>
+			<table class="tablesorter" cellspacing="0"> 
+				<tr>
+				 	<td width='100'>菜单名称:</td>
+				 	<td><input class='form-control' type='text' name='title'></td>
+				</tr>
+				<tr>
+				 	<td>点击类型:</td>
+				 	<td><select class='form-control' name='types'>
+				 		<option value='view' selected>网址链接</option>
+				 		<option value='click'>点击事件</option>
+				 	</select></td>
+				</tr>
+				<tr>
+				 	<td id='val_td'>链接地址：</td>
+				 	<td><input class='form-control' type='text' name='val'></td>
+				</tr>
+				<tr id='txt_td'>
+				 	<td>回复内容：</td>
+				 	<td><textarea class='form-control' type='text' name='content'></textarea></td>
+				</tr>
+				<tr>
+				 	<td>菜单排序：</td>
+				 	<td><input class='form-control' type='number' name='pos' value='999'></td>
+				</tr>
+			</table>
+			<script type="text/javascript">
+			$(document).ready(function(){
+				$("#txt_td").hide();
+				$("select[name=types]").change(function(){
+					$v = $("select[name=types] option:selected").val();
+					if($v=='view'){
+						$("#val_td").text('链接地址：');
+						$("#txt_td").hide();
+					}
+					if($v=='click'){
+						$("#val_td").text('事件KEY值：');
+						$("#txt_td").show();
+					}
+				});
+			});
+			</script>
+			</div><!-- end of #tab1 -->
+
+		</div><!-- end of .tab_container -->
+
+		<footer>
+			<div class="submit_link">
+				<input type="submit" value="提交" class="alt_btn">
+				<input onclick='history.go(-1)' type="button" value="返 回">
+			</div>
+		</footer>
+		
+		</article><!-- end of content manager article -->
+
+		<div class='page'>{$page}</div>
+		
+
+	</form>
+</section>
+<include file="Modules/Admin/Tpl/footer.html" />
