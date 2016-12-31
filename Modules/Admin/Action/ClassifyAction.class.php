@@ -79,7 +79,8 @@ class ClassifyAction extends AdminAction
 	{
 		$id = intval($_GET['id']);
 		$url = isset($_GET['url']) ? urldecode($_GET['url']) : '';
-		$msg = M('classify_image')->where("id={$id}")->save(array('url'=>$url)) ? '保存成功' : '保存失败';
+		$idAds = isset($_GET['is_ads']) ? intval($_GET['is_ads']) : 0;
+		$msg = M('classify_image')->where("id={$id}")->save(array('url'=>$url, 'is_ads'=>$idAds)) ? '保存成功' : '保存失败';
 		die(json_encode(array('err_code'=>$msg)));
 	}
 	
@@ -105,7 +106,8 @@ class ClassifyAction extends AdminAction
 			}else{// 上传成功 获取上传文件信息
 				$info =  $upload->getUploadFileInfo();				
 				$path = "/Upload/classify/{$info[0]['savename']}";
-				$classifyImageModel->add(array('image'=>$path, 'create_time'=>time()));
+				$isAds = intval($_POST['is_ads']);
+				$classifyImageModel->add(array('image'=>$path, 'create_time'=>time(), 'is_ads'=>$isAds));
 			}			
 		}				
 		$imageList = $classifyImageModel->select();

@@ -7,8 +7,8 @@ function saveUrl(id){
 		return;
 	}
 	var saveUrl = $('#url_' + id).val();
-	alert(saveUrl);	
-	$.getJSON('{:U("url")}', {id:id, url:saveUrl}, function(data){
+	var isAds = $('#isads_' + id).val();
+	$.getJSON('{:U("url")}', {id:id, url:saveUrl, is_ads:isAds}, function(data){
 		alert(data['err_code']);
 	});
 }
@@ -16,10 +16,12 @@ function saveUrl(id){
 <section id="main" class="column">
 
     <article class="module width_full">
-      <header><h3>用户搜索</h3></header>
+      <header><h3>上传banner</h3></header>
       <div class="module_content">
-        <form action="{:U('image')}" method='post' enctype="multipart/form-data">            			
-			<button type="submit" style="float:left;margin-right:20px;">上传(1242*248)</button>
+        <form action="{:U('image')}" method='post' enctype="multipart/form-data">
+        	<label style="float:left"><input type="radio" checked name="is_ads" value="0">banner图片</label>
+        	<label style="float:left;margin-left:8px"><input type="radio" name="is_ads" value="1">广告图片</label>        
+			<button type="submit" style="float:left;margin-right:20px;margin-left:15px">上传(1242*248)</button>
 			<input type="file" name="image" style='width:30%'>						
         </form>
         <div class="clear"></div>
@@ -35,8 +37,9 @@ function saveUrl(id){
 		<thead> 
 			<tr> 
 				<th width='40' id='checkall'>id</th> 
-				<th width='250'>图片</th>    			
-				<th width='250'>URL</th>
+				<th width='250'>图片</th>
+				<th width='50'>类型</th>    			
+				<th width='200'>URL</th>
 				<th width='100'>操作</th> 
 			</tr> 
 		</thead> 			
@@ -48,9 +51,15 @@ function saveUrl(id){
 				<td>					
 					<img src='{$image.image}' width='100%' class='img-responsive img-thumbnail'>					
 				</td>
+				<td>
+				<select id="isads_{$image.id}">
+				<option value="0"<if condition="$image.is_ads eq 0"> selected</if>>banner图片</option>
+				<option value="1"<if condition="$image.is_ads eq 1"> selected</if>>广告图片</option>
+				</select>
+				</td>
 				<td><input id="url_{$image.id}" type="text" value="{$image.url}" style="width:100%" /></td>
 				<td>
-					<button type="button" onclick="javascript:saveUrl({$image.id})">保存URL</button>
+					<button type="button" onclick="javascript:saveUrl({$image.id})">保存</button>
 					<a class='my-icon' href='javascript:sure("{:U('del','id='.$image['id'])}")' title="删除">删除</a>
 				</td> 
 			</tr>

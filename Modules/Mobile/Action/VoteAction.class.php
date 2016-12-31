@@ -5,11 +5,8 @@ class VoteAction extends HomeAction {
 		$data = VoteModel::getInstance()->find($id);
 		$data['content'] = str_replace("\r\n", "\\r\\n", $data['content']);
 		$this->data = $data;
-		$this->options = VoteSelectModel::getInstance()->where("vote_id={$id}")->order("`order` asc")->select();
-		$manualVote = array();
-		foreach($this->options as $option){
-		    $manualVote[$option[id]] = intval($option['add_num']);
-		}
+		$options = VoteSelectModel::getInstance()->where("vote_id={$id}")->order("`order` asc")->select();
+		$this->options = $options;
 		$voteRecordModel = VoteRecordModel::getInstance();
 		if($data['end_time'] < time()){
 		    $this->voted = 1;
@@ -18,14 +15,18 @@ class VoteAction extends HomeAction {
 		}
 		if($this->voted){	
 			//$this->redirect(U('Mobile/Vote/result', array('id'=>$id)));
-			$total = $voteRecordModel->where("vote_id={$id}")->count();
-			$total += array_sum($manualVote);
-			$result = $voteRecordModel->query("select option_id,count(id) as amount from wjw_vote_record where vote_id={$id} group by option_id");
-			$statistic = array();
-			foreach($result as $value){
-			    $amount = isset($manualVote[$value['option_id']]) ? ($manualVote[$value['option_id']] + $value['amount']) : $value['amount'];			   
-				$statistic[$value['option_id']] = array('percent'=>($total == 0 ? 0 : round($amount/$total, 2) * 100), 'amount'=>$amount);
-			}					
+		    $total = $voteRecordModel->where("vote_id={$id}")->count();
+		    array_walk($options, function($v,$k,$total){ $total += $v['add_num'];}, &$total);
+		    $statistic = array();
+		    $queryResult = $voteRecordModel->query("select option_id,count(id) as amount from wjw_vote_record where vote_id={$id} group by option_id");		    
+		    foreach($queryResult as $row){
+		        $result[$row['option_id']] = $row['amount'];
+		    }		    
+		    foreach($options as $option){
+		        $voteNum = isset($result[$option['id']]) ? $result[$option['id']] : 0;		        
+		        $amount = $voteNum + $option['add_num'];		        
+		        $statistic[$option['id']] = array('percent'=>($total == 0 ? 0 : round($amount/$total, 2) * 100), 'amount'=>$amount);
+		    }
 			$this->statistic = $statistic;
 		}				
 		

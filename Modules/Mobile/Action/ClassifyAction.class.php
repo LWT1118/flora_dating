@@ -1,8 +1,11 @@
 <?php
 class ClassifyAction extends PublicAction {
 	public function index(){
-		$imageList = M('classify_image')->select();
-		$this->assign('image_list', $imageList);
+	    $classifyImageModel = M('classify_image'); 
+		$bannerList = $classifyImageModel->where('is_ads=0')->select();
+		$adsList = $classifyImageModel->where('is_ads=1')->select();
+		$this->assign('banner_list', $bannerList);
+		$this->assign('ads_list', $adsList);
 		
 		$classifyModel = new Model();
 		$relationCatalog = $classifyModel->query('select * from wjw_classify_info where pid=0 and id in (select distinct pid from wjw_classify_info) order by no');
