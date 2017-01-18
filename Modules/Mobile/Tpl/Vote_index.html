@@ -28,12 +28,18 @@
 				  {$option.title}				  
 				  </label>			  
 				  <if condition="!empty($option['image'])">
-				  <div><img src="{$option.image}" class="img-thumbnail"></div>
+				  <div><img src="{$option.image}" class="img-thumbnail"></div>				  
+				  <div style="margin-top:8px;">
+				  <if condition="$statistic[$option['id']]['amount'] gt 0">
+				  {$statistic[$option['id']]['percent']}%({$statistic[$option['id']]['amount']}票)
+				  <else />
+				  0%(0票)
+				  </if>
+				  </div>
 				  </if>
 				  <if condition="intval($voted) gt 0">
-					<div class="progress" style="margin-top:5px">
-					  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {$statistic[$option['id']]['percent']}%;">
-						{$statistic[$option['id']]['percent']}%({$statistic[$option['id']]['amount']}票)
+					<div class="progress" style="margin-top:5px">					  
+					  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {$statistic[$option['id']]['percent']}%;">						
 					  </div>
 					</div>
 				  </if>	

@@ -9,11 +9,28 @@
 <meta name="apple-mobile-web-app-title" content="携程旅行">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta content="telephone=no" name="format-detection">
+<!-- Loading Bootstrap -->
+<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+<!-- Loading button -->
+<link href="__PUBLIC__/css/button.css" rel="stylesheet">
+<!-- Loading Flat UI -->
+<link href="__PUBLIC__/css/flat-ui.min.css" rel="stylesheet">
+<link rel="shortcut icon" href="img/favicon.ico">
+<link href="__PUBLIC__/css/font-awesome.min.css" rel="stylesheet">
+
+<link href="__PUBLIC__/css/bony.css" rel="stylesheet">
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+<!--[if lt IE 9]>
+  <script src="__PUBLIC__/js/vendor/html5shiv.js"></script>
+  <script src="__PUBLIC__/js/vendor/respond.min.js"></script>
+<![endif]-->
+<!-- Include all compiled plugins (below), or include individual files as needed -->
 <link href="__PUBLIC__/css/classify.css" rel="stylesheet">
 <link href="__PUBLIC__/css/abase.css" rel="stylesheet">
 <link href="__PUBLIC__/css/swiper3.08.min.css" rel="stylesheet">
 <script type="text/javascript" src="__PUBLIC__/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="__PUBLIC__/js/swiper3.08.jquery.min.js"></script>
+<script src="__PUBLIC__/js/flat-ui.min.js"></script
 <meta name="full-screen" content="yes">
 <meta name="x5-fullscreen" content="true">
 <meta name="browsermode" content="application">
@@ -21,12 +38,12 @@
 </head>
 <body id="ctripPage">
 <div id="js-index-page">
-	<if condition="!empty($image_list)">
+	<if condition="!empty($banner_list)">
 	<header class="jsmodule" id="js_module">
 		<div class="swiper-container">
 			<div class="swiper-wrapper">
-			<volist name='image_list' id='image'>
-				<div class="swiper-slide"><a <if condition="!empty($image['url'])">href="{$image['url']}"</if>><img style="width:100%;height:auto" src="{$image.image}"></a></div>
+			<volist name='banner_list' id='banner'>
+				<div class="swiper-slide"><a <if condition="!empty($banner['url'])">href="{$banner['url']}"</if>><img style="width:100%;height:auto" src="{$banner.image}"></a></div>
 			</volist>
 			</div>
 			<!-- 如果需要分页器 -->
@@ -36,7 +53,7 @@
 	</if>
 	<nav id="nav" class="nav-entry">
 	<volist name='relation_catalog' id='parent'>
-		<div class="row">
+		<div class="row" style="margin-left:auto;margin-right:auto;">
 		<div class="col col-33"><a style="line-height:90px" title="{$parent['classname']}" <if condition="!empty($parent['url'])">href="{$parent['url']}"</if>>{$parent['classname']}</a></div>
 		<volist name="parent['children']" id='chunk'>
 		<div class="col col-33">
@@ -48,7 +65,7 @@
 		</div>	
 	</volist>
 	
-	<div class="row">
+	<div class="row" style="margin-left:auto;margin-right:auto;">
 	<volist name='single_catalog' id='chunk'>
 		<div class="col col-33">
 		<volist name="chunk" id='catalog'>
@@ -58,6 +75,16 @@
 	</volist>
 	</div>		
 	</nav>		
+	<div class="jsmodule">
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+			<volist name='ads_list' id="ads">
+				<div class="swiper-slide"><a <if condition="!empty($ads['url'])">href="{$ads['url']}"</if>><img style="width:100%;height:auto" src="{$ads.image}"></a></div>
+			</volist>
+			</div>			
+			<div class="swiper-pagination"></div>						
+		</div>		
+	</div>
 </div>			
 <script type="text/javascript">        
   var mySwiper = new Swiper ('.swiper-container', {
@@ -69,3 +96,4 @@
 	autoplayDisableOnInteraction:false
   });        
 </script>	
+<include file="Modules/Mobile/Tpl/footer.html" />
