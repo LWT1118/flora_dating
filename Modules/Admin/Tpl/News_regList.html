@@ -16,7 +16,7 @@
 		<h3>活动 <a href='{:U('Home/News/detail/','id='.$news['id'])}'><b>{$news.title}</b></a> 的报名清单</h3>
 		<table class="tablesorter" cellspacing="0"> 
 		<thead> 
-			<tr><th>头像</th><th>姓名/手机</th><th>性别</th><th>邮箱/地址</th><th width='120'>参与</th></tr> 
+			<tr><th>头像</th><th>姓名/手机</th><th>性别</th><th>邮箱/地址</th><th>备注</th></td><th width='120'>参与</th></tr>
 		</thead> 
 		<tbody>
 		<volist name="data" id="vo"> 
@@ -33,7 +33,11 @@
 				<td>
 				  <p>邮箱：{$vo.email|default='暂未填写'}</p>
 				  <p>微信：{$vo.wechat|default='暂未填写'}</p>
-				</td>  
+				</td>
+				<td>
+					<textarea id="text_{$vo.id}" style="width:100%;height: 100%;"><?php $key = $news['id'] . '_' . $vo['id']; echo $remark[$key]; ?></textarea>
+					<p><input user_id="{$vo.id}" news_id="{$news.id}" type="button" value="保存"></p>
+				</td>
 				<td>
 				  <p>发布：{$vo.post}</p>
 				  <p>报名：{$vo.reg}</p>
@@ -45,5 +49,17 @@
 		</table>
 	</article>
 </section>
-
+<script type="text/javascript">
+	$(document).ready(function(){
+	    $('.module').find('input[user_id]').click(function(){
+	        var uid = $(this).attr('user_id');
+	        var remark = $('#text_' + uid).val();
+	        if(remark == '') return;
+	        if(!confirm('确定要保存备注？')) return;
+	        $.getJSON("{:U('Admin/News/remark/','nid='.$news['id'])}", {uid:uid,remark:remark}, function (data) {
+				alert(data.msg);
+            });
+		});
+	});
+</script>
 <include file="Modules/Admin/Tpl/footer.html" />

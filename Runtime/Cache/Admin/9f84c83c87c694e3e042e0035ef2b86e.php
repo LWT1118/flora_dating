@@ -119,8 +119,9 @@
 
 <h3>分类管理</h3>
 <ul class="toggle">
-    <li><a href="<?php echo U('/'.GROUP_NAME.'/Classify/index');?>"><i class='icon-plus'></i> 添加主分类</a></li>
-    <li><a href="<?php echo U('/'.GROUP_NAME.'/Classify/childIndex');?>"><i class='icon-plus'></i> 添加子类</a></li>
+    <!--li><a href="<?php echo U('/'.GROUP_NAME.'/Classify/index');?>"><i class='icon-plus'></i> 添加主分类</a></li-->
+    <li><a href="<?php echo U('/'.GROUP_NAME.'/Classify/childIndex');?>"><i class='icon-plus'></i> 添加分类</a></li>
+	<li><a href="<?php echo U('/'.GROUP_NAME.'/Classify/image');?>"><i class='icon-plus'></i> 宣传图片</a></li>
 </ul>
 
 <!-- <h3>消费日志</h3>

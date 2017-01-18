@@ -76,6 +76,6 @@ return array(
 
 	'NOT_AUTH_MODULE' => 'Mobile',					//无需验证的控制器
 	'NOT_AUTH_ACTION' => 'Index',					//无需验证的方法
-
+    'DEFAULT_TIMEZONE'=>'Europe/Berlin'
 );
 ?>

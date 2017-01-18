@@ -24,7 +24,7 @@
 	<?php if(!empty($image_list)): ?><header class="jsmodule" id="js_module">
 		<div class="swiper-container">
 			<div class="swiper-wrapper">
-			<?php if(is_array($image_list)): $i = 0; $__LIST__ = $image_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$image): $mod = ($i % 2 );++$i;?><div class="swiper-slide"><img style="width:100%;height:auto" src="<?php echo ($image["image"]); ?>"></div><?php endforeach; endif; else: echo "" ;endif; ?>
+			<?php if(is_array($image_list)): $i = 0; $__LIST__ = $image_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$image): $mod = ($i % 2 );++$i;?><div class="swiper-slide"><a <?php if(!empty($image['url'])): ?>href="<?php echo ($image['url']); ?>"<?php endif; ?>><img style="width:100%;height:auto" src="<?php echo ($image["image"]); ?>"></a></div><?php endforeach; endif; else: echo "" ;endif; ?>
 			</div>
 			<!-- 如果需要分页器 -->
 			<div class="swiper-pagination"></div>						
@@ -32,7 +32,7 @@
 	</header><?php endif; ?>
 	<nav id="nav" class="nav-entry">
 	<?php if(is_array($relation_catalog)): $i = 0; $__LIST__ = $relation_catalog;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$parent): $mod = ($i % 2 );++$i;?><div class="row">
-		<div class="col col-33"><a title="<?php echo ($parent['classname']); ?>" <?php if(!empty($parent['url'])): ?>href="<?php echo ($parent['url']); ?>"<?php endif; ?>><?php echo ($parent['classname']); ?></a></div>
+		<div class="col col-33"><a style="line-height:90px" title="<?php echo ($parent['classname']); ?>" <?php if(!empty($parent['url'])): ?>href="<?php echo ($parent['url']); ?>"<?php endif; ?>><?php echo ($parent['classname']); ?></a></div>
 		<?php if(is_array($parent['children'])): $i = 0; $__LIST__ = $parent['children'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$chunk): $mod = ($i % 2 );++$i;?><div class="col col-33">
 			<?php if(is_array($chunk)): $i = 0; $__LIST__ = $chunk;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$catalog): $mod = ($i % 2 );++$i;?><a title="<?php echo ($catalog['classname']); ?>" <?php if(!empty($catalog['url'])): ?>href="<?php echo ($catalog['url']); ?>"<?php endif; ?>><em><?php echo ($catalog['classname']); ?></em></a><?php endforeach; endif; else: echo "" ;endif; ?>		
 		</div><?php endforeach; endif; else: echo "" ;endif; ?>			

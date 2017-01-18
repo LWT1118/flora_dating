@@ -20,10 +20,13 @@ Class NewsAction extends AdminAction{
 		$where['news_id']=array('eq',$news_id);
 		$where['reg_time']=array('gt',0);
 		$arr = array();
-		$userlist = $db->where($where)->field('user_id')->select();
+		$userlist = $db->where($where)->field('user_id,remark')->select();
+		$remark = array();
 		foreach ($userlist as $key => $value) {
 			$arr[]=$value['user_id'];
+			$remark["{$news_id}_{$value['user_id']}"] = $value['remark'];
 		}
+		$this->remark = $remark;
 		$where2['id'] = array('in',$arr);
 		$db = D('userRelation');
 		$this->data = $db->relation(true)->where($where2)->select();
@@ -32,6 +35,17 @@ Class NewsAction extends AdminAction{
 		$this->display();
 	}
 
+	function remark(){
+	    $news_id = intval($_GET['nid']);
+	    $user_id = intval($_GET['uid']);
+	    $remark = isset($_GET['remark']) ? $_GET['remark'] : '';
+	    if(empty($remark)){
+	        die(json_encode(array('msg'=>'备注不能为空')));
+        }
+        $result = M('record')->where("news_id={$news_id} and user_id={$user_id}")->save(array('remark'=>$remark));
+	    echo json_encode(array('msg'=>$result ? '保存成功' : '保存失败'));
+    }
+
 	function excel(){
 		$news_id = $_GET['id'];
 		$news = M('news')->field('id,title')->find($news_id);
@@ -39,19 +53,25 @@ Class NewsAction extends AdminAction{
 		$where['news_id']=array('eq',$news_id);
 		$where['reg_time']=array('gt',0);
 		$arr = array();
-		$userlist = $db->where($where)->field('user_id')->select();
+		$userlist = $db->where($where)->field('user_id,remark')->select();
+		$remark = array();
 		foreach ($userlist as $key => $value) {
-			$arr[]=$value['user_id'];
+			$arr[] = $value['user_id'];
+			$remark["{$news_id}_{$value['user_id']}"] = $value['remark'];
 		}
 		$where2['id'] = array('in',$arr);
 		$db = D('userRelation');
 		$data = $db->relation(true)->where($where2)->select();
-		$array = array('nickname'=>'昵称', 'realname'=>'真实姓名', 'gender'=>'性别', 'tel'=>'电话', 'username'=>'email', 'wechat'=>'微信号');
+		$array = array('nickname'=>'昵称', 'realname'=>'真实姓名', 'gender'=>'性别', 'tel'=>'电话', 'username'=>'email', 'wechat'=>'微信号', 'remark'=>'备注');
 		$rows = array(1 => array_values($array));
 		foreach($data as $value){
 			$row = array();
 			foreach($array as $key=>$v){
-				$row[] = $key == 'gender' ? ($value[$key] == '0' ? '男' : '女') : $value[$key];
+			    if($key == 'remark'){
+			        $row[] = $remark["{$news_id}_{$value['id']}"];
+                }else {
+                    $row[] = $key == 'gender' ? ($value[$key] == '0' ? '男' : '女') : $value[$key];
+                }
 			}
 			$rows[] = $row;
 		}

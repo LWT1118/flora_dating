@@ -124,9 +124,9 @@
     <nav class="bony-nav bony-pink navbar navbar-default navbar-fixed-bottom" role="navigation">
         <div class="container-fluid">
             <div class="col-xs-4">
-                <a href="/Mobile/">
+                <a href="<?php echo U('/Mobile/Classify/index');?>">
                     <i class="icon-home icon-large"></i>
-                    <p>活动</p>
+                    <p>主页</p>
                 </a>
             </div>
             <div class="col-xs-4">

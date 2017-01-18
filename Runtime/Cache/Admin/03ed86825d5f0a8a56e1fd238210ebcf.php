@@ -102,12 +102,25 @@
 	
 </ul>
 
+<h3>投票管理</h3>
+<ul class="toggle">
+	<li><a href="<?php echo U('/'.GROUP_NAME.'/Vote/add');?>"><i class='icon-plus'></i> 添加投票</a></li>
+	<li><a href="<?php echo U('/'.GROUP_NAME.'/Vote/voteList');?>"><i class='icon-list'></i> 投票列表</a></li>
+</ul>
+
 <h3>用户管理</h3>
 <ul class="toggle">
 	<li><a href="<?php echo U('/'.GROUP_NAME.'/User/index');?>"><i class='icon-user'></i> 用户列表</a></li>
 	<li><a href="<?php echo U('/'.GROUP_NAME.'/User/node');?>"><i class='icon-user'></i> 节点列表</a></li>
 	<li><a href="<?php echo U('/'.GROUP_NAME.'/User/role');?>"><i class='icon-user'></i> 角色列表</a></li>
 	<li><a href="<?php echo U('/'.GROUP_NAME.'/User/complain');?>"><i class='icon-user'></i> 投诉列表</a></li>
+</ul>
+
+<h3>分类管理</h3>
+<ul class="toggle">
+    <!--li><a href="<?php echo U('/'.GROUP_NAME.'/Classify/index');?>"><i class='icon-plus'></i> 添加主分类</a></li-->
+    <li><a href="<?php echo U('/'.GROUP_NAME.'/Classify/childIndex');?>"><i class='icon-plus'></i> 添加分类</a></li>
+	<li><a href="<?php echo U('/'.GROUP_NAME.'/Classify/image');?>"><i class='icon-plus'></i> 宣传图片</a></li>
 </ul>
 
 <!-- <h3>消费日志</h3>
@@ -162,7 +175,7 @@
 		<h3>活动 <a href='<?php echo U('Home/News/detail/','id='.$news['id']);?>'><b><?php echo ($news["title"]); ?></b></a> 的报名清单</h3>
 		<table class="tablesorter" cellspacing="0"> 
 		<thead> 
-			<tr><th>头像</th><th>姓名/手机</th><th>性别</th><th>邮箱/地址</th><th width='120'>参与</th></tr> 
+			<tr><th>头像</th><th>姓名/手机</th><th>性别</th><th>邮箱/地址</th><th>备注</th></td><th width='120'>参与</th></tr>
 		</thead> 
 		<tbody>
 		<?php if(is_array($data)): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr> 
@@ -178,7 +191,11 @@
 				<td>
 				  <p>邮箱：<?php echo (($vo["email"])?($vo["email"]):'暂未填写'); ?></p>
 				  <p>微信：<?php echo (($vo["wechat"])?($vo["wechat"]):'暂未填写'); ?></p>
-				</td>  
+				</td>
+				<td>
+					<textarea id="text_<?php echo ($vo["id"]); ?>" style="width:100%;height: 100%;"><?php $key = $news['id'] . '_' . $vo['id']; echo $remark[$key]; ?></textarea>
+					<p><input user_id="<?php echo ($vo["id"]); ?>" news_id="<?php echo ($news["id"]); ?>" type="button" value="保存"></p>
+				</td>
 				<td>
 				  <p>发布：<?php echo ($vo["post"]); ?></p>
 				  <p>报名：<?php echo ($vo["reg"]); ?></p>
@@ -189,7 +206,19 @@
 		</table>
 	</article>
 </section>
-
+<script type="text/javascript">
+	$(document).ready(function(){
+	    $('.module').find('input[user_id]').click(function(){
+	        var uid = $(this).attr('user_id');
+	        var remark = $('#text_' + uid).val();
+	        if(remark == '') return;
+	        if(!confirm('确定要保存备注？')) return;
+	        $.getJSON("<?php echo U('Admin/News/remark/','nid='.$news['id']);?>", {uid:uid,remark:remark}, function (data) {
+				alert(data.msg);
+            });
+		});
+	});
+</script>
 </body>
 
 </html>
