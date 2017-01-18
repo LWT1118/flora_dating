@@ -11,7 +11,7 @@
 			<if condition="!empty($data['image']) AND file_exists('.'.$data['img'])">
 				<div class="bony-p"><img src='{$data.image}' class='img-responsive'></div>
 			</if>	          
-			<div class="bony-h"></div>
+			<div class="bony-h">{$data.desc}</div>
 	          <div class="bony-p" style="font-size:18px;margin: 16px auto;">投票截止时间：<br>{$data.start_time|date='Y-m-d H:i',###} —— {$data.end_time|date='Y-m-d H:i',###}</div>
 	          <div class="bony-p">
 			  <ul class="list-group">				  
