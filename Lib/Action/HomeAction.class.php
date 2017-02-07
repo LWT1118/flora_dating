@@ -6,7 +6,7 @@ class HomeAction extends PublicAction {
 		//if(isMobile())$this->redirect('/Mobile/Index/',0);
 		$this->myheader();
 		$this->myfooter();
-		/*$this->InitOpenId();*/
+		$this->InitOpenId();
 	}
 
 	protected function InitOpenId(){
