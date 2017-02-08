@@ -3,6 +3,7 @@ require_once('./Lib/Action/weixin.php');
 class WechatAction extends PublicAction{
 	private $_weObj = null;
 	private $account = array('account'=>'yinyuan.de@hotmail.com','password' => 'testtest1234');
+	private $defaultReply = "输入的内容不是关键字。输入【联络】联络我们。输入【帮助】查看帮助。";
 
 	public function media2server($mediaId,$path){
 		//$media_id = I('mediaId');
@@ -115,7 +116,9 @@ class WechatAction extends PublicAction{
 				$this->_weObj->text($reply)->reply();
 			}
 			//return;
-		}
+		}else{
+		    $this->_weObj->text($this->defaultReply)->reply();
+        }
 		/*$wxMsger = new Weixin($this->account);
 		//$this->_weObj = $this->wechat();
 		$fromUserId = $this->GetUserId($openid);
@@ -250,7 +253,6 @@ class WechatAction extends PublicAction{
 	/* 不包含8分钟约会 */
     public function index(){
         //echo $this->autoReply();
-        $defaultReply = "输入的内容不是关键字。输入【联络】联络我们。输入【帮助】查看帮助。";
         $this->_weObj = $this->wechat();
         $this->_weObj->valid();//明文或兼容模式可以在接口验证通过后注释此句，但加密模式一定不能注释，否则会验证失败
         $type = $this->_weObj->getRev()->getRevType();
@@ -266,7 +268,7 @@ class WechatAction extends PublicAction{
             case Wechat::MSGTYPE_IMAGE:
                 break;
             default:
-                $this->_weObj->text($defaultReply)->reply();
+                $this->_weObj->text($this->defaultReply)->reply();
         }
         echo 'success';
     }
