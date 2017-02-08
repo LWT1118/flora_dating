@@ -1,5 +1,6 @@
 <include file="Modules/Mobile/Tpl/header.html" />
-	<div class='container-fluid'>
+
+<div class='container-fluid'>
 		<div class='bony-h1 bony-text-pink' style="font-size:18px">			
 			【{$data.title}——<if condition="$data['status'] == 0">单选<else />多选</if>】
 			<input type="hidden" id="hid_select_type" value="{$data.status}">
@@ -60,7 +61,27 @@
 	          </div>    
 	        </div>			
 		</div>
-	</div>	
+	</div>
+
+<div class="modal fade" id="showVerify" tabindex="-1" role="dialog" aria-labelledby="showVerifyLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<form class="modal-content" method='post'>
+			<div class="modal-header">
+				<!--button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button-->
+				<h4 class="modal-title">请输入图片中的验证码</h4>
+			</div>
+			<div class="modal-body">
+				<p class='text-primary text-center' style="line-height: 100%">
+					<input style="width:50%;height: 36px" type="text" id="txt_verify" placeholder="点击图片切换验证码"><img id="img_verify" style="width:30%;height: 36px;margin-left:3px" src="/Mobile/Vote/verify">
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" id="btn_submit_vote">确定</button>
+				<button type="button" class="btn" data-dismiss="modal">取消</button>
+			</div>
+		</form>
+	</div>
+</div>
 
 <div class="modal fade" id="showBase" tabindex="-1" role="dialog" aria-labelledby="showWechatLabel" aria-hidden="true">
   <div class="modal-dialog">	
@@ -78,6 +99,8 @@
    </form>
   </div>
 </div>
+
+
 <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script type="text/javascript">
 wx.config({
@@ -124,40 +147,52 @@ document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
 }, false); 
 
 $(document).ready(function(){
+    $('#img_verify').click(
+        function(){
+            $(this).attr('src', '{:U('verify')}');
+		}
+	);
 	$('#btn_vote').click(			
 		function(){
-			var multiple = $('#hid_select_type').val();			
-			var options = '';
-			if(multiple != '0'){
-				$(':checkbox').each(function(i){
-					var checkbox = $(this);
-					if(checkbox.is(':checked')){
-						options += checkbox.val() + ',';
-					}
-				});
-			}else{
-				$(':radio').each(function(i){
-					var radio = $(this);					
-					if(radio.is(':checked')){
-						options = radio.val();
-						return false;
-					}
-				});
-			}						
-			if(!options){
-				alert('请选择投票选项');
-				return false;
-			}
-			$.getJSON('{:U('Vote/vote')}', {options:options,vote_id:<?php echo $data['id']; ?>}, function(data){
-				if(data.url){
-					location.href = data.url;
-				}else{
-					$('#info-container').text(data.msg);				
-					$('#showBase').modal('show');				
-				}
-			});			
+		    $('#showVerify').modal('show');
 		}
-	);		
+	);
+    $('#btn_submit_vote').click(function(){
+        var verify = $('#txt_verify').val();
+        var multiple = $('#hid_select_type').val();
+        var options = '';
+        if(multiple != '0'){
+            $(':checkbox').each(function(i){
+                var checkbox = $(this);
+                if(checkbox.is(':checked')){
+                    options += checkbox.val() + ',';
+                }
+            });
+        }else{
+            $(':radio').each(function(i){
+                var radio = $(this);
+                if(radio.is(':checked')){
+                    options = radio.val();
+                    return false;
+                }
+            });
+        }
+        if(!options){
+            alert('请选择投票选项');
+            return false;
+        }
+        $.getJSON('{:U('Vote/vote')}', {options:options,vote_id:<?php echo $data['id']; ?>, verify:verify}, function(data){
+            if(data.url){
+                location.href = data.url;
+            }else{
+                if(data.err_code == '2'){
+                    $('#img_verify').click();
+                }
+                $('#info-container').text(data.msg);
+                $('#showBase').modal('show');
+            }
+        });
+	});
 	$('#showBase').on('hide.bs.modal', function (e) {	
 		if($('#info-container').text() == '投票成功'){	
 			location.href = '/Mobile/Vote/index/?id={$data["id"]}&r=' + Math.random();

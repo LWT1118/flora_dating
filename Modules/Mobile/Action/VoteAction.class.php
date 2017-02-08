@@ -1,5 +1,6 @@
 <?php
 class VoteAction extends HomeAction {
+    private $hash_key = "zw_@#$%^*";
 	public function index(){					
 		$id = intval($_GET['id']);
 		$data = VoteModel::getInstance()->find($id);
@@ -16,7 +17,9 @@ class VoteAction extends HomeAction {
 		if($this->voted){	
 			//$this->redirect(U('Mobile/Vote/result', array('id'=>$id)));
 		    $total = $voteRecordModel->where("vote_id={$id}")->count();
-		    array_walk($options, function($v,$k,$total){ $total += $v['add_num'];}, &$total);
+		    foreach($options as $value){
+		        $total += $value['add_num'];
+            }
 		    $statistic = array();
 		    $queryResult = $voteRecordModel->query("select option_id,count(id) as amount from wjw_vote_record where vote_id={$id} group by option_id");		    
 		    foreach($queryResult as $row){
@@ -28,8 +31,7 @@ class VoteAction extends HomeAction {
 		        $statistic[$option['id']] = array('percent'=>($total == 0 ? 0 : round($amount/$total, 2) * 100), 'amount'=>$amount);
 		    }
 			$this->statistic = $statistic;
-		}				
-		
+		}
 		import("@.Action.WechatJssdk");
 		$cfg = parent::wechat_cfg();
 		$jssdk = new JSSDK($cfg['appid'], $cfg['appsecret']);
@@ -37,10 +39,20 @@ class VoteAction extends HomeAction {
 		
 		$this->display();
 	}
+
+    Public function verify(){
+        import('ORG.Util.Image');
+        Image::buildImageVerify();
+    }
 	
 	public function vote()
 	{					
-		$voteId = $_GET['vote_id'];				
+		$voteId = $_GET['vote_id'];
+		$verify = $_GET['verify'];
+		!empty($verify) or die();
+        if(md5($verify) != $_SESSION['verify']){
+            die(json_encode(array('msg'=>'您输入的验证码有误', 'err_code'=>'2')));
+        }
 		$weObj = $this->wechat();
 		$wechatInfo = $weObj->getUserInfo($this->open_id);
 		if($wechatInfo === false || !isset($wechatInfo['subscribe'])){
