@@ -117,7 +117,7 @@ class WechatAction extends PublicAction{
 			}
 			//return;
 		}else{
-		    $this->_weObj->text($this->defaultReply)->reply();
+            $this->_weObj->text($this->defaultReply)->reply();
         }
 		/*$wxMsger = new Weixin($this->account);
 		//$this->_weObj = $this->wechat();
