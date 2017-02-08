@@ -66,7 +66,7 @@ class WechatAction extends PublicAction{
 					'Title'=>$data['title'],
 					'Description'=>$data['summary'],
 					'PicUrl'=> 'http://'.$this->_server('HTTP_HOST').'/Upload/wechat/thumb_'.$data['img'],
-					'Url'=> $url
+					'Url'=> $data['url']
 				);
 
 				if($data['itemlist']!=''){
@@ -98,8 +98,6 @@ class WechatAction extends PublicAction{
 			}else{
 				$this->_weObj->text($reply)->reply();
 			}
-		}else{
-			$this->_weObj->text($defaultReply)->reply();
 		}
 	}
 
@@ -107,7 +105,7 @@ class WechatAction extends PublicAction{
 	}
 
 	private function TextEventProcessor(){
-		$openid = $this->_weObj->getRev()->getRevFrom();
+		//$openid = $this->_weObj->getRev()->getRevFrom();
 		$content = $this->_weObj->getRev()->getRevContent();
 		$reply = $this->autoReply($content);
 		if($reply){
@@ -116,9 +114,9 @@ class WechatAction extends PublicAction{
 			}else{
 				$this->_weObj->text($reply)->reply();
 			}
-			return;
+			//return;
 		}
-		$wxMsger = new Weixin($this->account);
+		/*$wxMsger = new Weixin($this->account);
 		//$this->_weObj = $this->wechat();
 		$fromUserId = $this->GetUserId($openid);
 		if($fromUserId == 0){
@@ -143,6 +141,7 @@ class WechatAction extends PublicAction{
 			$minutes = ceil((480 - $remains) / 60);
 			$wxMsger->sendMessage($toUserInfo['openid'], "{$content}(系统提示：剩余{$minutes}分钟)");
 		}
+		*/
 	}
 
 	private function CustomEventProcessor($eventKey){
@@ -205,11 +204,12 @@ class WechatAction extends PublicAction{
 		}elseif($event == Wechat::EVENT_UNSUBSCRIBE){
 			$this->UnsubscribeEventProcessor();
 		}elseif($event == Wechat::EVENT_MENU_CLICK){
-			$this->CustomEventProcessor($eventData['key']);
+			//$this->CustomEventProcessor($eventData['key']);
 		}			
 	}
 
-	public function index(){
+	/* 包含8分钟约会，因服务器压力较大，暂时去掉 */
+	/*public function index(){
 		//echo $this->autoReply();
 		$defaultReply = "输入的内容不是关键字。输入【联络】联络我们。输入【帮助】查看帮助。";		
 		$this->_weObj = $this->wechat();		
@@ -245,6 +245,30 @@ class WechatAction extends PublicAction{
 			default:
 				$this->_weObj->text($defaultReply)->reply();
 		}		
-	}
+	}*/
+
+	/* 不包含8分钟约会 */
+    public function index(){
+        //echo $this->autoReply();
+        $defaultReply = "输入的内容不是关键字。输入【联络】联络我们。输入【帮助】查看帮助。";
+        $this->_weObj = $this->wechat();
+        $this->_weObj->valid();//明文或兼容模式可以在接口验证通过后注释此句，但加密模式一定不能注释，否则会验证失败
+        $type = $this->_weObj->getRev()->getRevType();
+        $createTime = $this->_weObj->getRev()->getRevCtime();
+        $openid = $this->_weObj->getRev()->getRevFrom();
+        switch($type) {
+            case Wechat::MSGTYPE_TEXT:
+                $this->TextEventProcessor();
+                break;
+            case Wechat::MSGTYPE_EVENT:
+                $this->EventProcessor();
+                break;
+            case Wechat::MSGTYPE_IMAGE:
+                break;
+            default:
+                $this->_weObj->text($defaultReply)->reply();
+        }
+        echo 'success';
+    }
 }
 ?>
